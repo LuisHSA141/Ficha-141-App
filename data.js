@@ -1,0 +1,473 @@
+// Regras do Projeto 1.4.1 (Livro do Jogador v1.4.1). Edite aqui para mudar regras.
+// Textos longos das especializações, talentos e títulos ficam em livro.js.
+
+const ATTRIBUTES = { FOR: "Força", DEX: "Destreza", CON: "Constituição", INT: "Inteligência", SAB: "Sabedoria", CHA: "Carisma" };
+
+// ===== perícias (Livro, "Proficiências") =====
+const SKILLS = {
+	Atletismo: "FOR", "Equilíbrio": "FOR",
+	"Aviação": "DEX", "Habilitação": "DEX", Furtividade: "DEX", Acrobacia: "DEX", "Mãos Leves": "DEX",
+	Vigor: "CON",
+	Medicina: "SAB", "Intuição": "SAB", "Percepção": "SAB", "Adestrar Animais": "SAB", "Sobrevivência": "SAB", "Controle Psi": "SAB",
+	"Ciência": "INT", Sabotagem: "INT", Tecnologia: "INT", "Investigação": "INT",
+	"Persuasão": "CHA", "Intimidação": "CHA", "Diplomacia": "CHA", "Enganação": "CHA", "Atuação": "CHA",
+};
+const ALL_SKILLS = Object.keys(SKILLS);
+
+// ===== classes =====
+// hp1 = valor fixo do 1º nível (só para a primeira classe); saves fixos + choice (escolhe 1)
+const CLASSES = {
+	"Assalto": { hitDice: 12, hp1: 20, saves: ["FOR", "CON"], coletes: "Médios e pesados", armas: "Escudos, explosivos, LMGs, shotguns, ARs e pistolas", ferramentas: "Nenhuma",
+		skills: { n: 2, from: ["Habilitação", "Aviação", "Atletismo", "Vigor", "Mãos Leves", "Intimidação", "Investigação", "Percepção", "Sobrevivência"] } },
+	"Corpo-a-Corpo": { hitDice: 12, hp1: 20, saves: ["CON"], choice: ["FOR", "DEX"], coletes: "Leves, médios e pesados", armas: "Armas brancas, subs, shotguns e pistolas", ferramentas: "Nenhuma",
+		skills: { n: 2, from: ALL_SKILLS } },
+	"Suporte": { hitDice: 8, hp1: 16, saves: ["CHA"], choice: ["INT", "SAB"], coletes: "Leves, médios e pesados", armas: "Rifles de assalto, subs, LMGs, pistolas e revólveres", ferramentas: "Componentes químicos e médicos",
+		skills: { n: 2, from: ["Aviação", "Habilitação", "Adestrar Animais", "Intuição", "Medicina", "Persuasão", "Diplomacia", "Ciência", "Intimidação"] } },
+	"Cobra": { hitDice: 8, hp1: 16, saves: ["DEX", "INT"], coletes: "Leves e médios", armas: "Pistolas, subs, ARs e DMRs", ferramentas: "Kit de invasão",
+		skills: { n: 4, from: ["Habilitação", "Aviação", "Acrobacia", "Atletismo", "Atuação", "Intimidação", "Ciência", "Intuição", "Investigação", "Enganação", "Percepção", "Persuasão", "Mãos Leves"] } },
+	"Franco-atirador": { hitDice: 6, hp1: 12, saves: ["DEX", "SAB"], coletes: "Leves e médios", armas: "Snipers, DMRs, submetralhadoras, pistolas e revólver", ferramentas: "Nenhuma",
+		skills: { n: 3, from: ["Habilitação", "Aviação", "Adestrar Animais", "Atletismo", "Furtividade", "Intuição", "Investigação", "Percepção", "Sobrevivência"] } },
+	"Hacker": { hitDice: 6, hp1: 12, saves: ["INT", "CHA"], coletes: "Leves e médios", armas: "Subs, DMRs, ARs e pistolas", ferramentas: "Ferramentas de hacking",
+		skills: { n: 2, from: ["Habilitação", "Aviação", "Atletismo", "Mãos Leves", "Furtividade", "Intuição", "Investigação", "Percepção", "Atuação"] } },
+	"Especialista": { hitDice: 10, hp1: 20, saves: ["FOR", "INT"], coletes: "Médios e pesados", armas: "Submetralhadoras, shotguns, ARs, pistolas e revólveres", ferramentas: "Kits de reparo",
+		skills: { n: 3, from: ALL_SKILLS } },
+	"Comando": { hitDice: 8, hp1: 16, saves: ["INT", "CHA"], coletes: "Leves e médios", armas: "ARs, subs, DMRs e pistolas", ferramentas: "Nenhuma",
+		skills: { n: 3, from: ["Habilitação", "Aviação", "Diplomacia", "Enganação", "Intimidação", "Intuição", "Investigação", "Percepção", "Persuasão", "Tecnologia"] } },
+};
+const SPEC_RENAME = { Espadachim: "Duelista", Medico: "Médico" };   // nomes antigos -> livro novo
+
+// ===== tipos de humanidade =====
+// asi.fixed: bônus fixos | asi.pick: escolhas [{n, of:[atributos]}] | asi.free: n pontos de +1 em atributos diferentes
+const ALL_ATTR = ["FOR", "DEX", "CON", "INT", "SAB", "CHA"];
+const RACES = {
+	"Humano": { speed: "9m", skillChoice: 1, talent: 1, asi: { free: 4 },
+		features: [
+			{ name: "Aumento no Valor de Habilidade", desc: "Possui 4 pontos de distribuição que não podem acumular no mesmo atributo." },
+			{ name: "Idiomas", desc: "Escolha sua nacionalidade. Os humanos normalmente aprendem os idiomas dos povos que convivem, incluindo dialetos obscuros." },
+			{ name: "Perícia", desc: "Você ganha proficiência em UMA perícia, à sua escolha." },
+			{ name: "Talento", desc: "Você ganha UM talento à sua escolha." }] },
+	"Replika": { speed: "9m", skillChoice: 1, talent: 1, asi: { fixed: { DEX: 2, INT: 1 } },
+		features: [
+			{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Destreza aumenta em 2, e seu valor de Inteligência aumenta em 1." },
+			{ name: "Talento", desc: "Você ganha UM talento à sua escolha." },
+			{ name: "Natureza Sintética", desc: "Você é um construto. Você é imune à doença (incluindo Oripatia) e à condição Envenenado. Você não precisa comer, beber ou respirar (mas pode ingeri-los se desejar)." },
+			{ name: "Protocolo de Reparo", desc: "Você não recupera pontos de vida de kits médicos. Você só pode ser estabilizado ou curado (fora do descanso) por Kits de Reparo ou habilidades de Especialistas. Você pode realizar um descanso curto ou longo para recuperar PV normalmente." },
+			{ name: "Proficiência Designada", desc: "Você ganha proficiência em UMA perícia à sua escolha." }] },
+	"Mecanizado": { speed: "9m", asi: { fixed: { CON: 1 } }, subLabel: "Tipagem de mecanizado",
+		features: [
+			{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Constituição aumenta em 1." },
+			{ name: "Corpo Modificado", desc: "Você é considerado tanto Humanoide quanto Construto. Você pode ser curado tanto por kits médicos quanto por kits de reparo." }],
+		subs: {
+			"Nanotec": { speed: "11m", talent: 1, auto: ["Intimidação"], asi: { pick: [{ n: 2, of: ["FOR", "DEX"] }], fixed: { INT: 1 } },
+				features: [
+					{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Força ou Destreza aumenta em 2 e seu valor de Inteligência aumenta em 1." },
+					{ name: "Deslocamento Superior", desc: "Seu deslocamento base aumenta para 11 metros." },
+					{ name: "Talento", desc: "Você ganha proficiência em UM talento, à sua escolha." },
+					{ name: "Ameaçador", desc: "Você adquire proficiência na perícia Intimidação." }] },
+			"Ciborgue": { talent: 1, auto: ["Vigor"], ac: 1, asi: { pick: [{ n: 2, of: ["FOR", "DEX"] }], fixed: { CON: 1 } },
+				features: [
+					{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Força ou Destreza aumenta em 2 e seu valor de Constituição aumenta em 1 (totalizando +2 em CON, com o bônus da raça base)." },
+					{ name: "Talento", desc: "Você ganha proficiência em UM talento, à sua escolha." },
+					{ name: "Chassi Reforçado", desc: "Blindagem integrada: +1 de bônus na CA (já somado na CA da ficha)." },
+					{ name: "Proficiência de Sobrevivência", desc: "Você ganha proficiência na perícia Vigor." }] },
+			"Autômato": { asi: { fixed: { INT: 2, FOR: 1 } }, firewall: true,
+				features: [
+					{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Inteligência aumenta em 2 e seu valor de Força aumenta em 1." },
+					{ name: "Chassi Robótico", desc: "Seu corpo é uma máquina. Você é imune à condição Envenenado." },
+					{ name: "Protocolo Lógico", desc: "Você tem vantagem em testes de resistência contra a condição Amedrontado." },
+					{ name: "Sistema de Ferramentas Integrado", desc: "Escolha uma proficiência com Ferramentas: Ferramentas de Hacking, Kits de Reparo ou Componentes Químicos." },
+					{ name: "Sistema interno", desc: "Seu chassi é um Sistema e pode ser invadido. Firewall = 10 + Proef + Inteligência. Interferir faz você perder a Reação e ter Desvantagem no próximo ataque, em vez de desligar você. Controlar nunca funciona em você." },
+					{ name: "Energia", desc: "Você não come nem bebe, mas precisa recarregar: 1 hora conectado a uma fonte de energia, ou 1 célula de energia, equivale a uma refeição (regras de Fome e Sede)." }] },
+		} },
+	"Mutante": { speed: "9m", skillChoice: 1, subLabel: "Tipagem de mutante",
+		features: [{ name: "Perícia", desc: "Você ganha proficiência em UMA perícia, à sua escolha." }],
+		subs: {
+			"Incendiário": { auto: ["Atletismo"], asi: { fixed: { FOR: 2, CON: 1 } },
+				features: [
+					{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Força é aumentado em +2 e Constituição +1." },
+					{ name: "Sangue fervendo", desc: "O operador ganha proficiência em Atletismo e ganha resistência a danos de fogo." },
+					{ name: "Superaquecer", desc: "1º nível: 2d6 de dano incendiário, alcance 1m, 1 uso por descanso.\n4º nível: 3d6, alcance 1m.\n8º nível: 3d6, alcance 2m, 2 usos por descanso.\n12º nível: 3d8, alcance 2m.\n16º nível: 4d8, alcance 4m, 3 usos por descanso.\n20º nível: 4d10, alcance 4m." }] },
+			"Blitz": { asi: { fixed: { DEX: 2, SAB: 1 } },
+				features: [
+					{ name: "Aumento no Valor de Habilidade", desc: "Seu valor de Destreza é aumentado em +2 e Sabedoria +1." },
+					{ name: "Cargas elétricas", desc: "Ganha resistência a dano elétrico." },
+					{ name: "Eletrizar", desc: "1º nível: 2d4 de dano elétrico, alcance 3m, 2 usos por descanso.\n4º nível: 3d4, alcance 3m.\n8º nível: 3d6, alcance 3m, 3 usos por descanso.\n12º nível: 4d6, alcance 4m.\n16º nível: 4d6, alcance 4m, 4 usos por descanso.\n20º nível: 4d8, alcance 5m.\nA partir do 8º nível o alvo faz um teste de CON (CD 10 + SAB + Prof); na falha fica atordoado por 1 turno." }] },
+			"Anima": { auto: ["Adestrar Animais"], animaType: true, asi: { pick: [{ n: 2, of: ALL_ATTR }, { n: 1, of: ALL_ATTR }] }, asiNote: "O bônus depende do tipo de Anima (consulte o Mestre).",
+				features: [
+					{ name: "Aumento no Valor de Habilidade", desc: "Decidido por tipo de Anima." },
+					{ name: "Traço animal", desc: "Decidido por tipo de Anima." },
+					{ name: "Intuição animal", desc: "O operador consegue se comunicar com animais. Ganha proficiência em Adestrar Animais." }] },
+			"Sankta": { asi: { fixed: { DEX: 2 } }, stealthDis: true, halos: {
+					"Preta": { pick: [{ n: 1, of: ALL_ATTR }], noStealthDis: true, desc: "+1 em qualquer atributo e não dá desvantagem na furtividade." },
+					"Branca": { pick: [{ n: 1, of: ALL_ATTR }], desc: "+1 em qualquer atributo e ganha proficiência em qualquer teste de Carisma." },
+					"Vermelha": { pick: [{ n: 1, of: ["FOR", "CON"] }], desc: "+1 em Força ou Constituição e uma cura em si mesmo de 1d4 + CON (1d6/1d8/1d10/1d12 a cada 3 níveis), 1 vez por descanso." },
+					"Azul": { pick: [{ n: 1, of: ["SAB", "INT"] }], desc: "+1 em Sabedoria ou Inteligência e uma habilidade de remover 1 ponto de oripatia ou fadiga de um aliado, 1 vez por descanso." } },
+				features: [
+					{ name: "Aumento no valor de habilidade", desc: "Valor de Destreza aumenta em 2. A cor da auréola dá mais um bônus." },
+					{ name: "Auréola brilhante", desc: "O operador possui desvantagem em testes de Furtividade (exceto auréola Preta)." }] },
+		} },
+};
+
+// ===== ferimentos críticos (Livro, "Críticos") =====
+const INJURY_DESCRIPTIONS = {
+	"injury-head": "Desvantagem em todos os testes até o ferimento ser tratado.",
+	"injury-torso": "Desvantagem em todos os testes até o ferimento ser tratado.",
+	"injury-left-arm": "Desvantagem na Precisão com armas de duas mãos.",
+	"injury-right-arm": "Desvantagem na Precisão com armas de duas mãos.",
+	"injury-left-leg": "Deslocamento reduzido à metade.",
+	"injury-right-leg": "Deslocamento reduzido à metade.",
+	"arms-crippled": "O alvo não pode atacar com armas.",
+	"legs-crippled": "Não consegue andar e só se arrasta, com 1/4 do Deslocamento.",
+};
+const EXHAUSTION = ["Desvantagem em todos os testes de habilidade ou perícia", "Deslocamento reduzido pela metade", "Testes de resistência e jogadas de ataque com desvantagem", "HP máximo reduzido pela metade", "Deslocamento reduzido a 0", "Morte"];
+
+// ===== progressões =====
+const ASI_LEVELS = [4, 8, 12, 16, 19];      // incremento no valor de habilidade (nível total)
+const TITLE_LEVELS = [1, 5, 10, 15, 20];     // títulos de personagem
+const POCKET_LEVELS = [5, 11, 17];           // itens de bolso: 2 no 1º, +1 nesses níveis
+const peBaseFor = lvl => 4 + [3, 6, 9, 12, 15].filter(l => lvl >= l).length + (lvl >= 12 ? 1 : 0);
+const MULTI_MIN_LEVEL = 5;                    // classe dupla a partir do 5º nível
+const SHARED_FEATURES = ["GAMBIARRA", "SURTO DE AÇÃO", "FÔLEGO EXTRA", "ATAQUE EXTRA", "AÇÃO ARDILOSA", "ESTILO DE TIRO", "METACÓDIGO", "METACODIGO", "BRADO DE ALERTA"];
+
+// ===== coletes (protótipo; o livro remete ao guia de equipamentos) =====
+const COLETES = {
+	Nenhum: {
+		ac: 10,
+		addDex: true,
+		maxDex: null,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 2,
+		secondaryAmmo: 2,
+	},
+	"Roupa de Proteção": {
+		ac: 11,
+		addDex: true,
+		maxDex: null,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 2,
+		secondaryAmmo: 3,
+	},
+	"Colete Leve": {
+		ac: 11,
+		addDex: true,
+		maxDex: null,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 2,
+		secondaryAmmo: 3,
+	},
+	"Colete Alpha": {
+		ac: 12,
+		addDex: true,
+		maxDex: null,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 3,
+		secondaryAmmo: 3,
+	},
+	"Roupa Reforçada": {
+		ac: 12,
+		addDex: true,
+		maxDex: 2,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 3,
+		secondaryAmmo: 4,
+	},
+	"Colete Médio": {
+		ac: 13,
+		addDex: true,
+		maxDex: 2,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 4,
+		secondaryAmmo: 4,
+	},
+	"Colete de Placa": {
+		ac: 14,
+		addDex: true,
+		maxDex: 2,
+		strReq: 0,
+		stealthDisadvantage: true,
+		primaryAmmo: 5,
+		secondaryAmmo: 4,
+	},
+	"Colete Tático": {
+		ac: 14,
+		addDex: true,
+		maxDex: 2,
+		strReq: 0,
+		stealthDisadvantage: false,
+		primaryAmmo: 5,
+		secondaryAmmo: 4,
+	},
+	"Colete Delta": {
+		ac: 15,
+		addDex: true,
+		maxDex: 2,
+		strReq: 0,
+		stealthDisadvantage: true,
+		primaryAmmo: 6,
+		secondaryAmmo: 4,
+	},
+	"Colete Reforçado": {
+		ac: 15,
+		addDex: false,
+		maxDex: 0,
+		strReq: 12,
+		stealthDisadvantage: true,
+		primaryAmmo: 7,
+		secondaryAmmo: 4,
+	},
+	"Colete Pesado": {
+		ac: 16,
+		addDex: false,
+		maxDex: 0,
+		strReq: 13,
+		stealthDisadvantage: true,
+		primaryAmmo: 7,
+		secondaryAmmo: 5,
+	},
+	Juggernaut: {
+		ac: 17,
+		addDex: false,
+		maxDex: 0,
+		strReq: 14,
+		stealthDisadvantage: true,
+		primaryAmmo: 8,
+		secondaryAmmo: 5,
+	},
+	"Colete Ômega": {
+		ac: 18,
+		addDex: false,
+		maxDex: 0,
+		strReq: 15,
+		stealthDisadvantage: true,
+		primaryAmmo: 8,
+		secondaryAmmo: 5,
+	},
+};
+
+// ===== countries =====
+const COUNTRIES = {
+	AF: "Afeganistão",
+	ZA: "África do Sul",
+	AL: "Albânia",
+	DE: "Alemanha",
+	AD: "Andorra",
+	AO: "Angola",
+	SA: "Arábia Saudita",
+	DZ: "Argélia",
+	AR: "Argentina",
+	AM: "Armênia",
+	AU: "Austrália",
+	AT: "Áustria",
+	AZ: "Azerbaijão",
+	BS: "Bahamas",
+	BD: "Bangladesh",
+	BB: "Barbados",
+	BE: "Bélgica",
+	BZ: "Belize",
+	BJ: "Benin",
+	BY: "Bielorrússia",
+	BO: "Bolívia",
+	BA: "Bósnia e Herzegovina",
+	BW: "Botsuana",
+	BR: "Brasil",
+	BG: "Bulgária",
+	BF: "Burkina Faso",
+	BI: "Burundi",
+	BT: "Butão",
+	CV: "Cabo Verde",
+	CM: "Camarões",
+	KH: "Camboja",
+	CA: "Canadá",
+	QA: "Catar",
+	KZ: "Cazaquistão",
+	TD: "Chade",
+	CL: "Chile",
+	CN: "China",
+	CY: "Chipre",
+	CO: "Colômbia",
+	CG: "Congo",
+	CD: "Congo (RDC)",
+	KR: "Coreia do Sul",
+	CI: "Costa do Marfim",
+	CR: "Costa Rica",
+	HR: "Croácia",
+	CU: "Cuba",
+	DK: "Dinamarca",
+	DJ: "Djibuti",
+	DM: "Dominica",
+	EG: "Egito",
+	SV: "El Salvador",
+	AE: "Emirados Árabes Unidos",
+	EC: "Equador",
+	SK: "Eslováquia",
+	SI: "Eslovênia",
+	ES: "Espanha",
+	US: "Estados Unidos",
+	EE: "Estônia",
+	ET: "Etiópia",
+	FJ: "Fiji",
+	PH: "Filipinas",
+	FI: "Finlândia",
+	FR: "França",
+	GA: "Gabão",
+	GM: "Gâmbia",
+	GH: "Gana",
+	GE: "Geórgia",
+	GR: "Grécia",
+	GT: "Guatemala",
+	GN: "Guiné",
+	GW: "Guiné-Bissau",
+	GQ: "Guiné Equatorial",
+	GY: "Guiana",
+	HT: "Haiti",
+	NL: "Holanda",
+	HN: "Honduras",
+	HU: "Hungria",
+	YE: "Iêmen",
+	IN: "Índia",
+	ID: "Indonésia",
+	IQ: "Iraque",
+	IR: "Irã",
+	IE: "Irlanda",
+	IS: "Islândia",
+	IL: "Israel",
+	IT: "Itália",
+	JM: "Jamaica",
+	JP: "Japão",
+	JO: "Jordânia",
+	KW: "Kuwait",
+	LA: "Laos",
+	LV: "Letônia",
+	LB: "Líbano",
+	LT: "Lituânia",
+	LU: "Luxemburgo",
+	MY: "Malásia",
+	MW: "Malawi",
+	MV: "Maldivas",
+	ML: "Mali",
+	MT: "Malta",
+	MA: "Marrocos",
+	MU: "Maurício",
+	MR: "Mauritânia",
+	MX: "México",
+	MD: "Moldávia",
+	MC: "Mônaco",
+	MN: "Mongólia",
+	ME: "Montenegro",
+	MZ: "Moçambique",
+	MM: "Mianmar",
+	NP: "Nepal",
+	NI: "Nicarágua",
+	NE: "Níger",
+	NG: "Nigéria",
+	NO: "Noruega",
+	NZ: "Nova Zelândia",
+	OM: "Omã",
+	PK: "Paquistão",
+	PA: "Panamá",
+	PY: "Paraguai",
+	PE: "Peru",
+	PL: "Polônia",
+	PT: "Portugal",
+	KE: "Quênia",
+	GB: "Reino Unido",
+	"GB-SCT": "Escócia",
+	CZ: "República Tcheca",
+	RO: "Romênia",
+	RW: "Ruanda",
+	RU: "Rússia",
+	SN: "Senegal",
+	SL: "Serra Leoa",
+	RS: "Sérvia",
+	SG: "Singapura",
+	SY: "Síria",
+	SO: "Somália",
+	LK: "Sri Lanka",
+	SE: "Suécia",
+	CH: "Suíça",
+	SR: "Suriname",
+	TH: "Tailândia",
+	TZ: "Tanzânia",
+	TJ: "Tajiquistão",
+	TG: "Togo",
+	TT: "Trinidad e Tobago",
+	TN: "Tunísia",
+	TR: "Turquia",
+	UA: "Ucrânia",
+	UG: "Uganda",
+	UY: "Uruguai",
+	UZ: "Uzbequistão",
+	VE: "Venezuela",
+	VN: "Vietnã",
+	ZM: "Zâmbia",
+	ZW: "Zimbábue",
+	OTHER: "Outro",
+};
+
+// ===== estados =====
+// id, nome, cor (quando ativo), ícone (pasta icones/) e as regras do livro.
+const ESTADOS = [
+	{ id: "agarrado", nome: "Agarrado", cor: "#e0a33c", icon: "icones/agarrado.svg", regras: [
+		"O Deslocamento do alvo se torna 0, e ele não pode receber bônus de Deslocamento.",
+		"O estado termina se quem agarra ficar Incapacitado ou se o alvo for afastado dele.",
+		"Para escapar, o alvo usa uma Ação e faz um teste de Atletismo ou Acrobacia contra o Atletismo de quem o agarra."] },
+	{ id: "amedrontado", nome: "Amedrontado", cor: "#a46ce0", icon: "icones/amedrontado.png", regras: [
+		"O alvo tem Desvantagem em testes de habilidade e jogadas de ataque enquanto a fonte do medo estiver na linha de visão dele.",
+		"Ele não pode se mover voluntariamente para mais perto da fonte do medo."] },
+	{ id: "atordoado", nome: "Atordoado", cor: "#f2c94c", icon: "icones/atordoado.png", regras: [
+		"O alvo está Incapacitado, não pode se mover e só consegue falar com dificuldade.",
+		"Ele falha automaticamente em testes de resistência de Força e Destreza, e jogadas de ataque contra ele têm Vantagem."] },
+	{ id: "caido", nome: "Caído", cor: "#b98a62", icon: "icones/caido.png", regras: [
+		"O alvo só pode se mover rastejando, a menos que use metade do Deslocamento para se levantar.",
+		"Ele tem Desvantagem nas jogadas de ataque.",
+		"Ataques contra ele feitos a até 1,5m têm Vantagem. Ataques feitos de mais longe têm Desvantagem."] },
+	{ id: "cego", nome: "Cego", cor: "#c9c9c9", icon: "icones/cego.png", regras: [
+		"O alvo falha automaticamente em testes que dependem da visão.",
+		"Jogadas de ataque contra ele têm Vantagem, e os ataques dele têm Desvantagem."] },
+	{ id: "congelado", nome: "Congelado", cor: "#7fd8ff", icon: "icones/congelado.png", regras: [
+		"O alvo está Impedido até o fim do próximo turno dele.",
+		"Sofrer dano contundente ou explosivo encerra o estado imediatamente."] },
+	{ id: "envenenado", nome: "Envenenado", cor: "#7ed957", icon: "icones/envenenado.png", regras: [
+		"O alvo tem Desvantagem em jogadas de ataque e testes de habilidade."] },
+	{ id: "escondido", nome: "Escondido", cor: "#6f8fae", icon: "icones/escondido.svg", regras: [
+		"Os inimigos não sabem a posição exata do alvo. Ataques contra ele têm Desvantagem, e o primeiro ataque dele contra alguém que não o percebeu tem Vantagem.",
+		"Atacar, fazer barulho ou sair de cobertura com um inimigo olhando encerra o estado."] },
+	{ id: "impedido", nome: "Impedido", cor: "#d9783a", icon: "icones/impedido.png", regras: [
+		"O Deslocamento do alvo se torna 0, e ele não pode receber bônus de Deslocamento.",
+		"Jogadas de ataque contra ele têm Vantagem, e os ataques dele têm Desvantagem.",
+		"Ele tem Desvantagem em testes de resistência de Destreza."] },
+	{ id: "incapacitado", nome: "Incapacitado", cor: "#9a9a9a", icon: "icones/incapacitado.svg", regras: [
+		"O alvo não pode usar Ações nem Reações."] },
+	{ id: "inconsciente", nome: "Inconsciente", cor: "#6c6cf0", icon: "icones/inconsciente.png", regras: [
+		"O alvo está Incapacitado, não pode se mover nem falar e não percebe o que acontece ao redor. Ele larga tudo o que está segurando e fica Caído.",
+		"Ele falha automaticamente em testes de resistência de Força e Destreza, e jogadas de ataque contra ele têm Vantagem.",
+		"Qualquer ataque que o acerte a até 1,5m é um acerto crítico."] },
+	{ id: "invisivel", nome: "Invisível", cor: "#d6f0ff", icon: "icones/invisivel.png", regras: [
+		"O alvo não pode ser visto sem equipamentos ou sentidos especiais. Para se esconder, ele conta como estando em escuridão densa.",
+		"A posição dele ainda pode ser descoberta por barulho ou rastros.",
+		"Jogadas de ataque contra ele têm Desvantagem, e os ataques dele têm Vantagem."] },
+	{ id: "paralisado", nome: "Paralisado", cor: "#ffe14d", icon: "icones/paralisado.png", regras: [
+		"O alvo está Incapacitado e não pode se mover nem falar.",
+		"Ele falha automaticamente em testes de resistência de Força e Destreza, e jogadas de ataque contra ele têm Vantagem.",
+		"Qualquer ataque que o acerte a até 1,5m é um acerto crítico."] },
+	{ id: "queimado", nome: "Queimado", cor: "#ff7a2a", icon: "icones/queimado.png", regras: [
+		"No início de cada turno, o alvo sofre 1d6 de dano de fogo.",
+		"O estado termina se o alvo usar uma Ação para apagar o fogo, ou se entrar na água ou for coberto por algo que abafe as chamas."] },
+	{ id: "sobrecarregado", nome: "Sobrecarregado", cor: "#c08a4a", icon: "icones/sobrecarregado.svg", regras: [
+		"O Deslocamento do alvo cai pela metade, e ele tem Desvantagem em testes de Destreza. Veja a regra de Carga."] },
+	{ id: "suprimido", nome: "Suprimido", cor: "#ff4b4b", icon: "icones/suprimido.svg", regras: [
+		"O alvo está sob Fogo de supressão. Veja a regra de Fogo de supressão em Extras em combate."] },
+	{ id: "surdo", nome: "Surdo", cor: "#a9bfd6", icon: "icones/surdo.png", regras: [
+		"O alvo falha automaticamente em testes que dependem da audição."] },
+	{ id: "surpreendido", nome: "Surpreendido", cor: "#ffffff", icon: "icones/surpreendido.svg", regras: [
+		"No primeiro turno do combate, o alvo não pode se mover, usar Ações nem Reações.",
+		"O estado termina no fim do primeiro turno dele."] },
+];
+// estados que puxam outros automaticamente
+const ESTADOS_IMPLICA = { atordoado: ["incapacitado"], inconsciente: ["incapacitado", "caido"], paralisado: ["incapacitado"], congelado: ["impedido"] };
