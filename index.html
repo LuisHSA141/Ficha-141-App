@@ -14,6 +14,11 @@
 <link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png">
 <style>
 *{box-sizing:border-box}
+/* app: texto da interface não fica "marcável" no toque longo; campos de digitar continuam normais */
+html{-webkit-tap-highlight-color:transparent}
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]:not([contenteditable="false"]){-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+img{-webkit-user-drag:none}
 :root{
   color-scheme:dark;
   --bg:#0a0405;--panel:#120709;--panel2:#16090c;--inset:#0d0506;--hover:#260d13;--hov2:#1a0a0e;--hov3:#2d1218;--sel:#1d0910;--deep:#080304;
