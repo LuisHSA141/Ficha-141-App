@@ -100,8 +100,8 @@ const RACES = {
 			"Sankta": { asi: { fixed: { DEX: 2 } }, stealthDis: true, halos: {
 					"Preta": { pick: [{ n: 1, of: ALL_ATTR }], noStealthDis: true, desc: "+1 em qualquer atributo e não dá desvantagem na furtividade." },
 					"Branca": { pick: [{ n: 1, of: ALL_ATTR }], desc: "+1 em qualquer atributo e ganha proficiência em qualquer teste de Carisma." },
-					"Vermelha": { pick: [{ n: 1, of: ["FOR", "CON"] }], desc: "+1 em Força ou Constituição e uma cura em si mesmo de 1d4 + CON (1d6/1d8/1d10/1d12 a cada 3 níveis), 1 vez por descanso." },
-					"Azul": { pick: [{ n: 1, of: ["SAB", "INT"] }], desc: "+1 em Sabedoria ou Inteligência e uma habilidade de remover 1 ponto de oripatia ou fadiga de um aliado, 1 vez por descanso." } },
+					"Vermelha": { pick: [{ n: 1, of: ["FOR", "CON"] }], desc: "+1 em Força ou Constituição.\nCura: uma cura em si mesmo de 1d4 + CON (1d6/1d8/1d10/1d12 a cada 3 níveis), 1 vez por descanso curto ou longo." },
+					"Azul": { desc: "+1 em testes de Sabedoria ou Inteligência (não aumenta o atributo).\nRetardar a Oripatia: 1 vez por descanso curto ou longo, retarda o avanço da Oripatia em um aliado ou remove 1 ponto de fadiga dele. A auréola não cura a Oripatia, ela só ganha tempo para o aliado." } },
 				features: [
 					{ name: "Aumento no valor de habilidade", desc: "Valor de Destreza aumenta em 2. A cor da auréola dá mais um bônus." },
 					{ name: "Auréola brilhante", desc: "O operador possui desvantagem em testes de Furtividade (exceto auréola Preta)." }] },

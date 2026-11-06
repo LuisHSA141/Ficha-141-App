@@ -30,12 +30,14 @@ const CBT = (() => {
   function entries() {
     const out = [];
     const add = (acoes, o) => { const set = setOf(acoes); if (set.size) out.push(Object.assign(o, { types: set })); };
-    LISTS.weapons.forEach((w, i) => { if (!w._new) add(w.acoes, { src: "ARMA", name: w.name || "ARMA", list: "weapons", i,
-      info: [w.damage && "DANO " + w.damage, w.range && "ALCANCE " + w.range, w.swap && "TROCA " + w.swap, (w.penteMax || w.penteAtual) && `PENTE ${nz(w.penteAtual)}/${nz(w.penteMax)}`].filter(Boolean).join(" // "), desc: w.desc }); });
-    LISTS.equipment.forEach((e, i) => { if (!e._new) add(e.acoes, { src: "EQUIPAMENTO", name: e.name || "EQUIPAMENTO", list: "equipment", i,
-      info: [e.pe !== "" && e.pe != null && "P.E. " + e.pe, nz(e.qty) > 1 && "×" + e.qty].filter(Boolean).join(" // "), desc: e.desc }); });
-    LISTS.itens.forEach((e, i) => { if (!e._new) add(e.acoes, { src: "ITEM DA MALETA", name: e.name || "ITEM", list: "itens", i,
+    LISTS.weapons.forEach((w, i) => { if (!w._new && !w.local) add(w.acoes, { src: "ARMA", name: w.name || "ARMA", list: "weapons", i,
+      info: ARM.info(w), desc: [w.traco, w.desc].filter(Boolean).join("\n") }); });
+    LISTS.equipment.forEach((e, i) => { if (!e._new && !e.local) add(e.acoes, { src: "EQUIPAMENTO", name: e.name || "EQUIPAMENTO", list: "equipment", i,
+      info: [e.tipo, e.pe !== "" && e.pe != null && "P.E. " + String(e.pe).replace(".", ","), nz(e.qtdMax) && `UNIDADES ${nz(e.qtdAtual)}/${nz(e.qtdMax)}`, nz(e.cargasMax) && `CARGAS ${nz(e.cargasAtual)}/${nz(e.cargasMax)}`, nz(e.qty) > 1 && "×" + e.qty].filter(Boolean).join(" // "), desc: e.desc }); });
+    LISTS.itens.forEach((e, i) => { if (!e._new && e.local !== "stash") add(e.acoes, { src: "ITEM DA MALETA", name: e.name || "ITEM", list: "itens", i,
       info: [nz(e.qty) > 1 && "×" + e.qty, e.invIn !== "1" && "FORA DA MALETA"].filter(Boolean).join(" // "), desc: e.desc }); });
+    LISTS.bolso.forEach((b, i) => { if (!b._new) add(b.acoes, { src: "ITEM DE BOLSO", name: b.name || "ITEM DE BOLSO", list: "bolso", i,
+      info: [b.marca, b.marca === "Recarga" && `USOS ${nz(b.usosAtuais)}/${nz(b.usosMax)}`].filter(Boolean).join(" // "), desc: b.desc }); });
     LISTS.traits.forEach((t, i) => { if (!t._new) add(t.acoes, { src: "HABILIDADE ÚNICA", name: t.name || "HABILIDADE", list: "traits", i,
       info: nz(t.usosMax) > 0 ? `USOS ${nz(t.usosAtuais)}/${nz(t.usosMax)}` : "", desc: t.desc }); });
     LISTS.talents.forEach((t, i) => { if (!t._new) add(t.acoes, { src: "TALENTO", name: t.name || "TALENTO", list: "talents", i, info: "", desc: t.desc }); });
@@ -78,6 +80,8 @@ const CBT = (() => {
       return `<div class="cbt-col${spent[t.k] ? " spent" : ""}" style="--ac:${t.c}"><div class="cbt-ch"><span>${t.n} // ${list.length}</span><button data-spend="${t.k}" data-nosfx>${spent[t.k] ? "LIBERAR" : "MARCAR USADA"}</button></div>
         <div class="cbt-list">${list.length ? list.map(e => {
           const acts = e.list === "weapons" && nz(LISTS.weapons[e.i].penteMax) > 0 ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="weapons" data-ai="${e.i}" data-k="penteAtual" data-nosfx>DISPARAR −1</button><button class="btn sm" data-cq="fill" data-al="weapons" data-ai="${e.i}" data-k="penteAtual" data-nosfx>RECARREGAR</button></div>`
+            : e.list === "equipment" && (nz(LISTS.equipment[e.i].qtdMax) || nz(LISTS.equipment[e.i].cargasMax)) ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="equipment" data-ai="${e.i}" data-k="${nz(LISTS.equipment[e.i].qtdMax) ? "qtdAtual" : "cargasAtual"}" data-nosfx>USAR −1</button></div>`
+            : e.list === "bolso" && LISTS.bolso[e.i].marca === "Recarga" ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="bolso" data-ai="${e.i}" data-k="usosAtuais" data-nosfx>USAR −1</button></div>`
             : e.list === "traits" && nz(LISTS.traits[e.i].usosMax) > 0 ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="traits" data-ai="${e.i}" data-k="usosAtuais" data-nosfx>USAR −1</button></div>` : "";
           return `<details class="cbt-e"><summary><span class="es">${esc(e.src)}</span><span class="en">${esc(e.name)}</span>${e.info ? `<span class="ei">${esc(e.info)}</span>` : ""}</summary>${e.desc ? `<div class="ed">${esc(e.desc)}</div>` : ""}</details>${acts}`;
         }).join("") : `<div class="cbt-empty">NADA MARCADO COMO ${t.k}</div>`}</div></div>`;
@@ -101,6 +105,9 @@ const CBT = (() => {
       if (set.size) { hab[key] = str(set); n++; }
     });
     ["weapons", "equipment"].forEach(l => LISTS[l].forEach(it => { if (!it._new && !it.acoes) { it.acoes = "A"; n++; } }));
+    const AC = { "Ação": "A", "Ação Bônus": "B", "Reação": "R", "Ação Livre": "L" };
+    LISTS.bolso.forEach(it => { if (!it._new && !it.acoes && AC[it.acao]) { it.acoes = AC[it.acao]; n++; } });
+    LISTS.equipment.forEach(it => { if (!it._new && AC[it.acao] && it.acoes !== AC[it.acao] && !/[^A]/.test(it.acoes || "")) { it.acoes = AC[it.acao]; n++; } });
     return n;
   }
 
@@ -123,6 +130,7 @@ const CBT = (() => {
       const it = LISTS[cq.dataset.al][+cq.dataset.ai], k = cq.dataset.k, mk = k.replace("Atual", "Max"), cur = nz(it[k]), max = nz(it[mk]);
       const v = cq.dataset.cq === "dec" ? cur - 1 : max;
       if (v < 0 || v === cur) { sfx("errado"); toast(cq.dataset.cq === "dec" ? (k === "penteAtual" ? "PENTE VAZIO // RECARREGUE" : "SEM USOS") : "JÁ ESTÁ CHEIO", true); return; }
+      if (cq.dataset.al === "weapons" && k === "penteAtual" && cq.dataset.cq === "dec") { it._rec = (it._rec || 0) + (it._shot ? 1 : 0); it._shot = true; }
       it[k] = String(v); sfx(cq.dataset.cq === "dec" ? "clique" : "abrir"); renderList(cq.dataset.al); renderPanel(); changed(true); return;
     }
     const b = e.target.closest("[data-cbt]");
@@ -130,7 +138,7 @@ const CBT = (() => {
     const a = b.dataset.cbt;
     if (a === "all") openPanel();
     if (a === "close") closePanel();
-    if (a === "turn") { TYPES.forEach(t => spent[t.k] = false); sfx("abrir"); toast("NOVO TURNO // AÇÕES LIBERADAS"); hud(); if (panel.classList.contains("show")) renderPanel(); }
+    if (a === "turn") { TYPES.forEach(t => spent[t.k] = false); LISTS.weapons.forEach(w => { w._rec = 0; w._shot = false; }); renderList("weapons"); sfx("abrir"); toast("NOVO TURNO // AÇÕES LIBERADAS"); hud(); if (panel.classList.contains("show")) renderPanel(); }
     if (a === "off") toggle(false);
     if (a === "suggest") { const n = suggest(); updateFeatures(); renderAll(); hud(); renderPanel(); changed(true); sfx(n ? "abrir" : "errado"); toast(n ? `${n} SUGESTÕES MARCADAS // AJUSTE À VONTADE` : "NADA NOVO PARA SUGERIR", !n); }
   }, true);

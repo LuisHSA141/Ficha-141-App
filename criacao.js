@@ -112,7 +112,8 @@ function randomW() {
   w.nat = pick(natCodes.filter(c => c !== "OTHER"));
   // atributos: rolagem 4d6, maiores nos atributos de resistência da classe
   w.method = "roll";
-  w.pool = Array.from({ length: 6 }, () => { const x = [d6(6), d6(6), d6(6), d6(6)].sort((a, b) => a - b); return x[1] + x[2] + x[3]; }).sort((a, b) => b - a);
+  // 4d6 descartando o menor, com piso 8 para o operador sair jogável
+  w.pool = Array.from({ length: 6 }, () => { const x = [d6(6), d6(6), d6(6), d6(6)].sort((a, b) => a - b); return Math.max(8, x[1] + x[2] + x[3]); }).sort((a, b) => b - a);
   w.rolledPool = w.pool; w.rolled = true;
   const c = CLASSES[w.cls], pri = [...c.saves, ...(c.choice || [])], order = [...new Set([...shuffle(pri), ...shuffle(ATTR_LIST)])];
   order.forEach((k, i) => w.base[k] = i);

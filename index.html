@@ -297,6 +297,112 @@ body.nocrt:before,body.nocrt .noise{display:none}
 .stats{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:8px;font-size:12px}
 .stats span{color:var(--txt)}
 .stats em{font-style:normal;color:var(--dim2);font-size:9px;letter-spacing:.18em;margin-right:6px}
+.wchips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.wchips .wt{font-size:9px;letter-spacing:.16em;color:var(--acc-lt);border:1px solid rgb(var(--acc-rgb) / .5);padding:2px 7px;font-weight:normal;text-transform:uppercase}
+.wchips .wm{font-style:normal;font-size:9px;letter-spacing:.14em;color:var(--dim);border:1px solid var(--line2);padding:2px 6px;text-transform:uppercase}
+.stats small{color:var(--dim);font-size:10px;letter-spacing:.06em}
+.stats sup.wup{color:var(--good);font-size:9px;margin-left:3px}
+.stats b.wprec{font-size:15px;color:#fff;text-shadow:0 0 10px rgb(var(--acc-rgb) / .6);cursor:help}
+.wrec{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;font-size:10px;letter-spacing:.14em;color:var(--amber)}
+.wrec .step{width:auto;padding:0 8px;font-size:9px;letter-spacing:.12em}
+.wpc{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin-top:7px}
+.wpc em{font-style:normal;color:var(--dim2);font-size:8.5px;letter-spacing:.16em;margin-right:3px}
+.wpc span{font-size:10.5px;color:var(--good);border:1px solid #8fbf9844;padding:1px 6px}
+.wchips .wt.dim{color:var(--dim);border-color:var(--line2)}
+.bolso-info{margin:0 0 10px;font-size:10px;letter-spacing:.12em}
+.wacc{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.wacc span{font-size:11px;background:var(--panel2);border:1px solid var(--line2);padding:3px 7px;color:var(--txt2);cursor:help}
+.wacc em{font-style:normal;color:var(--dim2);font-size:8px;letter-spacing:.16em;margin-right:5px;text-transform:uppercase}
+.wtr{margin:8px 0 0;font-size:12px;line-height:1.55;color:var(--txt)}
+.wtr em{font-style:normal;color:var(--acc-lt);font-size:9px;letter-spacing:.18em;margin-right:7px}
+.wtr.kit em{color:var(--amber)}
+.wdet{margin-top:8px;font-size:11.5px;line-height:1.55;color:var(--txt2)}
+.wdet summary{cursor:pointer;color:var(--dim);font-size:9px;letter-spacing:.2em;list-style:none}
+.wdet summary::before{content:"▸ "}.wdet[open] summary::before{content:"▾ "}
+.wdet p,.wfx{margin:6px 0 0}
+.wdet .g,.wfx .g{color:var(--good)}.wdet .p,.wfx .p{color:#d98b8b}
+.wfx{font-size:11px;line-height:1.5;color:var(--txt2)}
+.wsec{margin-top:10px}
+.wck{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:5px;font-size:12px;color:var(--txt2)}
+.wck label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.wck input{accent-color:var(--acc)}
+.in.rel-on{border-color:var(--amber)!important;box-shadow:0 0 0 1px var(--amber),0 0 14px rgb(211 154 58 / .25)}
+.rel-pop{position:absolute;z-index:190;transform:translate(-50%,-110%);font:bold 16px "Courier New",monospace;color:var(--good);text-shadow:0 0 8px #000,0 0 2px #000;pointer-events:none;animation:relpop 1.1s ease-out forwards}
+.rel-pop.neg{color:var(--red)}
+@keyframes relpop{0%{opacity:0;margin-top:6px}15%{opacity:1;margin-top:0}100%{opacity:0;margin-top:-26px}}
+/* caixas de seleção do editor de armas: viram etiquetas */
+.wck{gap:6px}
+.wck label{position:relative;gap:7px;padding:6px 11px 6px 9px;border:1px solid var(--line2);background:var(--panel2);color:var(--dim);font-size:11px;letter-spacing:.1em;text-transform:uppercase;transition:border-color .12s,color .12s,background .12s;user-select:none}
+.wck label:hover{border-color:var(--btn);color:var(--txt)}
+.wck input{appearance:none;-webkit-appearance:none;width:12px;height:12px;margin:0;border:1px solid var(--dim2);background:var(--bg);display:grid;place-items:center;flex-shrink:0;cursor:pointer;transition:background .12s,border-color .12s}
+.wck input::after{content:"";width:6px;height:6px;background:#fff;transform:scale(0);transition:transform .12s}
+.wck input:checked{border-color:var(--acc);background:var(--acc)}
+.wck input:checked::after{transform:scale(1)}
+.wck input:focus-visible{outline:1px solid var(--acc-lt);outline-offset:2px}
+.wck label:has(input:checked){border-color:rgb(var(--acc-rgb) / .7);background:rgb(var(--acc-rgb) / .16);color:#fff;box-shadow:inset 3px 0 0 var(--acc)}
+.wcus{margin-top:10px;padding:10px 12px;border:1px solid rgb(var(--acc-rgb) / .45);border-left:3px solid var(--acc);background:rgb(var(--acc-rgb) / .06)}
+.wcus-h{font-size:9px;letter-spacing:.2em;color:var(--acc-lt);margin-bottom:6px}
+.wcus>label{display:block;margin-top:6px}
+.card.edit[data-list="weapons"] .wcus-n{grid-template-columns:repeat(auto-fill,minmax(92px,1fr));margin-top:8px}
+.wacc-ed{margin-top:6px}
+.ed select.in{width:100%}
+.add-g{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.add.acc-add{border-style:solid;border-color:rgb(var(--acc-rgb) / .6);color:var(--acc-lt)}
+.acat{position:fixed;inset:0;z-index:170;display:none;grid-template-columns:minmax(0,1fr);justify-items:center;align-items:center;padding:16px;background:rgb(var(--bg-rgb) / .86);backdrop-filter:blur(2px)}
+.acat.show{display:grid;animation:fade .2s ease}
+body.acat-on{overflow:hidden}
+.acat-in{position:relative;width:min(1100px,100%);max-height:calc(100dvh - 32px);display:flex;flex-direction:column;gap:10px;background:var(--panel);border:1px solid var(--line);padding:18px 20px}
+.acat-in>*{min-width:0;max-width:100%}
+.acat-h{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.22em;color:var(--dim)}
+.acat-h b{color:var(--txt)}
+.acat-tabs{display:flex;gap:5px;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px;flex-shrink:0}
+.acat-tab{flex:0 0 auto;background:var(--panel2);border:1px solid var(--line2);color:var(--dim);font:10px "Courier New",monospace;letter-spacing:.12em;padding:7px 10px;cursor:pointer;text-transform:uppercase}
+.acat-tab em{font-style:normal;color:var(--dim3);margin-left:4px}
+.acat-tab:hover{border-color:var(--btn);color:var(--txt)}
+.acat-tab.on{border-color:var(--acc);color:#fff;background:rgb(var(--acc-rgb) / .2)}
+.acat-tab.on em{color:var(--acc-lt)}
+.acat-grid{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;padding-right:2px}
+.acat-it{display:flex;flex-direction:column;gap:4px;align-items:stretch;text-align:left;background:var(--inset);border:1px solid var(--line2);color:var(--txt);padding:8px;cursor:pointer;font-family:inherit}
+.acat-it:hover,.acat-it:focus-visible{outline:none;border-color:var(--acc);background:var(--hover);box-shadow:0 0 16px rgb(var(--acc-rgb) / .2)}
+.acat-img{height:78px;display:grid;place-items:center;color:var(--dim3);font-size:9px;letter-spacing:.16em;background:radial-gradient(ellipse at center,#ffffff10,transparent 70%)}
+.acat-img img{max-width:100%;max-height:78px;object-fit:contain;filter:drop-shadow(0 2px 6px #000)}
+.acat-it b{font-size:12px;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acat-it small{color:var(--dim);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.acat-tags{display:flex;flex-wrap:wrap;gap:3px;min-height:15px}
+.acat-tags i{font-style:normal;font-size:8.5px;letter-spacing:.1em;border:1px solid var(--line2);color:var(--txt2);padding:1px 5px}
+.acat-tags i.g{border-color:#8fbf9888;color:var(--good)}
+.acat-tags i.s{border-color:#d39a3a88;color:var(--amber)}
+.acat-f{margin:0;font-size:10px}
+@media (max-width:600px){.acat{padding:0;place-items:stretch}.acat-in{width:100%;max-height:100dvh;height:100dvh;padding:14px 12px}.acat-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}.acat-img{height:64px}.acat-img img{max-height:64px}}
+.eqc-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.eqc-top .in{flex:1 1 220px}
+.eqc-tg{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.14em;color:var(--txt2);cursor:pointer}
+.eqc-tg input{accent-color:var(--acc)}
+.eqc-who{margin:0;font-size:10px;letter-spacing:.14em}
+.eqc-grid{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px;align-content:start;padding-right:2px}
+.eqc-it{background:var(--inset);border:1px solid var(--line2);padding:10px 12px;font-size:12px;line-height:1.5;color:var(--txt2)}
+.eqc-it.lock{opacity:.55}
+.eqc-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.eqc-h b{color:var(--txt);font-size:13px;letter-spacing:.04em}
+.eqc-h .btn{flex-shrink:0}
+.eqc-lk{font-size:8.5px;letter-spacing:.12em;color:var(--amber);border:1px solid #d39a3a66;padding:2px 6px;text-align:right}
+.eqc-m{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.eqc-m i{font-style:normal;font-size:9px;letter-spacing:.08em;border:1px solid var(--line2);padding:1px 6px;color:var(--txt2)}
+.eqc-m i.x{color:var(--amber);border-color:#d39a3a66}
+.eqc-it p{margin:0}
+.eqc-it details{margin-top:6px;font-size:11px}.eqc-it summary{cursor:pointer;color:var(--dim);font-size:9px;letter-spacing:.18em}
+.eqc-it details p{margin-top:4px}
+@media (max-width:600px){.eqc-grid{grid-template-columns:1fr}}
+#armGuia{margin-top:12px}
+.card.edit[data-list="weapons"] .ed-g{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));margin-top:8px}
+.wguia{border:1px dashed var(--line2);padding:10px 14px;font-size:12px;line-height:1.6;color:var(--txt2)}
+.wguia summary{cursor:pointer;color:var(--dim);font-size:10px;letter-spacing:.2em;list-style:none}
+.wguia[open] summary{color:var(--txt);margin-bottom:6px}
+.wguia h4{margin:14px 0 4px;color:var(--acc-lt);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:normal}
+.wguia p{margin:4px 0}
+.wguia table{border-collapse:collapse;width:100%;margin:4px 0;font-size:11.5px}
+.wguia td,.wguia th{border:1px solid var(--line3);padding:4px 8px;text-align:left;vertical-align:top}
+.wguia th{color:var(--dim);font-weight:normal;font-size:9px;letter-spacing:.14em}
 .desc{margin:8px 0 0;color:var(--txt2);font-size:12px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
 .ammo{display:flex;align-items:center;gap:6px;margin-top:9px;flex-wrap:wrap}
 .ammo em{font-style:normal;color:var(--dim2);font-size:9px;letter-spacing:.18em;margin-right:4px}
@@ -377,6 +483,11 @@ label.w-img:hover{border-color:var(--acc);color:#fff}
 .rail-t em{position:absolute;top:4px;right:6px;font-style:normal;color:var(--dim3);font-size:9px}
 .rail-t:hover,.rail-t:focus-visible{outline:none;border-color:var(--acc);color:#fff;background:var(--hover);box-shadow:0 0 18px rgb(var(--acc-rgb) / 0.2)}
 .rail-t:hover svg{filter:drop-shadow(0 0 6px var(--acc))}
+.rail-t.on{color:#fff;border-color:var(--acc);background:linear-gradient(90deg,rgb(var(--acc-rgb) / .28),rgb(var(--acc-rgb) / .08));box-shadow:inset 3px 0 0 var(--acc),0 0 18px rgb(var(--acc-rgb) / .22);cursor:default}
+.rail-t.on svg{filter:drop-shadow(0 0 6px var(--acc))}
+.rail-t.on em{color:var(--acc-lt)}
+.rail-t.on::after{content:"ABERTA";position:absolute;bottom:3px;left:0;right:0;font-size:7px;letter-spacing:.24em;color:var(--acc-lt)}
+.rail-t.on{padding-bottom:16px}
 .win-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;margin-bottom:14px;background:rgb(var(--inset-rgb) / 0.91);border:1px solid var(--line);border-left:3px solid var(--acc)}
 .win-t{font-size:13px;letter-spacing:.22em;color:#fff;text-shadow:1px 0 var(--acc2)}
 .win-t:before{content:"// ";color:var(--acc)}
@@ -441,6 +552,8 @@ body.dragging,body.dragging *{-webkit-user-select:none!important;user-select:non
   .rail-t svg{width:18px;height:18px}
   .rail-t span{max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .rail-t em{display:none}
+  .rail-t.on{box-shadow:inset 0 -3px 0 var(--acc);padding-bottom:8px}
+  .rail-t.on::after{display:none}
   .win-bar{padding:8px 10px}
   .win-acts .btn{padding:6px 8px;letter-spacing:.08em}
 }
@@ -664,6 +777,14 @@ details.feat.lockd{opacity:.45}
 .inv-info b{color:var(--txt);font-weight:normal}
 .inv-info .bad{color:var(--red)}
 .inv-wrap{overflow-x:auto;padding-bottom:2px}
+.inv-grab{cursor:grab;touch-action:none;user-select:none;color:var(--dim);font-size:16px;line-height:1;padding:4px 6px;margin:-4px 2px -4px -6px;border:1px solid transparent;align-self:flex-start}
+.inv-grab:hover{color:var(--acc-lt);border-color:var(--line2)}
+.card.drag{opacity:.45}
+.inv-it.eqp{background:linear-gradient(135deg,#2a2a1a,#151510);border-color:#8a8a5a}
+.inv-it .kd{position:absolute;top:2px;left:3px;font-size:7px;letter-spacing:.16em;color:var(--dim);z-index:2}
+.chip.eqp{border-color:#8a8a5a}
+.box.drop-over{outline:2px dashed var(--acc);outline-offset:-4px}
+.stored-note{grid-column:1/-1;font-size:9px;letter-spacing:.18em;color:var(--dim2);padding:4px 2px}
 .inv-grid{position:relative;margin:0 auto;--cell:44px;background-color:var(--deep);background-image:linear-gradient(var(--line3) 1px,transparent 1px),linear-gradient(90deg,var(--line3) 1px,transparent 1px);background-size:var(--cell) var(--cell);border:1px solid var(--btn);box-shadow:inset 0 0 40px #000}
 .inv-it{position:absolute;border:1px solid var(--dim2);background:rgb(var(--item-rgb) / .9);cursor:grab;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;transition:border-color .1s}
 .inv-it.wp{border-color:var(--acc2);background:rgb(var(--itemw-rgb) / .9)}
@@ -784,6 +905,18 @@ body.fx-surpreendido .l-surpreendido{display:none;font:bold 64px "Courier New",m
 .codec-sub.uma .cs-n{color:#ffb347;text-shadow:0 0 8px #ffb347}
 .codec-sub.uma .cs-t{font-size:clamp(26px,6vw,58px);font-weight:bold;letter-spacing:.04em;color:#fff;text-shadow:3px 0 #ff3b4f,-3px 0 #3bd5ff;animation:wowok .09s steps(2) infinite}
 @keyframes wowok{0%{transform:translate(-3px,2px) rotate(-1deg)}50%{transform:translate(3px,-2px) rotate(1deg)}100%{transform:translate(-1px,1px)}}
+.fuse{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0 0 10px;padding:7px 9px;border:1px solid var(--line2);background:var(--bg)}
+.fuse em{font-style:normal;color:var(--acc-lt);font-size:9px;letter-spacing:.16em;margin-right:4px}
+.fuse b{font-variant-numeric:tabular-nums;min-width:5ch;text-align:center}
+.fuse .pips{display:flex;gap:3px}.fuse .pips i{width:9px;height:9px;background:var(--txt)}.fuse .pips i.x{background:var(--line3)}
+.fuse small{flex-basis:100%;color:var(--dim2);font-size:8.5px;letter-spacing:.14em}
+.dup.use-b{color:var(--good);border-color:#8fbf9866}.dup.use-b.zero{color:var(--red);border-color:#ff4b4b66}
+.fw{margin-top:14px}
+.fw-r{display:flex;align-items:center;gap:12px;margin-top:6px;padding:6px 10px;border:1px solid var(--line2);background:var(--bg)}
+.fw-r b{font-size:20px;min-width:2.2ch;text-align:center;color:#fff}
+.fw-r span{font-size:10px;letter-spacing:.14em;color:var(--txt2)}
+.fw-r small{display:block;color:var(--dim2);font-size:8.5px;letter-spacing:.1em;margin-top:2px;text-transform:none}
+.rest-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.rest-row .btn{flex:1 1 140px;min-width:0;white-space:normal;padding-left:8px;padding-right:8px}
 .fd-acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
 .fd-acts .note{flex-basis:100%;margin:2px 0 0}
 .fd-ta{font-size:12px;min-height:90px}
@@ -869,7 +1002,7 @@ details.feat.own{border-left-color:var(--good)}
       <button class="start" id="startBtn">START</button>
       <div class="hint">PRESSIONE ENTER</div>
     </div>
-    <div class="meta"><div>FILE: OPR-141 // v3.5</div><div class="warn">⚠ ACESSO RESTRITO</div></div>
+    <div class="meta"><div>FILE: OPR-141 // v4.3</div><div class="warn">⚠ ACESSO RESTRITO</div></div>
     <div class="footer">PROJECT 1.4.1 // OPERATOR MODULE // ACCESS: GRANTED</div>
   </main>
 </div>
@@ -985,7 +1118,7 @@ details.feat.own{border-left-color:var(--good)}
           <div class="f" style="margin-top:14px"><span class="lbl">Pontos de vida <span style="color:var(--dim3)">(Shift = 5)</span></span>
             <div class="hp-row">
               <button class="step" data-hp="-1" title="Dano" data-nosfx>−</button>
-              <input class="in" id="char-hp-current" data-save type="number" placeholder="ATUAL">
+              <input class="in" id="char-hp-current" data-save data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" placeholder="ATUAL">
               <span class="sl">/</span>
               <input class="in" id="char-hp-max" data-save type="number" placeholder="MÁX">
               <button class="step" data-hp="1" title="Cura" data-nosfx>+</button>
@@ -994,7 +1127,7 @@ details.feat.own{border-left-color:var(--good)}
           <div class="f"><span class="lbl">Pontos de vontade (PVon) <span style="color:var(--dim3)">// 10 + CON + SAB + nível + Proef</span></span>
             <div class="hp-row">
               <button class="step" data-pv="-1" title="Dano de Sopro" data-nosfx>−</button>
-              <input class="in" id="char-pvon" data-save type="number" placeholder="ATUAL">
+              <input class="in" id="char-pvon" data-save data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" placeholder="ATUAL">
               <span class="sl">/</span>
               <div class="ro pvmax" id="pvonMax">--</div>
               <button class="step" data-pv="1" title="Recuperar" data-nosfx>+</button>
@@ -1002,6 +1135,7 @@ details.feat.own{border-left-color:var(--good)}
             <div class="estafa" id="estafa"></div>
           </div>
           <div class="f"><span class="lbl">Dados de vida</span><div class="ro" id="char-hit-dice">1d12</div></div>
+          <div class="rest-row"><button class="btn" id="restShort" data-nosfx title="Metade do PVon, usos de descanso curto e Itens de Bolso de Recarga">☾ DESCANSO CURTO</button><button class="btn acc" id="restLong" data-nosfx title="PV e PVon cheios e todos os usos restaurados">☾☾ DESCANSO LONGO</button></div>
         </div>
 
         <div class="box">
@@ -1013,6 +1147,7 @@ details.feat.own{border-left-color:var(--good)}
             <label><span class="lbl">Outros CA</span><input class="in" id="ac-bonus-other" data-save data-def="0" type="number" value="0"></label>
             <label><span class="lbl">Outros inic.</span><input class="in" id="init-bonus-other" data-save data-def="0" type="number" value="0"></label>
           </div>
+          <div class="fw" id="fwBox"></div>
         </div>
 
         <div class="box">
@@ -1066,8 +1201,9 @@ details.feat.own{border-left-color:var(--good)}
   <!-- 02 COMBATE & INVENTÁRIO -->
   <section class="page" id="combate">
     <div class="box">
-      <div class="box-h"><span>ARMAMENTO</span><button class="add" data-add="weapons">+ ADICIONAR ARMA</button></div>
+      <div class="box-h"><span>ARMAMENTO</span><span class="add-g"><button class="add acc-add" data-arm-cat>⌖ CATÁLOGO</button><button class="add" data-add="weapons">+ ARMA EM BRANCO</button></span></div>
       <div class="cards w" id="list-weapons"></div>
+      <div id="armGuia"></div>
     </div>
     <div class="grid g21" style="margin-top:16px">
       <div class="box">
@@ -1084,12 +1220,30 @@ details.feat.own{border-left-color:var(--good)}
       <div class="col">
         <div class="box">
           <div class="box-h"><span>DINHEIRO</span><small>DÓLAR DUPLO</small></div>
-          <div class="money"><input class="in" id="char-money" data-save data-def="0" type="number" value="0"><span>DD</span></div>
+          <div class="money"><input class="in" id="char-money" data-save data-def="0" data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" value="0"><span>DD</span></div>
         </div>
         <div class="box">
-          <div class="box-h"><span>EQUIPAMENTOS</span><button class="add" data-add="equipment">+ ADICIONAR EQUIPAMENTO</button></div>
+          <div class="box-h"><span>EQUIPAMENTOS</span><span class="add-g"><button class="add acc-add" data-eq-cat>⌖ CATÁLOGO</button><button class="add" data-add="equipment">+ EM BRANCO</button></span></div>
           <div class="cards" id="list-equipment"></div>
         </div>
+        <div class="box">
+          <div class="box-h"><span>ITENS DE BOLSO</span><button class="add" data-add="bolso">+ ITEM DE BOLSO</button></div>
+          <p class="note bolso-info" id="bolsoInfo"></p>
+          <div class="cards" id="list-bolso"></div>
+        </div>
+      </div>
+    </div>
+    <div class="grid" style="margin-top:16px">
+      <div class="box stash-box">
+        <div class="box-h"><span>STASH</span>
+          <div class="inv-size">GRADE <input class="in" id="st-cols" data-save data-def="12" type="number" min="1" max="24" value="12" title="Colunas">×<input class="in" id="st-rows" data-save data-def="8" type="number" min="1" max="24" value="8" title="Linhas"></div>
+        </div>
+        <p class="note" style="margin:0 0 10px">O que fica guardado na base. Itens, armas e equipamentos no Stash não pesam na Carga nem no P.E. Arraste da maleta, ou pela alça ⠿ dos cards de arma e equipamento.</p>
+        <div class="inv-info" id="stInfo"></div>
+        <div class="inv-wrap" id="stWrap"><div class="inv-grid" id="stGrid"><div id="stItems"></div><div class="inv-ghost hidden" id="stGhost"></div></div></div>
+        <div class="inv-bar" id="stBar"></div>
+        <span class="lbl" style="margin-top:14px">Fora da grade do stash</span>
+        <div class="tray" id="stTray"></div>
       </div>
     </div>
   </section>
@@ -1228,6 +1382,10 @@ details.feat.own{border-left-color:var(--good)}
 
 <script src="fichas.js"></script>
 <script src="data.js"></script>
+<script src="armas.js"></script>
+<script src="armas-catalogo.js"></script>
+<script src="bolso-catalogo.js"></script>
+<script src="equip-catalogo.js"></script>
 <script src="livro.js"></script>
 <script>
 "use strict";
@@ -1251,6 +1409,84 @@ const store={
   set(k,v){try{localStorage.setItem(k,v);return true;}catch(e){return false;}},
   del(k){try{localStorage.removeItem(k);}catch(e){}}
 };
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-huse]");if(!b) return;
+  e.preventDefault();e.stopPropagation();
+  const row=b.closest(".fuse"),id=row.dataset.uid,max=+row.dataset.max,used=HABUSOS[id]||0,d=+b.dataset.huse;
+  const nu=Math.max(0,Math.min(max,used-d));
+  if(nu===used){sfx("errado");toast(d<0?"SEM USOS // DESCANSE":"JÁ ESTÁ CHEIO",d<0);return;}
+  if(nu) HABUSOS[id]=nu; else delete HABUSOS[id];
+  sfx("clique");updateFeatures(true);changed(true);
+});
+// ================== DESCANSOS ==================
+async function descanso(tipo){
+  const longo=tipo==="longo";
+  sfx("clique");
+  if(!await ask(longo?"Descanso longo: PV e PVon cheios, Estafa zerada, todos os usos de habilidades, Itens de Bolso de Recarga e Habilidades Únicas restaurados.":"Descanso curto: recupera metade do PVon, os usos que voltam no descanso curto e os Itens de Bolso de Recarga. Os PV não mudam: some a cura dos Dados de Vida no campo (ex.: +12).",{top:longo?"DESCANSO LONGO":"DESCANSO CURTO",yes:"DESCANSAR"})) return;
+  const feito=[];
+  const pvMax=nz($("pvonMax").textContent),pv=$("char-pvon").value===""?pvMax:nz($("char-pvon").value);
+  if(longo){
+    const hm=$("char-hp-max").value;if(hm!==""){$("char-hp-current").value=hm;feito.push("PV");}
+    $("char-pvon").value=pvMax;feito.push("PVON");
+  }else{const nv=Math.min(pvMax,pv+Math.ceil(pvMax/2));if(nv!==pv){$("char-pvon").value=nv;feito.push("PVON +"+(nv-pv));}}
+  // usos de habilidades de classe
+  const antes=Object.keys(HABUSOS).length;
+  document.querySelectorAll("#features .fuse").forEach(r=>{if(longo||r.dataset.rest==="curto") delete HABUSOS[r.dataset.uid];});
+  if(longo) HABUSOS={};
+  if(antes!==Object.keys(HABUSOS).length) feito.push("USOS DE HABILIDADE");
+  // Itens de Bolso de Recarga
+  let nb=0;LISTS.bolso.forEach(it=>{if(it.marca==="Recarga"&&String(it.usosAtuais)!==String(profBonus())){it.usosAtuais=String(profBonus());nb++;}});
+  if(nb) feito.push("ITENS DE BOLSO");
+  if(longo){
+    let nc=0;LISTS.equipment.forEach(it=>{if(nz(it.cargasMax)&&nz(it.cargasAtual)<nz(it.cargasMax)){it.cargasAtual=it.cargasMax;nc++;}});
+    if(nc) feito.push("CARGAS DE BATERIA");
+    if(LISTS.equipment.some(it=>nz(it.qtdMax)&&nz(it.qtdAtual)<nz(it.qtdMax))&&await ask("O grupo tem Suprimentos ou acesso a uma loja? Se sim, as unidades gastas dos equipamentos (granadas, minas, kits...) voltam.",{top:"REPOR UNIDADES",yes:"REPOR",no:"NÃO TEM"})){
+      LISTS.equipment.forEach(it=>{if(nz(it.qtdMax)) it.qtdAtual=it.qtdMax;});feito.push("UNIDADES DE EQUIPAMENTO");
+    }
+  }
+  if(longo){let nt=0;LISTS.traits.forEach(t=>{if(nz(t.usosMax)>0&&nz(t.usosAtuais)<nz(t.usosMax)){t.usosAtuais=t.usosMax;nt++;}});if(nt) feito.push("HABILIDADES ÚNICAS");}
+  if(window.ARM) ARM.recoilReset();
+  renderAll();update();updateFeatures(true);changed();
+  sfx("abrir");toast(`${longo?"DESCANSO LONGO":"DESCANSO CURTO"} // ${feito.length?feito.join(", "):"NADA A RECUPERAR"}`);
+}
+// ================== CONTADORES: "-20" / "+5" soma ao valor atual ==================
+// vale para Vida, PVon, Dinheiro e os contadores e barras criados pelo jogador
+(()=>{
+  const SEL="[data-rel]";
+  const num=v=>{const n=parseFloat(String(v??"").replace(",","."));return isNaN(n)?0:n;};
+  const relOf=v=>{const m=/^\s*([+-])\s*(\d+(?:[.,]\d+)?)\s*$/.exec(String(v));return m?(m[1]==="-"?-1:1)*num(m[2]):null;};
+  const typing=v=>/^\s*[+-]\s*[\d.,]*\s*$/.test(String(v));
+  const limits=t=>{
+    if(t.id==="char-hp-current"){const mx=document.getElementById("char-hp-max").value;return [0,mx===""?Infinity:num(mx)];}
+    if(t.id==="char-pvon"){const mx=document.getElementById("pvonMax");return [0,mx?num(mx.textContent)||Infinity:Infinity];}
+    if(t.classList.contains("cb-cur")){const mx=t.closest(".box")?.querySelector(".cb-max")?.value;return [0,mx?num(mx):Infinity];}
+    if(t.id==="char-money") return [0,Infinity];   // sem dívida: o dinheiro para em 0
+    return [-Infinity,Infinity];
+  };
+  document.addEventListener("focusin",e=>{const t=e.target;if(t.matches&&t.matches(SEL)) t.dataset.prev=t.value;},true);
+  // enquanto digita "-2..." a ficha não recalcula com o número negativo
+  document.addEventListener("input",e=>{const t=e.target;if(!t.matches||!t.matches(SEL)) return;
+    if(typing(t.value)&&t.dataset.prev!==undefined&&String(t.dataset.prev).trim()!==""){e.stopImmediatePropagation();t.classList.add("rel-on");}
+    else t.classList.remove("rel-on");},true);
+  function commit(t){
+    t.classList.remove("rel-on");
+    if(t.value===t.dataset.prev) return;   // já aplicado (Enter seguido de sair do campo)
+    const d=relOf(t.value),prev=t.dataset.prev;
+    if(d===null||prev===undefined||String(prev).trim()===""){if(typing(t.value)&&prev!==undefined&&String(prev).trim()!==""){t.value=prev;}return;}
+    const [lo,hi]=limits(t);
+    const v=+Math.max(lo,Math.min(hi,num(prev)+d)).toFixed(2);
+    t.value=String(v);t.dataset.prev=t.value;
+    t.dispatchEvent(new Event("input",{bubbles:true}));t.dispatchEvent(new Event("change",{bubbles:true}));
+    // aviso rápido do que foi somado
+    const tag=document.createElement("span");tag.className="rel-pop"+(d<0?" neg":"");tag.textContent=(d>0?"+":"−")+Math.abs(d);
+    const r=t.getBoundingClientRect();tag.style.left=(r.left+r.width/2)+"px";tag.style.top=(r.top+window.scrollY)+"px";
+    document.body.appendChild(tag);setTimeout(()=>tag.remove(),1100);
+    if(typeof sfx==="function") sfx("clique");
+  }
+  document.addEventListener("keydown",e=>{const t=e.target;if(e.key==="Enter"&&t.matches&&t.matches(SEL)){e.preventDefault();commit(t);t.blur();}},true);
+  document.addEventListener("focusout",e=>{const t=e.target;if(t.matches&&t.matches(SEL)) commit(t);},true);
+})();
 
 // ================== SONS ==================
 const SFX={
@@ -1532,21 +1768,70 @@ function updateCombat(mods){
 
 function totals(peStr=0){
   let peW=0,peE=0,cg=0;
-  LISTS.weapons.forEach(w=>peW+=nz(w.pe));
-  LISTS.equipment.forEach(e=>{peE+=nz(e.pe);cg+=(nz(e.qty)||1)*nz(e.carga);});
-  LISTS.itens.forEach(e=>{cg+=(nz(e.qty)||1)*nz(e.carga);});
+  // equipado: conta P.E. // na maleta: pesa 2 × P.E. na Carga // no Stash: não conta nada
+  LISTS.weapons.forEach(w=>{const L=w.local||"";if(!L) peW+=ARM.pe(w);else if(L==="mal") cg+=2*ARM.pe(w);});
+  LISTS.equipment.forEach(e=>{const L=e.local||"";if(!L){peE+=nz(e.pe);cg+=(nz(e.qty)||1)*nz(e.carga);}else if(L==="mal") cg+=2*nz(e.pe);});
+  LISTS.itens.forEach(e=>{if(e.local!=="stash") cg+=(nz(e.qty)||1)*nz(e.carga);});
   const cover=Math.min(peW,peStr);   // a Força cobre parte do P.E. das armas
   return {pe:+(peE+peW-cover).toFixed(2),peW:+peW.toFixed(2),peE:+peE.toFixed(2),cover:+cover.toFixed(2),cg:+cg.toFixed(2)};
 }
 
 // textos de habilidade reescritos pelo jogador (chave da habilidade -> texto)
 let HABTXT={};
+// usos por descanso das habilidades de classe: HABUSOS[chave#n] = usos gastos
+let HABUSOS={},FEAT_LV=1,USE_SEEN=new Set();
+const NUMW={um:1,uma:1,dois:2,duas:2,"três":3,tres:3,quatro:4,cinco:5};
+// lê o texto do livro e acha os usos por descanso (rest: "curto" = volta no curto e no longo; "longo" = só no longo)
+function usesOf(txt,name,lv){
+  const P=profBonus(),M=getMods(),out=[];
+  const bullets=String(txt||"").replace(/•/g,"\n").split("\n");
+  bullets.forEach(bl=>{
+    bl=bl.trim();if(!bl) return;
+    const blabel=(/^([^:]{2,40}):/.exec(bl)||[])[1];
+    // dados de superioridade: "você tem 3 dados ... mais um no 5º, no 9º e no 13º nível ... recupera todos num descanso"
+    let m=/você tem (\d+) dados de superioridade/i.exec(bl);
+    if(m&&/descanso/i.test(bl)){let n=+m[1];const up=/mais um no ([^.]*?) nível/i.exec(bl);if(up) [...up[1].matchAll(/(\d+)º/g)].forEach(x=>{if(lv>=+x[1]) n++;});
+      out.push({label:"Dados de superioridade",max:n,rest:/descanso curto/i.test(bl)?"curto":"longo"});return;}
+    bl.split(/(?<=\.)\s+(?=[A-ZÁÉÍÓÚÂÊÔ])/).forEach(fr=>{
+      const t=fr.trim();if(!t||/passa a ter/i.test(t)) return;
+      if(!/descanso|utiliz[áa]-la novamente/i.test(t)) return;
+      // "A partir do 13º nível, você pode usar isso duas vezes por descanso": melhora o contador anterior
+      const ap=/^A partir do (\d+)º nível[^.]*?(uma|duas|dois|três|tres|\d+) vez(?:es)? por descanso/i.exec(t);
+      if(ap){if(lv>=+ap[1]&&out.length) out[out.length-1].max=NUMW[ap[2].toLowerCase()]||+ap[2];return;}
+      let max=null;
+      if((m=/(uma|um|duas|dois|três|tres|\d+) (?:vez(?:es)?|usos?) por descanso/i.exec(t))) max=NUMW[m[1].toLowerCase()]||+m[1];
+      else if(/número de vezes igual (?:a|à) metade da sua Proef/i.test(t)) max=Math.ceil(P/2);
+      else if(/número de vezes igual (?:a|à) (?:sua )?Proef/i.test(t)) max=P;
+      else if(/Códigos iguais à (?:sua )?Proef \+ (?:seu )?modificador de Intelig/i.test(t)) max=Math.max(1,P+M.INT);
+      else if(/Estamina iguais à sua Proef \+ seu modificador de Constituição/i.test(t)) max=Math.max(1,P+M.CON);
+      else if((m=/Usos: (\d+) por descanso longo((?:,? (?:e )?\d+ no \d+º(?: nível)?)+)/i.exec(t))){
+        max=+m[1];[...m[2].matchAll(/(\d+) no (\d+)º/g)].forEach(x=>{if(lv>=+x[2]) max=+x[1];});
+      }
+      else if((m=/igual a (\d+) × seu nível de \w+/i.exec(t))) max=+m[1]*lv;
+      else if(/antes de utiliz[áa]-la novamente/i.test(t)) max=1;
+      if(!max) return;
+      const rest=/descanso curto/i.test(t)||/antes de utiliz/i.test(t)?"curto":"longo";
+      let label=(/^([^:]{2,40}):/.exec(t)||[])[1]||blabel||name;
+      if(/^usos$/i.test(label.trim())) label=name;
+      out.push({label:label.trim(),max,rest});
+    });
+  });
+  // a mesma regra repetida vira um contador só
+  return out.filter((u,i)=>out.findIndex(v=>v.max===u.max&&v.rest===u.rest&&v.label===u.label)===i);
+}
+function usesHTML(key,list){
+  return list.map((u,n)=>{const id=key+"#"+n,used=Math.min(u.max,HABUSOS[id]||0),left=u.max-used;
+    return `<div class="fuse" data-uid="${esc(id)}" data-rest="${u.rest}" data-max="${u.max}"><em>${esc(u.label.toUpperCase())}</em><button class="step" data-huse="-1" data-nosfx title="Usar">−</button><b>${left} / ${u.max}</b><button class="step" data-huse="1" data-nosfx title="Devolver um uso">+</button>${u.max<=12?`<span class="pips">${Array.from({length:u.max},(_,k)=>`<i class="${k<left?"":"x"}"></i>`).join("")}</span>`:""}<small>${u.rest==="curto"?"VOLTA NO DESCANSO CURTO OU LONGO":"VOLTA NO DESCANSO LONGO"}</small></div>`;}).join("");
+}
 function featHTML(f,cls,locked,extra="",key=""){
   const own=key&&HABTXT[key]!=null,txt=own?HABTXT[key]:f.desc;
   const d=String(txt||"").split("\n").filter(Boolean).map(l=>`<p>${esc(l)}</p>`).join("");
   const tags=key&&!locked&&window.CBT?CBT.tagsFeat(key):"";
+  // o mesmo recurso descrito em duas habilidades (ex.: Códigos do Hacker) vira um contador só
+  const uses=(key&&!locked?usesOf(key.startsWith("raca|halo")?f.desc:(featOriginal(key)||f.desc),f.name,FEAT_LV):[]).filter(u=>{const k=u.label.toUpperCase()+"|"+u.max;if(u.label!==f.name&&USE_SEEN.has(k)) return false;USE_SEEN.add(k);return true;});
+  const ub=uses.length?uses.map((u,n)=>{const left=u.max-Math.min(u.max,HABUSOS[key+"#"+n]||0);return `<span class="dup use-b${left?"":" zero"}">${left}/${u.max}</span>`;}).join(""):"";
   const tools=key?`<div class="fd-acts"><button class="btn sm" data-hedit data-nosfx>✎ ${own?"EDITAR RESUMO":"RESUMIR / EDITAR"}</button>${own?'<button class="btn sm" data-horig data-nosfx>VER ORIGINAL</button><button class="btn sm danger" data-hrest data-nosfx>RESTAURAR TEXTO DO LIVRO</button>':""}</div>`:"";
-  return `<details class="feat ${cls}${locked?" lockd":""}${own?" own":""}"${key?` data-fkey="${esc(key)}"`:""}><summary><span class="fn">${esc(f.name)}</span>${own?'<span class="dup own-t">RESUMO DO JOGADOR</span>':""}${f.lvl?`<span class="lv" title="${locked?"Libera no nível "+f.lvl+" da especialização":"Liberada"}">NV ${f.lvl}</span>`:""}${extra}${tags}</summary><div class="fd">${d||"<p>--</p>"}${tools}</div></details>`;
+  return `<details class="feat ${cls}${locked?" lockd":""}${own?" own":""}"${key?` data-fkey="${esc(key)}"`:""}><summary><span class="fn">${esc(f.name)}</span>${own?'<span class="dup own-t">RESUMO DO JOGADOR</span>':""}${ub}${f.lvl?`<span class="lv" title="${locked?"Libera no nível "+f.lvl+" da especialização":"Liberada"}">NV ${f.lvl}</span>`:""}${extra}${tags}</summary><div class="fd">${uses.length?usesHTML(key,uses):""}${d||"<p>--</p>"}${tools}</div></details>`;
 }
 // texto original do livro de uma habilidade (para comparar/restaurar)
 function featOriginal(key){
@@ -1586,7 +1871,7 @@ document.addEventListener("click",e=>{
 function passivesOf(c){return CLASS_PASSIVES[c]||[];}
 function updateFeatures(force){
   if(!force&&document.querySelector("#features .fd-ta")) return;   // não apaga um resumo sendo escrito
-  const L=lvlInfo(),RD=raceData();let h="";
+  const L=lvlInfo(),RD=raceData();let h="";FEAT_LV=L.total;USE_SEEN=new Set();
   const group=(t,body)=>body?`<div class="feat-g"><div class="feat-t">${t}</div>${body}</div>`:"";
   let rf=RD.r.features.map(f=>featHTML(f,"race",false,"",`raca|${RD.name}|${f.name}`)).join("");
   if(RD.sub) rf+=RD.sub.features.map(f=>featHTML(f,"mut",false,"",`raca|${RD.subName}|${f.name}`)).join("");
@@ -1596,7 +1881,7 @@ function updateFeatures(force){
   const got=new Set();
   const specBlock=(c,sp,lv,first)=>{
     const d=(SPEC_BOOK[c]||{})[sp];if(!d) return "";
-    let b="";
+    let b="";FEAT_LV=lv;
     if(first||c!==L.c1) b+=passivesOf(c).map(pas=>featHTML(pas,"cls",false,'<span class="dup">PASSIVA DE CLASSE</span>',`classe|${c}|${pas.name}`)).join("");
     if(d.intro&&first!==null) b+=featHTML({name:"Sobre a especialização",desc:d.intro},"cls",false);
     const unlocked=d.feats.filter(f=>f.lvl<=lv).length;
@@ -1642,8 +1927,9 @@ function update(){
   for(let i=1;i<=6;i++) $("exl-"+i).classList.toggle("on",$("exhaustion-level-"+i).checked);
   // recursos
   const peOver=t.pe>c.peMax,cgOver=t.cg>c.cgMax;
-  $("peRo").textContent=`${t.pe} / ${c.peMax}`;
-  $("peNote").innerHTML=`ARMAS <b>${t.peW}</b>${t.cover?` (FORÇA PAGA <b>${t.cover}</b>)`:""} &nbsp;//&nbsp; EQUIPAMENTOS <b>${t.peE}</b>`;$("cgRo").textContent=`${t.cg} / ${c.cgMax}`+(cgOver?"  // SOBRECARGA":"");
+  const vg=x=>String(x).replace(".",",");
+  $("peRo").textContent=`${vg(t.pe)} / ${vg(c.peMax)}`;
+  $("peNote").innerHTML=`ARMAS <b>${vg(t.peW)}</b>${t.cover?` (FORÇA PAGA <b>${vg(t.cover)}</b>)`:""} &nbsp;//&nbsp; EQUIPAMENTOS <b>${vg(t.peE)}</b>`;$("cgRo").textContent=`${t.cg} / ${c.cgMax}`+(cgOver?"  // SOBRECARGA":"");
   $("peRo").style.color=peOver?"var(--red)":"";$("cgRo").style.color=cgOver?"var(--red)":"";
   const pct=(a,b)=>Math.max(0,Math.min(100,b>0?a/b*100:(a>0?100:0)));
   $("peMeter").firstChild.style.width=pct(t.pe,c.peMax)+"%";$("peMeter").classList.toggle("over",peOver);
@@ -1664,7 +1950,7 @@ function update(){
   $("hHpBox").classList.toggle("low",hm!==""&&hc!==""&&hp<=25);
   if(lastHp!==null&&hc!==""&&nz(hc)<lastHp){const hud=$("hud");hud.classList.remove("hit");void hud.offsetWidth;hud.classList.add("hit");}
   lastHp=hc===""?null:nz(hc);
-  $("hPe").textContent=`${t.pe} / ${c.peMax}`;$("hPeBox").classList.toggle("over",peOver);
+  $("hPe").textContent=`${String(t.pe).replace(".",",")} / ${String(c.peMax).replace(".",",")}`;$("hPeBox").classList.toggle("over",peOver);
   $("hCg").textContent=`${t.cg} / ${c.cgMax}`;$("hCgBox").classList.toggle("over",cgOver);
   // cabeçalho
   const cod=$("char-codename").value.trim();
@@ -1673,39 +1959,46 @@ function update(){
   $("hdSub").textContent=[`${LV.c1} ${LV.s1}${LV.multi?" "+LV.l1:""}`,LV.multi?`${LV.c2} ${LV.s2} ${LV.l2}`:"",RD.name+(RD.subName?" ("+RD.subName+")":""),COUNTRIES[$("char-nationality").value]||""].filter(Boolean).join(" // ").toUpperCase();
   document.title=cod?`141 // ${cod.toUpperCase()}`:"141 // FICHA DE OPERADOR";
   applyFx();
+  ARM.refresh();bolsoInfo();updateFirewall();
+  const bsig=lvlInfo().total+"|"+profBonus();if(bsig!==update._b&&!LISTS.bolso.some(x=>x._edit)){update._b=bsig;renderList("bolso");}
   if(window.CBT&&CBT.on) CBT.hud();
 }
 
 // ================== LISTAS DINÂMICAS ==================
-const LISTS={weapons:[],equipment:[],itens:[],titles:[],talents:[],traits:[]};
+const LISTS={weapons:[],equipment:[],itens:[],bolso:[],titles:[],talents:[],traits:[]};
 const FIELDS={
-  weapons:["name","damage","range","swap","pe","penteAtual","penteMax","desc","imageSrc","acoes"],
-  equipment:["name","qty","carga","pe","desc","acoes"],
-  itens:["name","qty","carga","desc","imageSrc","acoes","invW","invH","invX","invY","invRot","invIn"],
+  weapons:["name","tipo","damage","dmgTipo","attr","attrOpc","range","faixa","metros","disparos","municao","modos","recarga","swap","pe","slots","acc","accCustom","accMax","prof","kit","traco","local","invX","invY","invRot","invIn","penteAtual","penteMax","desc","imageSrc","acoes"],
+  equipment:["name","tipo","acao","qty","qtdAtual","qtdMax","cargasAtual","cargasMax","carga","pe","excl","desc","melhorias","acoes","local","invX","invY","invRot","invIn"],
+  itens:["name","qty","carga","desc","imageSrc","acoes","invW","invH","invX","invY","invRot","invIn","local"],
+  bolso:["name","marca","acao","classe","desc","melhorias","usosAtuais","acoes"],
   titles:["name","desc","acoes"],talents:["name","desc","acoes"],traits:["name","desc","usosAtuais","usosMax","acoes"]
 };
-const NOUN={weapons:"ARMA",equipment:"EQUIPAMENTO",itens:"ITEM",titles:"TÍTULO",talents:"TALENTO",traits:"HABILIDADE ÚNICA"};
+const NOUN={weapons:"ARMA",equipment:"EQUIPAMENTO",itens:"ITEM",bolso:"ITEM DE BOLSO",titles:"TÍTULO",talents:"TALENTO",traits:"HABILIDADE ÚNICA"};
 function blank(list){const o={};FIELDS[list].forEach(f=>o[f]="");if(list==="equipment"||list==="itens") o.qty="1";if(o.invW!==undefined){o.invW="1";o.invH="1";}return o;}
 
 function viewCard(list,it,i){
   const acts=`<div class="card-a">${window.CBT?CBT.tagsItem(list,i,it):""}<button class="btn ico" data-act="edit" title="Editar" data-nosfx>✎</button><button class="btn ico danger" data-act="del" title="Excluir" data-nosfx>×</button></div>`;
   const name=esc(it.name)||`<span style="color:var(--dim2)">${NOUN[list]} SEM NOME</span>`;
   const desc=it.desc?`<p class="desc">${esc(it.desc)}</p>`:"";
-  if(list==="weapons"){
-    const cur=nz(it.penteAtual),max=nz(it.penteMax);
-    const cells=max>0&&max<=60?Array.from({length:max},(_,k)=>`<i class="${k<cur?"":"x"}"></i>`).join(""):(max>0?`<i style="flex:0 0 ${Math.min(100,cur/max*100)}%"></i><i class="x"></i>`:"");
-    const st=[["DANO",it.damage],["ALCANCE",it.range],["TROCA",it.swap],["P.E.",it.pe]].filter(x=>x[1]!==""&&x[1]!=null).map(x=>`<span><em>${x[0]}</em>${esc(x[1])}</span>`).join("");
-    return `<div class="card" data-list="${list}" data-i="${i}">
-      <div class="w-img">${it.imageSrc?`<img src="${esc(it.imageSrc)}" alt="">`:"SEM<br>IMAGEM"}</div>
-      <div class="card-b"><div class="card-h"><div class="card-n">${name}</div>${acts}</div>
-      ${st?`<div class="stats">${st}</div>`:""}
-      ${max>0||cur>0?`<div class="ammo${cur<=0?" empty-mag":""}"><em>PENTE</em><button class="step" data-act="dec" data-k="penteAtual" data-nosfx>−</button><b>${cur} / ${max}</b><button class="step" data-act="inc" data-k="penteAtual" data-nosfx>+</button><button class="step" data-act="fill" data-k="penteAtual" title="Recarregar (encher o pente)" data-nosfx style="width:auto;padding:0 7px;font-size:10px;letter-spacing:.1em">RECARREGAR</button><div class="bar">${cells}</div></div>`:""}
-      ${desc}</div></div>`;
-  }
+  if(list==="weapons") return ARM.view(it,i,acts,name);
   if(list==="equipment"){
     const q=nz(it.qty)||1,cg=nz(it.carga);
-    const st=[["CARGA",it.carga!==""?`${it.carga}${q>1?` × ${q} = ${+(cg*q).toFixed(2)}`:""}`:""],["P.E.",it.pe]].filter(x=>x[1]!=="").map(x=>`<span><em>${x[0]}</em>${esc(x[1])}</span>`).join("");
-    return `<div class="card" data-list="${list}" data-i="${i}"><div class="card-b"><div class="card-h"><div class="card-n">${name}<small>× ${esc(it.qty||"1")}</small></div>${acts}</div>${st?`<div class="stats">${st}</div>`:""}${desc}</div></div>`;
+    const st=[["P.E.",String(it.pe??"").replace(".",",")],["CARGA",it.carga!==""&&it.carga!=null?`${it.carga}${q>1?` × ${q} = ${+(cg*q).toFixed(2)}`:""}`:""]].filter(x=>x[1]!==""&&x[1]!=null).map(x=>`<span><em>${x[0]}</em>${esc(x[1])}</span>`).join("");
+    const chips=[it.tipo?`<b class="wt">${esc(it.tipo)}</b>`:"",it.acao?`<i class="wm">${esc(it.acao)}</i>`:"",it.excl?`<i class="wm">EXCLUSIVO: ${esc(it.excl)}</i>`:""].join("");
+    // unidades (Lançáveis, Armadilhas, Consumíveis) e cargas (Baterias)
+    const cont=(k,lbl,dica)=>{const mx=nz(it[k+"Max"]);if(!mx) return "";if(String(it[k+"Atual"]??"")===""||nz(it[k+"Atual"])>mx) it[k+"Atual"]=String(mx);const cur=nz(it[k+"Atual"]);
+      return `<div class="uses" title="${dica}"><em>${lbl}</em><button class="step" data-act="dec" data-k="${k}Atual" data-nosfx>−</button><b>${cur} / ${mx}</b><button class="step" data-act="inc" data-k="${k}Atual" data-nosfx>+</button>${mx<=12?`<div class="pips">${Array.from({length:mx},(_,j)=>`<i class="${j<cur?"":"x"}"></i>`).join("")}</div>`:""}</div>`;};
+    const mel=it.melhorias?`<details class="wdet"><summary>MELHORIAS</summary>${it.melhorias.split("\n").filter(Boolean).map(m=>`<p>${esc(m)}</p>`).join("")}</details>`:"";
+    return `<div class="card" data-list="${list}" data-i="${i}"><div class="card-b"><div class="card-h"><span class="inv-grab" title="Arraste para a maleta ou o stash">⠿</span><div class="card-n">${name}${q>1?`<small>× ${esc(it.qty)}</small>`:""}</div>${acts}</div>${chips?`<div class="wchips">${chips}</div>`:""}${st?`<div class="stats">${st}</div>`:""}${cont("qtd","UNIDADES","Voltam no descanso longo se o grupo tiver Suprimentos ou loja")}${cont("cargas","CARGAS","Voltam no descanso longo ou com uma Célula de Energia")}${desc}${mel}</div></div>`;
+  }
+  if(list==="bolso"){
+    const rec=it.marca==="Recarga",max=profBonus();
+    if(rec){it.usosMax=String(max);if(String(it.usosAtuais??"")===""||nz(it.usosAtuais)>max) it.usosAtuais=String(max);}
+    const cur=nz(it.usosAtuais);
+    const chips=[it.marca?`<b class="wt">${esc(it.marca)}</b>`:`<b class="wt dim">SEM MARCAÇÃO</b>`,it.acao?`<i class="wm">${esc(it.acao)}</i>`:"",it.classe?`<i class="wm">SÓ ${esc(it.classe)}</i>`:""].join("");
+    const usos=rec?`<div class="uses"><em>USOS</em><button class="step" data-act="dec" data-k="usosAtuais" data-nosfx>−</button><b>${cur} / ${max}</b><button class="step" data-act="inc" data-k="usosAtuais" data-nosfx>+</button><div class="pips">${Array.from({length:max},(_,k)=>`<i class="${k<cur?"":"x"}"></i>`).join("")}</div></div>`:"";
+    const mel=it.melhorias?`<details class="wdet"><summary>MELHORIAS</summary>${it.melhorias.split("\n").filter(Boolean).map(m=>`<p>${esc(m)}</p>`).join("")}</details>`:"";
+    return `<div class="card" data-list="${list}" data-i="${i}"><div class="card-b"><div class="card-h"><div class="card-n">${name}</div>${acts}</div><div class="wchips">${chips}</div>${usos}${desc}${mel}</div></div>`;
   }
   let uses="";
   if(list==="traits"&&nz(it.usosMax)>0){
@@ -1717,10 +2010,23 @@ function viewCard(list,it,i){
 function editCard(list,it,i){
   const inp=(k,ph,type="text",extra="")=>`<label><span class="lbl">${ph}</span><input class="in" data-k="${k}" type="${type}" value="${esc(it[k])}" ${extra}></label>`;
   let body="";
-  if(list==="weapons") body=`${inp("name","Nome da arma")}<div class="ed-g">${inp("damage","Dano")}${inp("range","Alcance")}${inp("swap","Troca")}${inp("pe","P.E.","number",'step="0.5"')}${inp("penteAtual","Pente atual","number")}${inp("penteMax","Pente máx.","number")}</div>
-    <label><span class="lbl">Vantagens, desvantagens, acessórios</span><textarea class="ta" data-k="desc" rows="2">${esc(it.desc)}</textarea></label>`;
-  else if(list==="equipment") body=`${inp("name","Nome do equipamento")}<div class="ed-g">${inp("qty","Quantidade","number",'min="1"')}${inp("carga","Carga (un.)","number",'step="0.5"')}${inp("pe","P.E.","number",'step="0.5"')}</div>
-    <label><span class="lbl">Descrição</span><textarea class="ta" data-k="desc" rows="2">${esc(it.desc)}</textarea></label>`;
+  if(list==="weapons") body=ARM.edit(it,i);
+  else if(list==="bolso"){
+    const L=lvlInfo(),tem=c=>!c||c.split(", ").some(x=>x===L.c1||(L.multi&&x===L.c2));
+    const sel=(k,opts,cur)=>`<select class="in" data-k="${k}">${opts.map(o=>`<option value="${esc(o[0])}"${o[0]===(cur||"")?" selected":""}>${esc(o[1])}</option>`).join("")}</select>`;
+    body=`${it._new?`<label><span class="lbl">Escolher do Guia dos Equipamentos</span><select class="in" data-bk="cat"><option value="">Item personalizado</option>${BOLSO_CAT.map((b,j)=>`<option value="${j}"${tem(b.classe)?"":" disabled"}>${esc(b.name)}${b.marca?" ("+b.marca+")":""}${b.classe?" // só "+esc(b.classe):""}</option>`).join("")}</select></label>`:""}
+    ${inp("name","Nome do item")}<div class="ed-g"><label><span class="lbl">Marcação</span>${sel("marca",[["","Escolha..."],["Ferramenta","Ferramenta (sem limite)"],["Recarga","Recarga (usos = Proef)"]],it.marca)}</label><label><span class="lbl">Ação</span>${sel("acao",[["",""],["Ação","Ação"],["Ação Bônus","Ação Bônus"],["Ação Livre","Ação Livre"],["Reação","Reação"]],it.acao)}</label></div>
+    <label><span class="lbl">Descrição</span><textarea class="ta" data-k="desc" rows="3">${esc(it.desc)}</textarea></label>
+    <label><span class="lbl">Melhorias (uma por linha)</span><textarea class="ta" data-k="melhorias" rows="2">${esc(it.melhorias)}</textarea></label>`;
+  }
+  else if(list==="equipment"){
+    const sel=(k,opts)=>`<select class="in" data-k="${k}">${opts.map(o=>`<option value="${esc(o)}"${o===(it[k]||"")?" selected":""}>${esc(o||"—")}</option>`).join("")}</select>`;
+    const TIPOS_EQ=["","Lançável","Armadilha","Bateria","Bateria (Ferramenta de hacking)","Vestido","Vestido / Bateria","Consumível","Consumível (Munição)"];
+    body=`${inp("name","Nome do equipamento")}<div class="ed-g"><label><span class="lbl">Tipo</span>${sel("tipo",TIPOS_EQ.includes(it.tipo||"")?TIPOS_EQ:[...TIPOS_EQ,it.tipo])}</label><label><span class="lbl">Ação</span>${sel("acao",["","Ação","Ação Bônus","Ação Livre","Reação"])}</label>${inp("pe","P.E.","number",'step="0.25" min="0"')}</div>
+    <div class="ed-g">${inp("qtdMax","Unidades (Quantidade)","number",'min="0"')}${inp("cargasMax","Cargas (Bateria)","number",'min="0"')}${inp("carga","Carga (peso)","number",'step="0.5"')}</div>
+    <label><span class="lbl">Descrição</span><textarea class="ta" data-k="desc" rows="3">${esc(it.desc)}</textarea></label>
+    <label><span class="lbl">Melhorias (uma por linha)</span><textarea class="ta" data-k="melhorias" rows="2">${esc(it.melhorias)}</textarea></label>`;
+  }
   else if(list==="itens") body=`${inp("name","Nome do item")}<div class="ed-g">${inp("qty","Quantidade","number",'min="1"')}${inp("carga","Carga (un.)","number",'step="0.5"')}${inp("invW","Maleta: largura","number",'min="1" max="12"')}${inp("invH","Maleta: altura","number",'min="1" max="12"')}</div>
     <label><span class="lbl">Descrição</span><textarea class="ta" data-k="desc" rows="2">${esc(it.desc)}</textarea></label>`;
   else body=`${inp("name","Nome do "+NOUN[list].toLowerCase())}${list==="traits"?`<div class="ed-g">${inp("usosAtuais","Usos atuais","number")}${inp("usosMax","Usos máx. (vazio = sem usos)","number")}</div>`:""}
@@ -1732,7 +2038,9 @@ function editCard(list,it,i){
 function renderList(list){
   const el=$("list-"+list),arr=LISTS[list];
   if(list==="itens"){el.innerHTML=arr.map((it,i)=>it._edit?editCard(list,it,i):"").join("");renderInv(true);return;}
-  el.innerHTML=arr.length?arr.map((it,i)=>it._edit?editCard(list,it,i):viewCard(list,it,i)).join(""):`<div class="empty">NENHUM REGISTRO // ${list==="weapons"?"+ ADICIONAR ARMA":list==="equipment"?"+ ADICIONAR EQUIPAMENTO":"+ ADICIONAR"}</div>`;
+  const guardado=it=>(list==="weapons"||list==="equipment")&&it.local&&!it._edit;
+  const nG=arr.filter(guardado).length;
+  el.innerHTML=arr.length>nG?arr.map((it,i)=>guardado(it)?"":it._edit?editCard(list,it,i):viewCard(list,it,i)).join("")+(nG?`<div class="stored-note">+ ${nG} GUARDADO${nG>1?"S":""} NA MALETA / STASH</div>`:""):nG?`<div class="empty">TUDO GUARDADO NA MALETA / STASH // ARRASTE DE VOLTA PARA EQUIPAR</div>`:`<div class="empty">NENHUM REGISTRO // ${list==="weapons"?"⌖ CATÁLOGO OU + ARMA EM BRANCO":list==="equipment"?"⌖ CATÁLOGO OU + EM BRANCO":list==="bolso"?"+ ITEM DE BOLSO":"+ ADICIONAR"}</div>`;
 
 }
 const renderAll=()=>Object.keys(LISTS).forEach(renderList);
@@ -1760,6 +2068,7 @@ document.addEventListener("click",async e=>{
     if(await ask(`Excluir "${it.name||NOUN[l]}"? Não dá pra desfazer.`,{top:"EXCLUIR REGISTRO",yes:"EXCLUIR"})){if(INV.sel===it) INV.sel=null;LISTS[l].splice(i,1);renderList(l);changed();}
   }
   else if(act==="noimg"){e.preventDefault();it.imageSrc="";renderList(l);sfx("fechar");changed();}
+  else if(act==="recoil0"){it._rec=0;it._shot=false;sfx("clique");renderList(l);}
   else if(act==="dec"||act==="inc"||act==="fill"){
     const k=b.dataset.k,mk=k.replace("Atual","Max"),cur=nz(it[k]),max=nz(it[mk]);
     let v=cur;
@@ -1767,6 +2076,8 @@ document.addEventListener("click",async e=>{
     if(act==="inc"&&cur<max) v=cur+1;
     if(act==="fill") v=max;
     if(v===cur){sfx("errado");return;}
+    // Recuo: cada disparo depois do primeiro no turno tira 1 dado do dano
+    if(l==="weapons"&&k==="penteAtual"){if(act==="dec") it._rec=(it._rec||0)+(it._shot?1:0),it._shot=true;if(act==="inc"){if(it._rec>0) it._rec--; else it._shot=false;}}
     it[k]=String(v);sfx("clique");renderList(l);changed();
   }
 });
@@ -1774,6 +2085,19 @@ document.addEventListener("input",e=>{
   const f=e.target.closest("[data-k]");const card=f&&f.closest(".card.edit");if(!card) return;
   LISTS[card.dataset.list][+card.dataset.i][f.dataset.k]=f.value;changed(true);
 });
+document.addEventListener("change",e=>{
+  const f=e.target.closest("[data-bk]");if(!f) return;
+  const card=f.closest(".card.edit"),it=LISTS.bolso[+card.dataset.i],b=BOLSO_CAT[+f.value];
+  if(b){Object.assign(it,{name:b.name,marca:b.marca,acao:b.acao,classe:b.classe,desc:b.desc,melhorias:b.melhorias,usosAtuais:""});}
+  else Object.assign(it,{name:"",marca:"",acao:"",classe:"",desc:"",melhorias:""});
+  renderList("bolso");sfx("clique");
+});
+// quantos Itens de Bolso o operador pode carregar: 2 no 1º nível, +1 no 5º, 11º e 17º
+function bolsoInfo(){
+  const el=$("bolsoInfo");if(!el) return;
+  const lv=lvlInfo().total,n=2+[5,11,17].filter(x=>lv>=x).length,has=LISTS.bolso.filter(x=>!x._new).length;
+  el.innerHTML=`<b style="color:${has>n?"var(--red)":"var(--txt)"}">${has} / ${n}</b> ITENS // 2 NO 1º NÍVEL, +1 NO 5º, 11º E 17º // RECARGA: USOS = PROEF (${profBonus()}), VOLTAM NO DESCANSO // CD 12 + PROEF + ATRIBUTO`;
+}
 document.addEventListener("keydown",e=>{
   const card=e.target.closest&&e.target.closest(".card.edit");
   if(!card) return;
@@ -1804,77 +2128,115 @@ function readImage(file,max=512){
   });
 }
 
-// ================== MALETA (GRADE ESTILO RE4) ==================
-// Cada arma/equipamento tem largura × altura. Arraste pra dentro, R gira, solte fora pra tirar.
-const INV={cell:44,sel:null,drag:null,cg:0,cgMax:8};
-const invCols=()=>Math.max(1,Math.min(24,Math.round(num("inv-cols",10))||10));
-const invRows=()=>Math.max(1,Math.min(24,Math.round(num("inv-rows",6))||6));
+// ================== MALETA E STASH (GRADES ESTILO RE4) ==================
+// Itens, armas e equipamentos podem ficar na Maleta (pesa na Carga) ou no Stash (não pesa nada).
+// Arma guardada: retângulo com área = Carga (2 × P.E.). Equipamento guardado: quadrado.
+const INV={cell:44,cells:{},sel:null,drag:null,cg:0,cgMax:8};
+const clampN=(id,d)=>Math.max(1,Math.min(24,Math.round(num(id,d))||d));
+const CONT={
+  mal:{nome:"MALETA",grid:"invGrid",items:"invItems",ghost:"invGhost",wrap:"invWrap",tray:"tray",bar:"invBar",info:"invInfo",cols:()=>clampN("inv-cols",10),rows:()=>clampN("inv-rows",6)},
+  st:{nome:"STASH",grid:"stGrid",items:"stItems",ghost:"stGhost",wrap:"stWrap",tray:"stTray",bar:"stBar",info:"stInfo",cols:()=>clampN("st-cols",12),rows:()=>clampN("st-rows",8)}
+};
+const CONTS=["mal","st"];
+const invCols=()=>CONT.mal.cols(),invRows=()=>CONT.mal.rows();
 const sz=v=>Math.max(1,Math.min(12,parseInt(v)||1));
-const dimsOf=(it,rot=it.invRot==="1")=>{const w=sz(it.invW),h=sz(it.invH);return rot?[h,w]:[w,h];};
+const KIND=new WeakMap();   // item -> lista de origem
+// arma: retângulo (largura > altura) com área perto da carga; equipamento: quadrado
+function rectFor(c){let best=null;for(let h=1;h<=6;h++){const w=Math.max(h+1,Math.ceil(c/h));const sc=(w*h-c)*2+Math.abs(w/h-1.5);if(!best||sc<best.sc) best={w,h,sc};}return [Math.min(12,best.w),best.h];}
+const cargaGuardada=(it,l)=>2*(l==="weapons"?ARM.pe(it):nz(it.pe));
+function baseDims(it,l=KIND.get(it)||"itens"){
+  if(l==="weapons") return rectFor(Math.max(1,Math.ceil(cargaGuardada(it,l))));
+  if(l==="equipment"){const sd=Math.min(12,Math.ceil(Math.sqrt(Math.max(1,Math.ceil(cargaGuardada(it,l))))));return [sd,sd];}
+  return [sz(it.invW),sz(it.invH)];
+}
+const dimsOf=(it,rot=it.invRot==="1")=>{const [w,h]=baseDims(it);return rot?[h,w]:[w,h];};
 const invTag=it=>`${sz(it.invW)}×${sz(it.invH)}${it.invIn==="1"?"":" (FORA)"}`;
-function invAll(){
+// onde está: itens -> mal/st; armas e equipamentos -> null (equipado), mal ou st
+function contOf(it,l=KIND.get(it)||"itens"){const v=it.local||"";if(l==="itens") return v==="stash"?"st":"mal";return v==="mal"?"mal":v==="stash"?"st":null;}
+const LOCAL={mal:"mal",st:"stash"};
+function setCont(it,l,c){it.local=c===null?"":(l==="itens"&&c==="mal"?"":LOCAL[c]);}
+function invAll(c){
   const a=[];
-  LISTS.itens.forEach((it,i)=>{if(!it._new) a.push({it,l:"itens",i});});
+  [["itens",LISTS.itens],["weapons",LISTS.weapons],["equipment",LISTS.equipment]].forEach(([l,arr])=>arr.forEach((it,i)=>{
+    if(it._new||it._edit&&l!=="itens") return;KIND.set(it,l);
+    const cc=contOf(it,l);if(cc&&(!c||cc===c)) a.push({it,l,i,c:cc});
+  }));
   return a;
 }
-function fitsAt(it,x,y,rot){
-  const [w,h]=dimsOf(it,rot);
-  if(x<0||y<0||x+w>invCols()||y+h>invRows()) return false;
-  for(const o of invAll()){
+function fitsAt(it,x,y,rot,c=contOf(it)){
+  const C=CONT[c],[w,h]=dimsOf(it,rot);
+  if(x<0||y<0||x+w>C.cols()||y+h>C.rows()) return false;
+  for(const o of invAll(c)){
     const b=o.it;if(b===it||b.invIn!=="1") continue;
     const [bw,bh]=dimsOf(b),bx=+b.invX||0,by=+b.invY||0;
     if(x<bx+bw&&bx<x+w&&y<by+bh&&by<y+h) return false;
   }
   return true;
 }
-function autoPlace(it){
-  const r0=it.invRot==="1";
-  for(const rot of [r0,!r0]) for(let y=0;y<invRows();y++) for(let x=0;x<invCols();x++)
-    if(fitsAt(it,x,y,rot)){Object.assign(it,{invX:String(x),invY:String(y),invRot:rot?"1":"",invIn:"1"});return true;}
+function autoPlace(it,c=contOf(it)){
+  const r0=it.invRot==="1",C=CONT[c];
+  for(const rot of [r0,!r0]) for(let y=0;y<C.rows();y++) for(let x=0;x<C.cols();x++)
+    if(fitsAt(it,x,y,rot,c)){Object.assign(it,{invX:String(x),invY:String(y),invRot:rot?"1":"",invIn:"1"});return true;}
   return false;
 }
-function validateInv(){ // tira da maleta o que não cabe mais (grade diminuiu, item cresceu...)
-  const placed=invAll().filter(o=>o.it.invIn==="1"),bumped=[];
+// guarda no contêiner c (posição livre ou a escolhida); devolve false se não couber
+function moveTo(it,l,c,x,y,rot){
+  const old=[it.local,it.invX,it.invY,it.invRot,it.invIn];
+  KIND.set(it,l);setCont(it,l,c);
+  if(x!=null){if(fitsAt(it,x,y,rot,c)){Object.assign(it,{invX:String(x),invY:String(y),invRot:rot?"1":"",invIn:"1"});return true;}}
+  else{it.invIn="";if(autoPlace(it,c)) return true;}
+  [it.local,it.invX,it.invY,it.invRot,it.invIn]=old;return false;
+}
+function equipar(it,l){it.local="";it.invIn="";if(INV.sel===it) INV.sel=null;sfx("abrir");renderList(l);renderInv();changed();toast(`${(it.name||NOUN[l]).toUpperCase()} EQUIPADO`);}
+function validateInv(c){ // tira da grade o que não cabe mais (grade diminuiu, item cresceu...)
+  const placed=invAll(c).filter(o=>o.it.invIn==="1"),bumped=[];
   placed.forEach(o=>o.it.invIn="");
   const loose=[];
-  placed.forEach(o=>{const it=o.it;if(fitsAt(it,+it.invX||0,+it.invY||0,it.invRot==="1")) it.invIn="1";else loose.push(o);});
-  loose.forEach(o=>{if(!autoPlace(o.it)) bumped.push(o.it.name||NOUN[o.l]);}); // tenta realocar antes de tirar
+  placed.forEach(o=>{const it=o.it;if(fitsAt(it,+it.invX||0,+it.invY||0,it.invRot==="1",c)) it.invIn="1";else loose.push(o);});
+  loose.forEach(o=>{if(!autoPlace(o.it,c)) bumped.push(o.it.name||NOUN[o.l]);});
   return bumped;
 }
 function invInfo(){
-  if(!$("invInfo")) return;
-  const C=invCols(),R=invRows();let used=0;
-  invAll().forEach(o=>{if(o.it.invIn==="1"){const [w,h]=dimsOf(o.it);used+=w*h;}});
-  const over=INV.cg>INV.cgMax;
-  $("invInfo").innerHTML=`<span>ESPAÇO <b>${used} / ${C*R}</b></span><span>CARGA <b class="${over?"bad":""}">${INV.cg} / ${INV.cgMax}${over?" // SOBRECARGA":""}</b></span>`;
+  CONTS.forEach(c=>{const C=CONT[c];if(!$(C.info)) return;
+    let used=0;invAll(c).forEach(o=>{if(o.it.invIn==="1"){const [w,h]=dimsOf(o.it);used+=w*h;}});
+    const over=INV.cg>INV.cgMax;
+    $(C.info).innerHTML=`<span>ESPAÇO <b>${used} / ${C.cols()*C.rows()}</b></span>`+(c==="mal"?`<span>CARGA <b class="${over?"bad":""}">${String(INV.cg).replace(".",",")} / ${INV.cgMax}${over?" // SOBRECARGA":""}</b></span>`:`<span>NÃO PESA NA CARGA NEM NO P.E.</span>`);
+  });
 }
 function renderInv(report){
-  const grid=$("invGrid");if(!grid) return;
-  const bumped=validateInv();
+  if(!$("invGrid")) return;
   if(INV.sel&&!invAll().some(o=>o.it===INV.sel)) INV.sel=null;
-  const C=invCols(),R=invRows(),wrapW=$("invWrap").clientWidth||640;
-  const cell=Math.max(28,Math.min(56,Math.floor((wrapW-2)/C)));INV.cell=cell;
-  grid.style.setProperty("--cell",cell+"px");grid.style.width=(C*cell+2)+"px";grid.style.height=(R*cell+2)+"px";
-  let h="",tray="";
-  invAll().forEach((o,k)=>{
-    const it=o.it,[w,hh]=dimsOf(it),name=esc(it.name||NOUN[o.l]),wp=o.l==="weapons"?" wp":"";
-    const qty=nz(it.qty)>1?`<span class="q">×${esc(it.qty)}</span>`:"";
-    if(it.invIn==="1"){
-      const rot=it.invRot==="1",ow=sz(it.invW),oh=sz(it.invH);
-      const img=it.imageSrc?`<img src="${esc(it.imageSrc)}" alt="" style="width:${ow*cell-8}px;height:${oh*cell-8}px;transform:translate(-50%,-50%)${rot?" rotate(90deg)":""}">`:"";
-      h+=`<div class="inv-it${wp}${INV.sel===it?" sel":""}" data-ix="${k}" title="${name} (${w}×${hh})" style="left:${(+it.invX||0)*cell+1}px;top:${(+it.invY||0)*cell+1}px;width:${w*cell-1}px;height:${hh*cell-1}px">${img}${qty}<span class="nm">${name}</span></div>`;
-    } else tray+=`<div class="chip${wp}" data-ix="${k}">${it.imageSrc?`<img src="${esc(it.imageSrc)}" alt="">`:""}${name}<small>${sz(it.invW)}×${sz(it.invH)}</small></div>`;
+  CONTS.forEach(c=>{
+    const C=CONT[c],grid=$(C.grid);if(!grid) return;
+    const bumped=validateInv(c);
+    const cols=C.cols(),rows=C.rows(),wrapW=$(C.wrap).clientWidth||640;
+    const cell=Math.max(28,Math.min(56,Math.floor((wrapW-2)/cols)));INV.cells[c]=cell;if(c==="mal") INV.cell=cell;
+    grid.style.setProperty("--cell",cell+"px");grid.style.width=(cols*cell+2)+"px";grid.style.height=(rows*cell+2)+"px";
+    let h="",tray="";
+    invAll(c).forEach(o=>{
+      const it=o.it,[w,hh]=dimsOf(it),name=esc(it.name||NOUN[o.l]),kind=o.l==="weapons"?" wp":o.l==="equipment"?" eqp":"";
+      const qty=o.l==="itens"&&nz(it.qty)>1?`<span class="q">×${esc(it.qty)}</span>`:"";
+      const tag=o.l==="weapons"?`<span class="kd">ARMA</span>`:o.l==="equipment"?`<span class="kd">EQUIP.</span>`:"";
+      const ref=`data-c="${c}" data-l="${o.l}" data-ix="${o.i}"`;
+      if(it.invIn==="1"){
+        const rot=it.invRot==="1",[ow,oh]=baseDims(it);
+        const img=it.imageSrc?`<img src="${esc(it.imageSrc)}" alt="" style="width:${ow*cell-8}px;height:${oh*cell-8}px;transform:translate(-50%,-50%)${rot?" rotate(90deg)":""}">`:"";
+        h+=`<div class="inv-it${kind}${INV.sel===it?" sel":""}" ${ref} title="${name} (${w}×${hh})" style="left:${(+it.invX||0)*cell+1}px;top:${(+it.invY||0)*cell+1}px;width:${w*cell-1}px;height:${hh*cell-1}px">${img}${qty}${tag}<span class="nm">${name}</span></div>`;
+      } else tray+=`<div class="chip${kind}" ${ref}>${it.imageSrc?`<img src="${esc(it.imageSrc)}" alt="">`:""}${name}<small>${baseDims(it).join("×")}</small></div>`;
+    });
+    $(C.items).innerHTML=h;
+    $(C.tray).innerHTML=tray||'<span class="none">TUDO GUARDADO</span>';
+    const s=INV.sel,sl=s&&KIND.get(s),sc=s&&contOf(s);
+    const outro=c==="mal"?"st":"mal";
+    $(C.bar).innerHTML=s&&sc===c?`<b>${esc(s.name||"ITEM")} // ${dimsOf(s).join("×")}${sl==="itens"&&nz(s.qty)>1?` // ×${esc(s.qty)}`:""}${sl==="itens"?(s.carga!==""&&s.carga!=null?` // CARGA ${esc(s.carga)}`:""):` // CARGA ${String(+cargaGuardada(s,sl).toFixed(2)).replace(".",",")}`}</b>`+
+        (s.invIn==="1"?`<button class="btn sm" data-inv="rot" data-nosfx>GIRAR (R)</button><button class="btn sm" data-inv="out" data-nosfx>TIRAR</button>`:`<button class="btn sm" data-inv="in" data-nosfx>ENCAIXAR</button>`)+
+        `<button class="btn sm" data-inv="move" data-nosfx>→ ${CONT[outro].nome}</button>`+
+        (sl!=="itens"?`<button class="btn sm acc" data-inv="equip" data-nosfx>EQUIPAR</button>`:(window.CBT?CBT.tagsItem("itens",LISTS.itens.indexOf(s),s):"")+`<button class="btn sm" data-inv="edit" data-nosfx>EDITAR</button>`)+
+        `<button class="btn sm danger" data-inv="del" data-nosfx>EXCLUIR</button>`+(s.desc?`<div style="flex-basis:100%;color:var(--txt2);letter-spacing:.04em;font-size:11px;line-height:1.5;white-space:pre-wrap">${esc(s.desc)}</div>`:"")
+      :(c==="mal"?'ARRASTE PARA MOVER // CLIQUE PARA SELECIONAR // R GIRA // ARRASTE ARMAS E EQUIPAMENTOS PELA ALÇA ⠿ DO CARD':'GUARDE AQUI O QUE NÃO ESTÁ LEVANDO // ARRASTE PARA O ARMAMENTO OU OS EQUIPAMENTOS PARA EQUIPAR');
+    if(report&&bumped.length&&state==="sheet"){toast(`SEM ESPAÇO: ${bumped.join(", ").toUpperCase()} SAIU DA GRADE ${C.nome==="MALETA"?"DA MALETA":"DO STASH"}`,true);sfx("errado");}
   });
-  $("invItems").innerHTML=h;
-  $("tray").innerHTML=tray||'<span class="none">TUDO GUARDADO</span>';
-  const s=INV.sel;
-  const sIn=s&&s.invIn==="1";
-  $("invBar").innerHTML=s?`<b>${esc(s.name||"ITEM")} // ${dimsOf(s).join("×")}${nz(s.qty)>1?` // ×${esc(s.qty)}`:""}${s.carga!==""?` // CARGA ${esc(s.carga)}`:""}</b>`+
-      (sIn?`<button class="btn sm" data-inv="rot" data-nosfx>GIRAR (R)</button><button class="btn sm" data-inv="out" data-nosfx>TIRAR</button>`:`<button class="btn sm" data-inv="in" data-nosfx>ENCAIXAR</button>`)+
-      (window.CBT?CBT.tagsItem("itens",LISTS.itens.indexOf(s),s):"")+`<button class="btn sm" data-inv="edit" data-nosfx>EDITAR</button><button class="btn sm danger" data-inv="del" data-nosfx>EXCLUIR</button>`+(s.desc?`<div style="flex-basis:100%;color:var(--txt2);letter-spacing:.04em;font-size:11px;line-height:1.5;white-space:pre-wrap">${esc(s.desc)}</div>`:"")
-    :'ARRASTE PARA MOVER // CLIQUE PARA SELECIONAR // R GIRA // SOLTE FORA DA GRADE PARA TIRAR';
   invInfo();
-  if(report&&bumped.length&&state==="sheet"){toast(`SEM ESPAÇO: ${bumped.join(", ").toUpperCase()} SAIU DA MALETA`,true);sfx("errado");}
 }
 function invRotate(it){
   const rot=it.invRot!=="1";
@@ -1883,37 +2245,52 @@ function invRotate(it){
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-inv]");if(!b||!INV.sel) return;
-  const it=INV.sel,act=b.dataset.inv,i=LISTS.itens.indexOf(it);
+  const it=INV.sel,l=KIND.get(it)||"itens",act=b.dataset.inv,i=LISTS[l].indexOf(it),c=contOf(it);
   if(act==="rot") invRotate(it);
   else if(act==="out"){it.invIn="";sfx("fechar");renderInv();changed(true);}
-  else if(act==="in"){if(autoPlace(it)){sfx("fechar");renderInv();changed(true);}else{sfx("errado");toast("SEM ESPAÇO NA MALETA PARA ESTE ITEM",true);}}
-  else if(act==="edit"&&i>=0){it._snap=JSON.stringify(cleanItem(it));it._edit=true;renderList("itens");sfx("abrir");$("list-itens").querySelector("input[data-k]")?.focus();}
-  else if(act==="del"&&i>=0){ask(`Excluir "${it.name||"ITEM"}"? Não dá pra desfazer.`,{top:"EXCLUIR ITEM",yes:"EXCLUIR"}).then(ok=>{if(!ok) return;LISTS.itens.splice(i,1);INV.sel=null;renderList("itens");changed();});}
+  else if(act==="in"){if(autoPlace(it,c)){sfx("fechar");renderInv();changed(true);}else{sfx("errado");toast(`SEM ESPAÇO ${c==="mal"?"NA MALETA":"NO STASH"} PARA ESTE ITEM`,true);}}
+  else if(act==="move"){const o=c==="mal"?"st":"mal";if(moveTo(it,l,o)){sfx("fechar");renderInv();update();changed();toast(`GUARDADO ${o==="mal"?"NA MALETA":"NO STASH"}`);}else{sfx("errado");toast(`SEM ESPAÇO ${o==="mal"?"NA MALETA":"NO STASH"}`,true);}}
+  else if(act==="equip") equipar(it,l);
+  else if(act==="edit"&&i>=0&&l==="itens"){it._snap=JSON.stringify(cleanItem(it));it._edit=true;renderList("itens");sfx("abrir");$("list-itens").querySelector("input[data-k]")?.focus();}
+  else if(act==="del"&&i>=0){ask(`Excluir "${it.name||NOUN[l]}"? Não dá pra desfazer.`,{top:"EXCLUIR",yes:"EXCLUIR"}).then(ok=>{if(!ok) return;LISTS[l].splice(i,1);INV.sel=null;renderList(l);renderInv();changed();});}
 });
-const inRect=(x,y,r)=>x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom;
+const inRect=(x,y,r)=>r&&r.width>0&&x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom;
+const boxOf=id=>{const e=$(id);return e?e.closest(".box"):null;};
 document.addEventListener("pointerdown",e=>{
-  const el=e.target.closest(".inv-it,.chip");if(!el||e.button>0) return;
-  const o=invAll()[+el.dataset.ix];if(!o) return;
-  e.preventDefault();
-  const fromGrid=el.classList.contains("inv-it");let offX=0,offY=0;
-  if(fromGrid){const r=el.getBoundingClientRect();offX=Math.floor((e.clientX-r.left)/INV.cell);offY=Math.floor((e.clientY-r.top)/INV.cell);}
+  if(e.button>0) return;
+  const grab=e.target.closest(".inv-grab");
+  let it,l,el,fromGrid=false,fromCard=false;
+  if(grab){const card=grab.closest(".card");l=card.dataset.list;it=LISTS[l][+card.dataset.i];el=card;fromCard=true;}
+  else{el=e.target.closest(".inv-it,.chip");if(!el||!el.dataset.l) return;l=el.dataset.l;it=LISTS[l][+el.dataset.ix];fromGrid=el.classList.contains("inv-it");}
+  if(!it) return;
+  e.preventDefault();KIND.set(it,l);
+  let offX=0,offY=0;const c0=contOf(it);
+  if(fromGrid){const r=el.getBoundingClientRect(),cell=INV.cells[c0]||INV.cell;offX=Math.floor((e.clientX-r.left)/cell);offY=Math.floor((e.clientY-r.top)/cell);}
   document.body.classList.add("dragging");
-  INV.drag={it:o.it,el,fromGrid,rot:o.it.invRot==="1",offX,offY,sx:e.clientX,sy:e.clientY,px:e.clientX,py:e.clientY,moved:false,x:null,y:null,ok:false,tray:false};
+  INV.drag={it,l,el,c0,fromGrid,fromCard,rot:it.invRot==="1",offX,offY,sx:e.clientX,sy:e.clientY,px:e.clientX,py:e.clientY,moved:false,tgt:null,x:null,y:null,ok:false};
 });
 function dragUpdate(){
   const d=INV.drag;if(!d) return;
-  const [w,h]=dimsOf(d.it,d.rot),fl=$("invFloat"),gh=$("invGhost");
+  const [w,h]=dimsOf(d.it,d.rot),fl=$("invFloat");
   fl.textContent=`${(d.it.name||"ITEM").toUpperCase()} ${w}×${h} // R GIRA`;fl.style.left=(d.px+14)+"px";fl.style.top=(d.py+16)+"px";fl.classList.remove("hidden");
-  d.tray=d.fromGrid&&inRect(d.px,d.py,$("tray").getBoundingClientRect());
-  $("tray").classList.toggle("over",d.tray);
-  const g=$("invGrid").getBoundingClientRect(),c=INV.cell;
-  if(!inRect(d.px,d.py,g)){gh.classList.add("hidden");d.x=null;return;}
-  const ox=Math.min(d.offX,w-1),oy=Math.min(d.offY,h-1);
-  d.x=Math.max(0,Math.min(invCols()-w,Math.floor((d.px-g.left-1)/c)-ox));
-  d.y=Math.max(0,Math.min(invRows()-h,Math.floor((d.py-g.top-1)/c)-oy));
-  d.ok=w<=invCols()&&h<=invRows()&&fitsAt(d.it,d.x,d.y,d.rot);
-  Object.assign(gh.style,{left:(d.x*c+1)+"px",top:(d.y*c+1)+"px",width:(w*c-1)+"px",height:(h*c-1)+"px"});
-  gh.classList.toggle("bad",!d.ok);gh.classList.remove("hidden");
+  d.tgt=null;d.x=null;d.ok=false;
+  CONTS.forEach(c=>{$(CONT[c].ghost).classList.add("hidden");$(CONT[c].tray).classList.remove("over");boxOf(CONT[c].grid)?.classList.remove("drop-over");});
+  ["list-weapons","list-equipment"].forEach(id=>boxOf(id)?.classList.remove("drop-over"));
+  // voltar a equipar: soltar no Armamento ou nos Equipamentos
+  if(d.l!=="itens"&&!d.fromCard){const bx=boxOf(d.l==="weapons"?"list-weapons":"list-equipment");if(inRect(d.px,d.py,bx?.getBoundingClientRect())){d.tgt="equip";bx.classList.add("drop-over");return;}}
+  for(const c of CONTS){
+    const C=CONT[c],g=$(C.grid),gr=g.getBoundingClientRect(),cell=INV.cells[c]||INV.cell;
+    if(inRect(d.px,d.py,gr)&&g.offsetParent){
+      const ox=Math.min(d.offX,w-1),oy=Math.min(d.offY,h-1);
+      d.tgt=c;d.x=Math.max(0,Math.min(C.cols()-w,Math.floor((d.px-gr.left-1)/cell)-ox));d.y=Math.max(0,Math.min(C.rows()-h,Math.floor((d.py-gr.top-1)/cell)-oy));
+      const keep=[d.it.local];setCont(d.it,d.l,c);d.ok=w<=C.cols()&&h<=C.rows()&&fitsAt(d.it,d.x,d.y,d.rot,c);d.it.local=keep[0];
+      const gh=$(C.ghost);Object.assign(gh.style,{left:(d.x*cell+1)+"px",top:(d.y*cell+1)+"px",width:(w*cell-1)+"px",height:(h*cell-1)+"px"});gh.classList.toggle("bad",!d.ok);gh.classList.remove("hidden");
+      return;
+    }
+    if(d.fromGrid&&c===d.c0&&inRect(d.px,d.py,$(C.tray).getBoundingClientRect())){d.tgt="tray";$(C.tray).classList.add("over");return;}
+    // caixa minimizada ou fora da grade: guarda onde couber
+    const bx=boxOf(C.grid);if(inRect(d.px,d.py,bx?.getBoundingClientRect())&&c!==d.c0){d.tgt="auto:"+c;bx.classList.add("drop-over");return;}
+  }
 }
 document.addEventListener("pointermove",e=>{
   const d=INV.drag;if(!d) return;
@@ -1923,21 +2300,25 @@ document.addEventListener("pointermove",e=>{
 });
 function dragEnd(cancel){
   const d=INV.drag;if(!d) return;INV.drag=null;document.body.classList.remove("dragging");
-  $("invFloat").classList.add("hidden");$("invGhost").classList.add("hidden");$("tray").classList.remove("over");d.el.classList.remove("drag");
+  $("invFloat").classList.add("hidden");
+  CONTS.forEach(c=>{$(CONT[c].ghost).classList.add("hidden");$(CONT[c].tray).classList.remove("over");boxOf(CONT[c].grid)?.classList.remove("drop-over");});
+  ["list-weapons","list-equipment"].forEach(id=>boxOf(id)?.classList.remove("drop-over"));
+  d.el.classList.remove("drag");
   if(cancel) return;
-  const it=d.it;
+  const it=d.it,l=d.l;
   if(!d.moved){
+    if(d.fromCard){toast("ARRASTE PELA ALÇA ⠿ ATÉ A MALETA OU O STASH");return;}
     if(d.fromGrid){INV.sel=INV.sel===it?null:it;sfx("clique");renderInv();}
-    else if(autoPlace(it)){INV.sel=it;sfx("fechar");renderInv();changed(true);}
-    else{INV.sel=it;sfx("errado");renderInv();toast("SEM ESPAÇO NA MALETA PARA ESTE ITEM",true);}
+    else if(autoPlace(it,d.c0)){INV.sel=it;sfx("fechar");renderInv();changed(true);}
+    else{INV.sel=it;sfx("errado");renderInv();toast("SEM ESPAÇO PARA ESTE ITEM",true);}
     return;
   }
-  if(d.x!==null){
-    if(d.ok){Object.assign(it,{invX:String(d.x),invY:String(d.y),invRot:d.rot?"1":"",invIn:"1"});INV.sel=it;sfx("fechar");renderInv();changed(true);}
-    else{sfx("errado");renderInv();}
-    return;
-  }
-  if(d.tray){it.invIn="";if(INV.sel===it) INV.sel=null;sfx("fechar");renderInv();changed(true);return;}
+  const done=msg=>{INV.sel=it;sfx("fechar");if(l!=="itens") renderList(l);renderInv();update();changed();if(msg) toast(msg);};
+  if(d.tgt==="equip"){equipar(it,l);return;}
+  if(d.tgt==="tray"){it.invIn="";if(INV.sel===it) INV.sel=null;sfx("fechar");renderInv();changed(true);return;}
+  if(d.tgt&&d.tgt.startsWith("auto:")){const c=d.tgt.slice(5);if(moveTo(it,l,c)) done(`GUARDADO ${c==="mal"?"NA MALETA":"NO STASH"}`);else{sfx("errado");toast(`SEM ESPAÇO ${c==="mal"?"NA MALETA":"NO STASH"}`,true);}return;}
+  if(d.tgt&&d.ok){moveTo(it,l,d.tgt,d.x,d.y,d.rot);done(d.c0!==d.tgt?`GUARDADO ${d.tgt==="mal"?"NA MALETA":"NO STASH"}`:"");return;}
+  if(d.tgt){sfx("errado");}
   renderInv();
 }
 document.addEventListener("pointerup",()=>dragEnd(false));
@@ -2241,7 +2622,7 @@ function collect(){
     else d.inputs[el.id]=el.value;
   });
   d.estados=[...fxManual];
-  d.habTexto=Object.assign({},HABTXT);
+  d.habTexto=Object.assign({},HABTXT);d.habUsos=Object.assign({},HABUSOS);
   if(window.CBT) CBT.save(d);
   if(window.MOD) d.layout=MOD.save();
   for(const l in LISTS) d.dynamic[l]=LISTS[l].filter(it=>!it._new).map(it=>it._snap?JSON.parse(it._snap):cleanItem(it));
@@ -2257,7 +2638,7 @@ function resetForm(){
   setNat("US");setPortrait("");setBg("");
   INJ_PARTS.forEach(p=>$(p).classList.remove("injured"));
   for(const l in LISTS) LISTS[l]=[];
-  lastHp=null;INV.sel=null;fxManual.clear();HABTXT={};if(window.CBT) CBT.reset();
+  lastHp=null;INV.sel=null;fxManual.clear();HABTXT={};HABUSOS={};if(window.CBT) CBT.reset();
 }
 function apply(d){
   if(!d||typeof d!=="object"||(!d.inputs&&!d.selects&&!d.dynamic)) throw new Error("arquivo não parece uma ficha do 1.4.1");
@@ -2282,7 +2663,7 @@ function apply(d){
     LISTS[l]=(Array.isArray(D[l])?D[l]:[]).map(src=>{const it=blank(l);FIELDS[l].forEach(f=>{if(src[f]!=null) it[f]=String(src[f]);});return it;});
   }
   (Array.isArray(d.estados)?d.estados:[]).forEach(id=>{if(FX_BY[id]&&id!=="surpreendido") fxManual.add(id);});
-  HABTXT=Object.assign({},d.habTexto||{});
+  HABTXT=Object.assign({},d.habTexto||{});HABUSOS=Object.assign({},d.habUsos||{});
   if(window.CBT) CBT.load(d);
   if(window.MOD) MOD.load(d.layout);
   update();renderAll();updateInjuries();
@@ -2333,6 +2714,15 @@ $("downloadBtn").onclick=async()=>{
   try{const r=await FICHAS.exportJSON(collect(),$("char-codename").value);if(r!=="cancel") toast(r==="share"?"FICHA PRONTA PARA COMPARTILHAR":"ARQUIVO GERADO");}
   catch(e){sfx("errado");toast("NÃO FOI POSSÍVEL EXPORTAR: "+e.message,true);}
 };
+$("restShort").onclick=()=>descanso("curto");$("restLong").onclick=()=>descanso("longo");
+// Firewall (CA contra invasão): equipamentos pessoais 8 + Proef + Int; Sistema interno (Autômato) e autômato do Criador 10 + Proef + Int
+function updateFirewall(){
+  const P=profBonus(),I=getMods().INT,RD=raceData(),L=lvlInfo();
+  const rows=[["EQUIPAMENTOS PESSOAIS",8+P+I,"8 + Proef + Int // drones, pontos, visores, próteses"]];
+  if(/aut[ôo]mato/i.test(RD.subName||"")) rows.push(["CHASSI (SISTEMA INTERNO)",10+P+I,"10 + Proef + Int // Interferir: perde a Reação; Controlar nunca funciona"]);
+  if([[L.c1,L.s1],L.multi?[L.c2,L.s2]:null].some(x=>x&&x[0]==="Hacker"&&/criador/i.test(x[1]))) rows.push(["AUTÔMATO DO CRIADOR",10+P+I,"10 + Proef + Int // sem Sistema interno: pode ser Controlado"]);
+  $("fwBox").innerHTML=`<span class="lbl">Firewall (defesa contra invasão)</span>`+rows.map(r=>`<div class="fw-r"><b>${r[1]}</b><span>${r[0]}<small>${r[2]}</small></span></div>`).join("");
+}
 $("opsBtn").onclick=()=>{sfx("clique");goTitle(true);};
 async function updateOpsInfo(){
   const n=FICHAS.list().length,u=await FICHAS.usage();
@@ -2354,12 +2744,14 @@ $("upload-file").onchange=e=>{
 // ================== EVENTOS DO FORMULÁRIO ==================
 $("sheet").addEventListener("input",e=>{
   const t=e.target;if(t.closest(".card.edit")||t.id==="natSearch"||t.id==="background-url-input"||t.dataset.vol||t.classList.contains("fd-ta")) return;
+  if(t.id==="st-cols"||t.id==="st-rows"){if(t.value!==""){const v=Math.max(1,Math.min(24,Math.round(+t.value)));if(+t.value!==v) t.value=v;}renderInv(true);}
   if(t.id==="inv-cols"||t.id==="inv-rows"){if(t.value!==""){const v=Math.max(1,Math.min(24,Math.round(+t.value)));if(+t.value!==v) t.value=v;}renderInv(true);}
   if(t.id==="char-level"&&t.value!==""){const v=Math.max(1,Math.min(20,Math.round(+t.value)));if(+t.value!==v) t.value=v;}
   changed(true);
 });
 $("sheet").addEventListener("change",e=>{
   const t=e.target;if(t.closest(".card.edit")||t.type==="file"||t.classList.contains("fd-ta")||t.dataset.vol||t.id==="muteToggle"||t.id==="crtToggle"||t.id==="fxVisToggle") return;
+  if((t.id==="st-cols"||t.id==="st-rows")&&t.value===""){t.value=t.dataset.def;renderInv(true);}
   if((t.id==="inv-cols"||t.id==="inv-rows")&&t.value===""){t.value=t.dataset.def;renderInv(true);}
   if(t.id==="char-class") rebuildSpec();
   if(t.id==="char-race"){rebuildSub();$("char-speed").value=raceSpeed();}
@@ -2440,6 +2832,7 @@ function enterSheet(){
     $("sheet").classList.add("show");$("dock").classList.add("show");
     state="sheet";applyFx();syncHud();window.scrollTo(0,0);
     if(window.MOD) MOD.refresh();
+    {const sb=document.querySelector(".stash-box");if(sb&&!sb.classList.contains("min")){sb.classList.add("min");if(window.MOD) MOD.relayout();}}
     if(musicTarget()>0) fadeMusic(musicTarget());
     update();renderInv();autosave();
     veil(false,()=>{});
@@ -2450,6 +2843,7 @@ const start=enterSheet;
 // carrega o último estado (autosave; se não houver, o salvamento rápido da ficha antiga)
 // a ficha começa vazia; a tela inicial pergunta se é operador novo ou existente (criacao.js)
 function boot(){
+  $("armGuia").innerHTML=ARM.guide();
   resetForm();
   update();renderAll();updateInjuries();
   const tab=store.get(KEY_TAB);if(tab) showTab(tab,true);
@@ -2458,6 +2852,7 @@ function boot(){
 <script src="modular.js"></script>
 <script src="criacao.js"></script>
 <script src="combate.js"></script>
+<script src="equip.js"></script>
 <script>
 // app instalável (PWA): funciona sem internet depois da primeira visita. No app nativo não precisa.
 if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost")){

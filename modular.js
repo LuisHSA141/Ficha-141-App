@@ -19,7 +19,7 @@ const MOD = (() => {
   // larguras padrão (12 colunas) e ordem inicial de cada janela
   const DEF = {
     principal: [["identificacao", 4], ["atributos", 4], ["vitalidade", 4], ["origem", 4], ["pericias", 4], ["defesas", 4], ["testes-de-resistencia", 4], ["recursos", 4], ["ferimento-critico", 4], ["salvaguardas-exaustao", 4]],
-    combate: [["armamento", 12], ["maleta", 8], ["dinheiro", 4], ["equipamentos", 4]],
+    combate: [["armamento", 12], ["maleta", 8], ["dinheiro", 4], ["equipamentos", 4], ["itens-de-bolso", 4], ["stash", 12]],
     habilidades: [["habilidades-de-raca-classe", 6], ["titulos-de-personagem", 6], ["talentos", 6], ["habilidades-unicas", 6]],
     notas: [["aparencia-personalidade", 6], ["historia-do-personagem", 6], ["aliados-sinergia", 6]],
     arquivo: [["salvar-ficha-em-arquivo", 6], ["carregar-ficha-de-arquivo", 6], ["plano-de-fundo", 6], ["sistema", 6]],
@@ -113,16 +113,14 @@ const MOD = (() => {
   }
 
   // ---------------- janelas + trilho ----------------
+  // trilho fixo: todas as janelas, sempre na mesma ordem; a aberta fica destacada
   function renderRail() {
-    $("rail").innerHTML = rail.map((id, i) => `<button class="rail-t" data-win="${id}" data-nosfx title="${WINS[id].name} (${ORDER.indexOf(id) + 1})">${WINS[id].icon}<span>${WINS[id].name}</span><em>${ORDER.indexOf(id) + 1}</em></button>`).join("");
+    $("rail").innerHTML = ORDER.map((id, i) => `<button class="rail-t${id === main ? " on" : ""}" data-win="${id}" data-nosfx title="${WINS[id].name} (${i + 1})"${id === main ? ' aria-current="page"' : ""}>${WINS[id].icon}<span>${WINS[id].name}</span><em>${i + 1}</em></button>`).join("");
   }
   function show(id, silent) {
     if (!WINS[id]) return;
-    if (id !== main) {
-      const i = rail.indexOf(id);
-      if (i >= 0) rail[i] = main; // a janela anterior fica no lugar do ícone clicado
-      main = id; renderRail();
-    }
+    if (id !== main) { main = id; rail = ORDER.filter(w => w !== main); }
+    renderRail();
     ORDER.forEach(w => pages[w].classList.toggle("on", w === main));
     const p = pages[main];
     if (!silent) { p.classList.remove("glitch"); void p.offsetWidth; p.classList.add("glitch"); }
@@ -135,8 +133,8 @@ const MOD = (() => {
   function customHTML(type) {
     if (type === "texto") return `<textarea class="ta cb-text" rows="5" placeholder="Escreva aqui..."></textarea>`;
     if (type === "imagem") return `<label class="cb-img"><span>▸ ENVIAR IMAGEM</span><img alt="" class="hidden"><input type="file" accept="image/*"></label>`;
-    if (type === "barra") return `<div class="cb-bar"><i></i><span></span></div><div class="cb-row"><button class="step" data-cb="-1" data-nosfx>−</button><input class="in cb-cur" type="number"><span class="sl">/</span><input class="in cb-max" type="number"><button class="step" data-cb="1" data-nosfx>+</button></div>`;
-    return `<div class="cb-count"><button class="step big" data-cb="-1" data-nosfx>−</button><input class="in cb-val" type="number"><button class="step big" data-cb="1" data-nosfx>+</button></div>`;
+    if (type === "barra") return `<div class="cb-bar"><i></i><span></span></div><div class="cb-row"><button class="step" data-cb="-1" data-nosfx>−</button><input class="in cb-cur" data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar"><span class="sl">/</span><input class="in cb-max" type="number"><button class="step" data-cb="1" data-nosfx>+</button></div>`;
+    return `<div class="cb-count"><button class="step big" data-cb="-1" data-nosfx>−</button><input class="in cb-val" data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar"><button class="step big" data-cb="1" data-nosfx>+</button></div>`;
   }
   function makeCustom(c) {
     const b = document.createElement("div");
@@ -398,6 +396,8 @@ const MOD = (() => {
         const W = L.wins[win]; if (!W) return;
         const bd = boards[win];
         (W.order || []).forEach(id => { const b = [...document.querySelectorAll(".board .box")].find(x => x.dataset.box === id); if (b && b.dataset.win === win) bd.appendChild(b); });
+        // caixas que não existiam quando o layout foi salvo vão para o fim, sem empurrar as antigas
+        [...bd.children].filter(b => !(W.order || []).includes(b.dataset.box)).forEach(b => bd.appendChild(b));
         [...bd.children].forEach(b => { const o = (W.items || {})[b.dataset.box]; if (o) setBox(b, o); else if (!b.dataset.w) setBox(b, { w: 4 }); });
       });
       if (L.main && WINS[L.main]) { main = L.main; rail = Array.isArray(L.rail) && L.rail.length === ORDER.length - 1 && L.rail.every(w => WINS[w] && w !== main) ? L.rail.slice() : ORDER.filter(w => w !== main); }
