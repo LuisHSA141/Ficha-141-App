@@ -1,7 +1,7 @@
 // 141 // service worker: deixa a ficha funcionar sem internet depois da primeira visita.
 // HTML e JS se atualizam sozinhos (a versão nova aparece na abertura seguinte).
 // Ao trocar sons ou imagens, mude VERSAO para os aparelhos baixarem tudo de novo.
-const VERSAO = "ficha141-v4.3";
+const VERSAO = "ficha141-v4.8";
 const ARQUIVOS = [
   "./",
   "index.html",
@@ -143,6 +143,9 @@ const ARQUIVOS = [
   "modular.js",
   "criacao.js",
   "combate.js",
+  "dados.js",
+  "csel.js",
+  "glitch.js",
   "logo.png",
   "manifest.webmanifest",
   "sons/Abrir.mp3",

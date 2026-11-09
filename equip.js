@@ -30,6 +30,7 @@ const EQC = (() => {
     m.addEventListener("click", e => {
       if (e.target === m || e.target.closest('[data-eqc="x"]')) return close();
       const t = e.target.closest("[data-eqc-tab]"); if (t) { sel = t.dataset.eqcTab; render(); sfx("clique"); return; }
+      const mm = e.target.closest("[data-eqc-mais]"); if (mm) { const d = mm.previousElementSibling, ab = d.classList.toggle("open"); mm.textContent = ab ? "▾ RECOLHER" : "▸ LER TUDO"; sfx("clique"); return; }
       const a = e.target.closest("[data-eqc-add]"); if (a) { pick(+a.dataset.eqcAdd); return; }
     });
     m.querySelector("#eqcQ").addEventListener("input", e => { q = e.target.value; render(); });
@@ -50,23 +51,26 @@ const EQC = (() => {
     const vis = base.filter(x => qq ? norm(x.e.name + " " + x.e.tipo + " " + x.e.desc).includes(qq) : (!sel || grupoOf(x.e) === sel));
     document.getElementById("eqcN").textContent = vis.length;
     document.getElementById("eqcGrid").innerHTML = vis.map(({ e, i }) => {
-      const ok = pode(e), meta = [e.tipo, `P.E. ${String(e.pe).replace(".", ",")}`, e.acao, e.qtd && `${e.qtd} un.`, e.cargas && `${e.cargas} cargas`].filter(Boolean);
+      const ok = pode(e), meta = [e.tipo, `P.E. ${String(e.pe).replace(".", ",")}`, e.acao, e.qtd && `${e.qtd} un.`, e.cargas && `${e.cargas} carga${e.cargas == 1 ? "" : "s"}`].filter(Boolean);
       return `<div class="eqc-it${ok ? "" : " lock"}"><div class="eqc-h"><b>${E(e.name)}</b>${ok ? `<button class="btn sm acc" data-eqc-add="${i}" data-nosfx>+ ADICIONAR</button>` : `<span class="eqc-lk">SÓ ${E(e.excl.join(", ").toUpperCase())}</span>`}</div>
         <div class="eqc-m">${meta.map(t => `<i>${E(t)}</i>`).join("")}${e.excl ? `<i class="x">EXCLUSIVO: ${E(e.excl.join(", "))}</i>` : ""}</div>
-        <p>${E(e.desc)}</p>${e.melhorias ? `<details><summary>MELHORIAS (${e.mel})</summary>${e.melhorias.split("\n").map(m => `<p>${E(m)}</p>`).join("")}</details>` : ""}</div>`;
+        <div class="eqc-d">${e.desc.split("\n").map(t => `<p>${E(t)}</p>`).join("")}</div><button class="eqc-mais" data-eqc-mais hidden data-nosfx>▸ LER TUDO</button>${e.melhorias ? `<details><summary>MELHORIAS (${e.mel})</summary>${e.melhorias.split("\n").map(m => `<p>${E(m)}</p>`).join("")}</details>` : ""}</div>`;
     }).join("") || '<div class="empty">NENHUM EQUIPAMENTO ENCONTRADO</div>';
+    // texto que passa do limite ganha o botão LER TUDO
+    document.querySelectorAll("#eqcGrid .eqc-d").forEach(d => { if (d.scrollHeight > d.clientHeight + 4) { d.classList.add("longo"); d.nextElementSibling.hidden = false; } });
   }
   function open() { const m = el(); q = ""; m.querySelector("#eqcQ").value = ""; render(); m.classList.add("show"); document.body.classList.add("acat-on"); sfx("abrir"); }
   function close() { const m = document.getElementById("eqCat"); if (!m || !m.classList.contains("show")) return; m.classList.remove("show"); document.body.classList.remove("acat-on"); sfx("fechar"); }
   function pick(i) {
     const e = EQUIP_CAT[i]; if (!e) return;
     const it = blank("equipment");
-    Object.assign(it, { name: e.name, tipo: e.tipo, acao: e.acao, pe: String(e.pe), qty: "1", desc: e.desc, melhorias: e.melhorias || "", excl: (e.excl || []).join(", "),
+    const peNum = !isNaN(parseFloat(e.pe));
+    Object.assign(it, { name: e.name, tipo: e.tipo, acao: e.acao, pe: peNum ? String(e.pe) : "1", qty: "1", desc: e.desc, melhorias: e.melhorias || "", excl: (e.excl || []).join(", "),
       qtdMax: e.qtd || "", qtdAtual: e.qtd || "", cargasMax: e.cargas || "", cargasAtual: e.cargas || "" });
     it._edit = true; it._new = true;
     LISTS.equipment.push(it); close(); renderList("equipment");
     const c = document.getElementById("list-equipment").lastElementChild; if (c) c.scrollIntoView({ block: "nearest", behavior: "smooth" });
-    toast(`${e.name.toUpperCase()} ADICIONADO // REVISE E SALVE`);
+    toast(peNum ? `${e.name.toUpperCase()} ADICIONADO // REVISE E SALVE` : `${e.name.toUpperCase()} ADICIONADO // AJUSTE O P.E. (${String(e.pe).toUpperCase()})`);
   }
   document.addEventListener("click", e => { if (e.target.closest("[data-eq-cat]")) open(); });
   return { open, close, pode };
