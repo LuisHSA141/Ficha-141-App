@@ -7,7 +7,8 @@
 // =====================================================================
 const GLITCH = (() => {
   const NS = "http://www.w3.org/2000/svg";
-  let svg, cv, ctx, buf, bctx, tiles = [], scan = null;
+  let svg, cv, ctx, buf, bctx, tiles = [], scan = null, TXT = {};
+  const PADRAO = { t: "SINAL PERDIDO", s: "// RESTABELECENDO CONEXÃO COM O OPERADOR" };
   const R = (a, b) => a + Math.random() * (b - a);
 
   function montar() {
@@ -95,8 +96,8 @@ const GLITCH = (() => {
     if (fase === "pico") {
       const fs = Math.max(13, Math.min(26, W / 30)), cx = W / 2, cy = H / 2, jit = R(-3, 3);
       ctx.font = `bold ${fs}px "Courier New", monospace`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-      const txt = Math.random() < .05 ? "▓▓ ▒▒▒▒ ░░░ ▓▓▓▓" : "SINAL PERDIDO";
-      const sub = "// RESTABELECENDO CONEXÃO COM O OPERADOR";
+      const txt = Math.random() < .05 ? "▓▓ ▒▒▒▒ ░░░ ▓▓▓▓" : TXT.t;
+      const sub = TXT.s;
       ctx.globalAlpha = .9; ctx.globalCompositeOperation = "screen";
       ctx.fillStyle = "rgba(255,0,40,.9)"; ctx.fillText(txt, cx - 3 + jit, cy - fs * .6);
       ctx.fillStyle = "rgba(0,220,255,.7)"; ctx.fillText(txt, cx + 3 + jit, cy - fs * .6);
@@ -105,7 +106,7 @@ const GLITCH = (() => {
       ctx.fillStyle = `rgb(${Math.min(255, ar + 60)},${Math.min(255, ag + 40)},${Math.min(255, ab + 40)})`; ctx.fillText(sub, cx, cy + fs * .5);
       // moldura de terminal
       ctx.globalCompositeOperation = "source-over"; ctx.strokeStyle = `rgba(${ar},${ag},${ab},.8)`; ctx.lineWidth = 1; ctx.globalAlpha = .8;
-      const bw = Math.min(W * .8, fs * 17), bh = fs * 2.6; ctx.strokeRect(cx - bw / 2 + jit, cy - bh / 2 - fs * .15, bw, bh);
+      const bw = Math.min(W * .92, Math.max(fs * 17, ctx.measureText(sub).width + fs * 2)), bh = fs * 2.6; ctx.strokeRect(cx - bw / 2 + jit, cy - bh / 2 - fs * .15, bw, bh);
     }
     // linhas de varredura por cima de tudo
     ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = .55 * Math.min(1, k * 1.5);
@@ -143,8 +144,8 @@ const GLITCH = (() => {
   }
 
   // antes: elementos que se rasgam ao sair // depois: os que se rasgam ao entrar
-  function rodar(antes, onPeak, depois, done) {
-    montar();
+  function rodar(antes, onPeak, depois, done, texto) {
+    montar(); TXT = Object.assign({}, PADRAO, texto || {});
     const IN = 520, HOLD = 260, OUT = 620, T = IN + HOLD + OUT;
     const W = cv.width = Math.max(200, Math.round(innerWidth / 2)), H = cv.height = Math.max(150, Math.round(innerHeight / 2));
     // padrão de linhas de varredura

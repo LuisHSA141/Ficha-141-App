@@ -139,13 +139,19 @@ function goTitle(openList) {
   autosave(); state = "entering"; sfx("fechar");
   if ($("fxPanel").classList.contains("show")) $("fxPanel").classList.remove("show");
   fadeMusic(0, 900);
-  veil(true, () => {
+  const troca = () => {
     $("sheet").classList.remove("show"); $("dock").classList.remove("show");
     $("titleScreen").style.display = ""; document.body.classList.add("title-on", "locked");
     state = "title"; applyFx(); buildTitle(); window.scrollTo(0, 0);
     if (openList === true) showLoad(true);
-    veil(false, () => { if (openList !== true) $("newBtn").focus(); });
-  });
+  };
+  const fim = () => { if (openList !== true) $("newBtn").focus(); };
+  if (window.DADOS && DADOS.aberto) DADOS.abrir(false);
+  if (!window.GLITCH || matchMedia("(prefers-reduced-motion:reduce)").matches) { veil(true, () => { troca(); veil(false, fim); }); return; }
+  // saída: a ficha se rasga, aparece o selo do projeto e a tela inicial volta
+  const nome = (($("hdName") || {}).textContent || "").trim();
+  GLITCH.rodar([$("sheet")], troca, () => [$("titleScreen")], fim,
+    { t: "PROJETO 1.4.1", s: `// ${nome && !/^OPERADOR SEM/i.test(nome) ? "OPERADOR " + nome.toUpperCase() + " DESCONECTADO" : "CONEXÃO ENCERRADA"} // FICHA ARQUIVADA` });
 }
 document.querySelector(".head-logo").title = "Voltar para a tela inicial (a ficha fica salva)";
 document.querySelector(".head-logo").addEventListener("click", () => goTitle());
