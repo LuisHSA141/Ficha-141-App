@@ -131,6 +131,9 @@ body.sg-run{overflow-x:hidden}
 .hpbar{height:5px;margin-top:5px;background:var(--line3);position:relative;overflow:hidden}
 .hpbar i{position:absolute;inset:0 auto 0 0;background:var(--txt);transition:width .25s}
 .hud-hp.low .hpbar i{background:var(--acc);animation:b .6s steps(2) infinite}
+/* PV temporários: trecho azul logo depois da vida normal */
+.hpbar i.tmp{background:#6cb6ff;box-shadow:0 0 6px #6cb6ff;transition:left .25s,width .25s}
+.hud-hp.low .hpbar i.tmp{background:#6cb6ff;animation:none}
 .hud-hp.low b{color:var(--acc-lt)}
 .over b{color:var(--red)}
 .hud.hit{animation:hit .28s steps(2)}

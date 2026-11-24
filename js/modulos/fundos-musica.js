@@ -11,7 +11,7 @@ const FUNDOS_MUS = (() => {
   let box, vids, ativo = 0, atual = "", seq = 0;
   const falhou = new Set(); // não insiste num arquivo que já deu erro nesta sessão
   const emPe = () => matchMedia("(orientation: portrait)").matches;
-  const arq = id => `fundos/bg-${id}-${emPe() ? "v" : "h"}.mp4`;
+  const arq = id => `fundos/${id}-${emPe() ? "v" : "h"}.mp4`;  // vídeos H.264 4:2:0 (o 4:4:4 não toca no Chrome)
   const naFicha = () => !document.body.classList.contains("title-on");
   const temUrl = () => { const i = document.getElementById("background-url-input"); return !!(i && i.value.trim()); };
   const musica = () => { try { return MUS.atual; } catch (e) { return "pense"; } };

@@ -338,7 +338,11 @@ function update(){
   const hc=$("char-hp-current").value,hm=$("char-hp-max").value;
   const htmp=window.INTER?INTER.temp():0;
   $("hHp").textContent=`${hc===""?"--":hc} / ${hm===""?"--":hm}${htmp?` +${htmp}`:""}`;
-  const hp=pct(nz(hc),nz(hm));$("hHpBar").style.width=(hm===""?0:hp)+"%";
+  const hp=pct(nz(hc),nz(hm));
+  // com PV temporários a barra representa atual + temporários (sem passar de 100% do conjunto)
+  const cur=hc===""?nz(hm):nz(hc),tot=Math.max(nz(hm),cur+htmp)||1;
+  $("hHpBar").style.width=(hm===""?0:Math.min(100,cur/tot*100))+"%";
+  const tb=$("hTmpBar");tb.style.left=(hm===""?0:Math.min(100,cur/tot*100))+"%";tb.style.width=(hm===""||!htmp?0:Math.min(100,htmp/tot*100))+"%";
   $("hHpBox").classList.toggle("low",hm!==""&&hc!==""&&hp<=25);
   if(lastHp!==null&&hc!==""&&nz(hc)<lastHp){const hud=$("hud");hud.classList.remove("hit");void hud.offsetWidth;hud.classList.add("hit");}
   lastHp=hc===""?null:nz(hc);
