@@ -1,19 +1,37 @@
 // 141 // service worker: deixa a ficha funcionar sem internet depois da primeira visita.
 // HTML e JS se atualizam sozinhos (a versão nova aparece na abertura seguinte).
 // Ao trocar sons ou imagens, mude VERSAO para os aparelhos baixarem tudo de novo.
-const VERSAO = "ficha141-v5.9";
+const VERSAO = "ficha141-v6.2-teste";
 const ARQUIVOS = [
   "./",
   "index.html",
-  "fichas.js",
-  "richtext.js",
-  "armas.js",
-  "armas-catalogo.js",
-  "bolso-catalogo.js",
-  "equip-catalogo.js",
-  "equip.js",
-  "interludio.js",
-  "codigo.js",
+  "css/ficha.css",
+  "js/ficha/01-base.js",
+  "js/ficha/02-descansos.js",
+  "js/ficha/03-contadores.js",
+  "js/ficha/04-audio.js",
+  "js/ficha/05-avisos.js",
+  "js/ficha/06-montagem.js",
+  "js/ficha/07-regras.js",
+  "js/ficha/08-listas.js",
+  "js/ficha/09-inventario.js",
+  "js/ficha/10-estados.js",
+  "js/ficha/11-visual.js",
+  "js/ficha/12-salvar.js",
+  "js/ficha/13-eventos.js",
+  "js/ficha/14-inicio.js",
+  "js/iniciar.js",
+
+  "js/nucleo/fichas.js",
+  "js/nucleo/richtext.js",
+  "js/modulos/armas.js",
+  "js/catalogos/armas-catalogo.js",
+  "js/catalogos/bolso-catalogo.js",
+  "js/catalogos/equip-catalogo.js",
+  "js/modulos/equip-catalogo-ui.js",
+  "js/modulos/interludio.js",
+  "js/modulos/codigo.js",
+  "js/modulos/fundos-musica.js",
   "armas/aa-12.webp",
   "armas/ak-12.webp",
   "armas/ak-74.webp",
@@ -141,14 +159,14 @@ const ARQUIVOS = [
   "armas/vsk-94.webp",
   "armas/vss.webp",
   "armas/winchester-1887.webp",
-  "data.js",
-  "livro.js",
-  "modular.js",
-  "criacao.js",
-  "combate.js",
-  "dados.js",
-  "csel.js",
-  "glitch.js",
+  "js/catalogos/regras-base.js",
+  "js/catalogos/livro.js",
+  "js/modulos/janelas.js",
+  "js/modulos/criacao.js",
+  "js/modulos/combate.js",
+  "js/modulos/bandeja-dados.js",
+  "js/nucleo/csel.js",
+  "js/modulos/glitch.js",
   "logo.png",
   "manifest.webmanifest",
   "sons/Abrir.mp3",
@@ -225,7 +243,7 @@ self.addEventListener("fetch", e => {
     if (hit) return req.headers.has("range") ? comRange(req, hit) : hit;
     // músicas extras não entram no pacote inicial (são grandes): na primeira vez que tocam,
     // o arquivo inteiro é baixado em segundo plano e guardado para tocar sem internet depois
-    if (req.headers.has("range") && (url.pathname.includes("/sons/musicas/") || url.pathname.includes("/fundo-mosaico")) && !BAIXANDO.has(url.href)) {
+    if (req.headers.has("range") && (url.pathname.includes("/sons/musicas/") || url.pathname.includes("/fundos/")) && !BAIXANDO.has(url.href)) {
       BAIXANDO.add(url.href);
       e.waitUntil(fetch(url.href).then(r => { if (r.ok && r.status === 200) return c.put(url.href, r); }).catch(() => {}).finally(() => BAIXANDO.delete(url.href)));
     }
