@@ -290,7 +290,7 @@ const ARM = (() => {
       ${max > 0 ? `<div class="ammo${cur <= 0 ? " empty-mag" : ""}"><em>${R.aljava ? "ALJAVA" : "DISPAROS"}</em><button class="step" data-act="dec" data-k="penteAtual" data-nosfx>−</button><b>${cur} / ${max}${R.aljava && w.municao ? ` <small>${E(w.municao)}</small>` : ""}</b><button class="step" data-act="inc" data-k="penteAtual" data-nosfx>+</button><button class="step" data-act="fill" data-k="penteAtual" title="${R.aljava ? "Repor a aljava" : "Recarregar"}" data-nosfx style="width:auto;padding:0 7px;font-size:10px;letter-spacing:.1em">${R.aljava ? "REPOR" : "RECARREGAR"}</button><div class="bar">${cells}</div></div>` : ""}
       ${w._shot && R.disp ? `<div class="wrec">RECUO // ${N(w._rec) + 1} disparo${N(w._rec) ? "s" : ""} neste turno: o próximo sai com −${R.dm.rec} dado${R.dm.rec > 1 ? "s" : ""} <button class="step" data-act="recoil0" title="Começar um turno novo: o Recuo zera" data-nosfx>↺ NOVO TURNO</button></div>` : ""}
       ${R.precCond.length ? `<div class="wpc"><em>PRECISÃO SE</em>${R.precCond.map(t => `<span>${E(t)}</span>`).join("")}</div>` : ""}
-      ${accs}${lines.join("")}${w.desc ? `<p class="desc">${E(w.desc)}</p>` : ""}${details}</div></div>`;
+      ${accs}${lines.join("")}${w.desc ? `<p class="desc">${typeof rtx === "function" ? rtx(w.desc) : E(w.desc)}</p>` : ""}${details}</div></div>`;
   }
 
   // ---------------- cartão (edição) ----------------

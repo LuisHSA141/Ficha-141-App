@@ -83,7 +83,7 @@ const CBT = (() => {
             : e.list === "equipment" && (nz(LISTS.equipment[e.i].qtdMax) || nz(LISTS.equipment[e.i].cargasMax)) ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="equipment" data-ai="${e.i}" data-k="${nz(LISTS.equipment[e.i].qtdMax) ? "qtdAtual" : "cargasAtual"}" data-nosfx>USAR −1</button></div>`
             : e.list === "bolso" && LISTS.bolso[e.i].marca === "Recarga" ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="bolso" data-ai="${e.i}" data-k="usosAtuais" data-nosfx>USAR −1</button></div>`
             : e.list === "traits" && nz(LISTS.traits[e.i].usosMax) > 0 ? `<div class="ea"><button class="btn sm" data-cq="dec" data-al="traits" data-ai="${e.i}" data-k="usosAtuais" data-nosfx>USAR −1</button></div>` : "";
-          return `<details class="cbt-e"><summary><span class="es">${esc(e.src)}</span><span class="en">${esc(e.name)}</span>${e.info ? `<span class="ei">${esc(e.info)}</span>` : ""}</summary>${e.desc ? `<div class="ed">${esc(e.desc)}</div>` : ""}</details>${acts}`;
+          return `<details class="cbt-e"><summary><span class="es">${esc(e.src)}</span><span class="en">${esc(e.name)}</span>${e.info ? `<span class="ei">${esc(e.info)}</span>` : ""}</summary>${e.desc ? `<div class="ed">${rtx(e.desc)}</div>` : ""}</details>${acts}`;
         }).join("") : `<div class="cbt-empty">NADA MARCADO COMO ${t.k}</div>`}</div></div>`;
     }).join("");
   }

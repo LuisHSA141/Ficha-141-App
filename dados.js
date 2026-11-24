@@ -137,7 +137,36 @@ const DADOS = (() => {
     f.addEventListener("input", () => { const r = parse(f.value); f.classList.toggle("bad", !r); if (r) { pool = r.p; mod = r.m; sync(true); } });
     f.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); rolarAtual(); } });
     m.querySelector("#dtAt").addEventListener("toggle", desenhaAtalhos);
+    arrasto(m);
     return m;
+  }
+  // ---------- arrastar a bandeja pelo título (só no PC; no celular ela é uma folha embaixo) ----------
+  const KEY_POS = "ficha141_bandejaPos";
+  const celular = () => matchMedia("(max-width:650px)").matches;
+  function prende(m, x, y) {
+    const w = m.offsetWidth, h = m.offsetHeight;
+    x = Math.max(4, Math.min(innerWidth - w - 4, x)); y = Math.max(4, Math.min(innerHeight - Math.min(h, 120), y));
+    m.style.left = x + "px"; m.style.top = y + "px"; m.style.right = "auto"; m.style.bottom = "auto";
+    return { x, y };
+  }
+  function posInicial(m) {
+    if (celular()) { m.style.left = m.style.top = m.style.right = m.style.bottom = ""; return; }
+    let p = null; try { p = JSON.parse(localStorage.getItem(KEY_POS) || "null"); } catch (e) {}
+    if (p && isFinite(p.x) && isFinite(p.y)) prende(m, p.x, p.y);
+  }
+  function arrasto(m) {
+    const h = m.querySelector(".dt-h"); let d = null;
+    h.title = "Arraste para mover // duplo clique volta ao canto";
+    h.addEventListener("pointerdown", e => {
+      if (celular() || e.button !== 0 || e.target.closest("button")) return;
+      const r = m.getBoundingClientRect(); d = { dx: e.clientX - r.left, dy: e.clientY - r.top, id: e.pointerId };
+      h.setPointerCapture(e.pointerId); h.style.cursor = "grabbing"; e.preventDefault();
+    });
+    h.addEventListener("pointermove", e => { if (d && e.pointerId === d.id) prende(m, e.clientX - d.dx, e.clientY - d.dy); });
+    const fim = e => { if (!d) return; d = null; h.style.cursor = ""; const r = m.getBoundingClientRect(); try { localStorage.setItem(KEY_POS, JSON.stringify({ x: r.left, y: r.top })); } catch (er) {} };
+    h.addEventListener("pointerup", fim); h.addEventListener("pointercancel", fim);
+    h.addEventListener("dblclick", e => { if (e.target.closest("button")) return; try { localStorage.removeItem(KEY_POS); } catch (er) {} m.style.left = m.style.top = m.style.right = m.style.bottom = ""; sfx("clique"); });
+    window.addEventListener("resize", () => { if (!m.classList.contains("show")) return; if (celular()) { m.style.left = m.style.top = m.style.right = m.style.bottom = ""; return; } if (m.style.left) { const r = m.getBoundingClientRect(); prende(m, r.left, r.top); } });
   }
   function sync(daDigitacao) {
     const m = el();
@@ -190,7 +219,7 @@ const DADOS = (() => {
     const m = el(); if (on === undefined) on = !m.classList.contains("show");
     m.classList.toggle("show", on); document.body.classList.toggle("dt-on", on);
     const b = document.getElementById("diceBtn"); if (b) b.classList.toggle("on", on);
-    if (on) { sync(); desenhaHist(); if (m.querySelector("#dtAt").open) desenhaAtalhos(); sfx("abrir"); }
+    if (on) { posInicial(m); sync(); desenhaHist(); if (m.querySelector("#dtAt").open) desenhaAtalhos(); sfx("abrir"); }
     else sfx("fechar");
   }
   return {

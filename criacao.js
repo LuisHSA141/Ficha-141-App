@@ -74,7 +74,7 @@ function showLoad(on, focusId) {
   Q("[data-dup]").forEach(b => b.onclick = () => { const id = FICHAS.duplicate(b.dataset.dup); sfx("abrir"); toast("OPERADOR DUPLICADO"); showLoad(true, id); });
   Q("[data-exp]").forEach(b => b.onclick = async () => {
     sfx("clique"); const d = FICHAS.get(b.dataset.exp);
-    try { const r = await FICHAS.exportJSON(d, FICHAS.summary(d).cod); if (r !== "cancel") toast(r === "share" ? "FICHA PRONTA PARA COMPARTILHAR" : "ARQUIVO GERADO"); } catch (e) { sfx("errado"); toast("NÃO FOI POSSÍVEL EXPORTAR: " + e.message, true); }
+    try { const r = await FICHAS.exportJSON(d, FICHAS.summary(d).cod); if (r !== "cancel") toast(r === "share" ? "FICHA PRONTA PARA COMPARTILHAR" : r === "saved" ? "FICHA SALVA NO ARQUIVO ESCOLHIDO" : "ARQUIVO GERADO"); } catch (e) { sfx("errado"); toast("NÃO FOI POSSÍVEL EXPORTAR: " + e.message, true); }
   });
   Q("[data-del]").forEach(b => b.onclick = async () => {
     const s = L.find(x => x.id === b.dataset.del); sfx("clique");
@@ -490,7 +490,7 @@ R.id = () => `<div class="grid g2" style="gap:18px"><div>
     <div><span class="lbl">Imagem do operador (opcional)</span><label class="wz-img">${W.portrait ? `<img src="${esc(W.portrait)}" alt="">` : "▸ ENVIAR IMAGEM"}<input type="file" accept="image/*" id="wzImg"></label>${W.portrait ? `<button class="btn sm" id="wzImgX" data-nosfx>REMOVER</button>` : ""}</div></div>`;
 R.id.bind = () => {
   $("wzCod").oninput = e => W.codename = e.target.value; $("wzName").oninput = e => W.name = e.target.value;
-  $("wzImg").onchange = async e => { const f = e.target.files[0]; if (!f) return; try { W.portrait = await readImage(f, 420); sfx("clique"); renderStep(true); } catch (err) { sfx("errado"); toast("NÃO FOI POSSÍVEL LER A IMAGEM", true); } };
+  $("wzImg").onchange = async e => { const f = e.target.files[0]; if (!f) return; try { W.portrait = await readImage(f, 420); sfx("clique"); renderStep(true); } catch (err) { sfx("errado"); toast(err && err.gif ? "GIF MUITO GRANDE // MÁXIMO 10 MB" : "NÃO FOI POSSÍVEL LER A IMAGEM", true); } };
   const x = $("wzImgX"); if (x) x.onclick = () => { W.portrait = ""; sfx("fechar"); renderStep(true); };
   setTimeout(() => $("wzCod").focus(), 30);
 };

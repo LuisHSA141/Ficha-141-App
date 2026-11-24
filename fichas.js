@@ -119,6 +119,15 @@ const FICHAS = (() => {
     }
     const file = typeof File === "function" ? new File([txt], name, { type: "application/json" }) : null;
     const touch = window.matchMedia && matchMedia("(pointer:coarse)").matches;
+    // PC (Chrome, Edge, Opera): janela "Salvar como" para escolher pasta e nome.
+    // Sem ela (Firefox, Safari) ou se der erro, cai no download normal.
+    if (!touch && window.showSaveFilePicker) {
+      try {
+        const h = await window.showSaveFilePicker({ suggestedName: name, types: [{ description: "Ficha do Projeto 1.4.1", accept: { "application/json": [".json"] } }] });
+        const w = await h.createWritable(); await w.write(new Blob([txt], { type: "application/json" })); await w.close();
+        return "saved";
+      } catch (e) { if (e && e.name === "AbortError") return "cancel"; }
+    }
     if (file && touch && navigator.canShare && navigator.canShare({ files: [file] })) {
       try { await navigator.share({ files: [file], title: name }); return "share"; } catch (e) { if (e && e.name === "AbortError") return "cancel"; }
     }

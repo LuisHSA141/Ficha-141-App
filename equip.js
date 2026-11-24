@@ -70,7 +70,7 @@ const EQC = (() => {
     it._edit = true; it._new = true;
     LISTS.equipment.push(it); close(); renderList("equipment");
     const c = document.getElementById("list-equipment").lastElementChild; if (c) c.scrollIntoView({ block: "nearest", behavior: "smooth" });
-    toast(peNum ? `${e.name.toUpperCase()} ADICIONADO // REVISE E SALVE` : `${e.name.toUpperCase()} ADICIONADO // AJUSTE O P.E. (${String(e.pe).toUpperCase()})`);
+    toast(peNum ? `${e.name.toUpperCase()} ADICIONADO // REVISE E SALVE` : `${e.name.toUpperCase()} ADICIONADO // ESCOLHA O VEÍCULO PARA DEFINIR O P.E.`);
   }
   document.addEventListener("click", e => { if (e.target.closest("[data-eq-cat]")) open(); });
   return { open, close, pode };

@@ -13,7 +13,7 @@ const MOD = (() => {
     combate: { name: "COMBATE & INVENTÁRIO", icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg>' },
     habilidades: { name: "HABILIDADES & TÍTULOS", icon: '<svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>' },
     notas: { name: "NOTAS & RP", icon: '<svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 15h7M9 18h4"/></svg>' },
-    arquivo: { name: "SALVAR / CARREGAR", icon: '<svg viewBox="0 0 24 24"><path d="M4 4h13l3 3v13H4z"/><path d="M8 4v5h8V4M8 20v-6h8v6"/></svg>' },
+    arquivo: { name: "CONFIGURAÇÕES", fixa: true, icon: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5l1.6 2.7 3.1-.6.9 3 2.9 1.3-.9 3 .9 3-2.9 1.3-.9 3-3.1-.6L12 21.5l-1.6-2.7-3.1.6-.9-3-2.9-1.3.9-3-.9-3 2.9-1.3.9-3 3.1.6z"/></svg>' },
   };
   const ORDER = Object.keys(WINS);
   // larguras padrão (12 colunas) e ordem inicial de cada janela
@@ -22,7 +22,8 @@ const MOD = (() => {
     combate: [["armamento", 12], ["maleta", 8], ["dinheiro", 4], ["equipamentos", 4], ["itens-de-bolso", 4], ["stash", 12]],
     habilidades: [["habilidades-de-raca-classe", 6], ["titulos-de-personagem", 6], ["talentos", 6], ["habilidades-unicas", 6]],
     notas: [["aparencia-personalidade", 6], ["historia-do-personagem", 6], ["aliados-sinergia", 6]],
-    arquivo: [["salvar-ficha-em-arquivo", 6], ["carregar-ficha-de-arquivo", 6], ["plano-de-fundo", 6], ["sistema", 6]],
+    // configurações: tamanho e posição fixos
+    arquivo: [["operadores-salvos", 4], ["exportar-ficha", 4], ["carregar-ficha-de-arquivo", 4], ["audio", 6], ["musica", 6], ["visual", 6], ["atalhos", 6]],
   };
   const COLORS = ["#b3263f", "#e0a33c", "#7ed957", "#7fd8ff", "#a46ce0", "#ff7a2a", "#dddddd", "#6c6cf0"];
   const slug = t => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -43,11 +44,11 @@ const MOD = (() => {
       $("stageMain").appendChild(page);
       const boxes = [...page.querySelectorAll(".box")];
       const bar = document.createElement("div"); bar.className = "win-bar";
-      bar.innerHTML = `<span class="win-t">${WINS[id].name}</span><div class="win-acts">
+      bar.innerHTML = WINS[id].fixa ? `<span class="win-t">${WINS[id].name}</span>` : `<span class="win-t">${WINS[id].name}</span><div class="win-acts">
         <button class="btn sm" data-wact="add" data-nosfx title="Criar uma caixa nova nesta janela">+ CAIXA</button>
         <button class="btn sm" data-wact="lock" data-nosfx title="Trava arrastar e redimensionar">TRAVAR</button>
         <button class="btn sm" data-wact="reset" data-nosfx title="Volta esta janela ao layout padrão">PADRÃO</button></div>`;
-      const board = document.createElement("div"); board.className = "board"; board.dataset.win = id;
+      const board = document.createElement("div"); board.className = "board" + (WINS[id].fixa ? " board-fixa" : ""); board.dataset.win = id;
       page.innerHTML = ""; page.append(bar, board);
       boards[id] = board;
       boxes.forEach(b => { prepBox(b, id); board.appendChild(b); });
@@ -68,7 +69,7 @@ const MOD = (() => {
       t.classList.add("bx-title");
     }
     b.dataset.win = win;
-    if (!h.querySelector(".bx-ctl")) {
+    if (!WINS[win].fixa && !h.querySelector(".bx-ctl")) {
       const c = document.createElement("span"); c.className = "bx-ctl";
       c.innerHTML = (b.dataset.custom ? '<button class="bx-b" data-bx="cfg" title="Configurar" data-nosfx>⚙</button><button class="bx-b" data-bx="del" title="Excluir caixa" data-nosfx>×</button>' : "") +
         '<button class="bx-b" data-bx="min" title="Minimizar" data-nosfx>▁</button><span class="bx-grip" title="Arraste para mover">⠿</span>';
@@ -88,6 +89,8 @@ const MOD = (() => {
   }
   function fit(b) {
     if (!b.isConnected || b.offsetParent === null) return;
+    // configurações: colunas que se encaixam sozinhas, sem buracos (o CSS cuida)
+    if (b.parentElement && b.parentElement.classList.contains("board-fixa")) { b.style.gridColumn = ""; b.style.gridRowEnd = ""; return; }
     b.style.gridColumn = `span ${effW(b)}`;
     const h = b.getBoundingClientRect().height;
     b.style.gridRowEnd = `span ${Math.max(1, Math.ceil((h + GAP) / UNIT))}`;
@@ -241,7 +244,7 @@ const MOD = (() => {
   function onDbl(e) {
     const rs = e.target.closest(".bx-rs");
     if (rs) { const b = rs.closest(".box"); setBox(b, { w: b.dataset.w, min: b.classList.contains("min"), title: b.dataset.title }); sfx("clique"); saved(); return; }
-    const t = e.target.closest(".bx-title"); if (t) startRename(t.closest(".box"));
+    const t = e.target.closest(".bx-title"); if (t && !t.closest(".board-fixa")) startRename(t.closest(".box"));
   }
   function startRename(b) {
     const t = b.querySelector(".bx-title"); if (t.isContentEditable) return;
@@ -267,7 +270,7 @@ const MOD = (() => {
     if (e.button > 0 || locked) return;
     const rs = e.target.closest(".bx-rs");
     if (rs) return startResize(e, rs.closest(".box"));
-    const h = e.target.closest(".board .box-h");
+    const h = e.target.closest(".board:not(.board-fixa) .box-h");
     if (!h || e.target.closest("button,input,select,textarea,a,label,[contenteditable=true],.nat")) return;
     const b = h.closest(".box");
     D = { b, sx: e.clientX, sy: e.clientY, x: e.clientX, y: e.clientY, on: false, touch: e.pointerType === "touch", t0: Date.now() };
@@ -372,6 +375,7 @@ const MOD = (() => {
   function save() {
     const wins = {};
     ORDER.forEach(win => {
+      if (WINS[win].fixa) return;
       wins[win] = { order: [], items: {} };
       [...boards[win].children].forEach(b => {
         if (!b.classList.contains("box")) return;
@@ -391,9 +395,10 @@ const MOD = (() => {
     ORDER.forEach(win => [...boards[win].children].forEach(b => setBox(b, { w: b.dataset.w })));
     applyDefaults(true);
     if (L && L.wins) {
-      (L.custom || []).forEach(c => { if (TYPES[c.type] && boards[c.win]) boards[c.win].appendChild(makeCustom(c)); });
+      // caixas criadas na antiga "Salvar / Carregar" vão para Notas & RP
+      (L.custom || []).forEach(c => { if (WINS[c.win] && WINS[c.win].fixa) c.win = "notas"; if (TYPES[c.type] && boards[c.win]) boards[c.win].appendChild(makeCustom(c)); });
       ORDER.forEach(win => {
-        const W = L.wins[win]; if (!W) return;
+        const W = L.wins[win]; if (!W || WINS[win].fixa) return;
         const bd = boards[win];
         (W.order || []).forEach(id => { const b = [...document.querySelectorAll(".board .box")].find(x => x.dataset.box === id); if (b && b.dataset.win === win) bd.appendChild(b); });
         // caixas que não existiam quando o layout foi salvo vão para o fim, sem empurrar as antigas

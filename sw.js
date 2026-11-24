@@ -1,16 +1,18 @@
 // 141 // service worker: deixa a ficha funcionar sem internet depois da primeira visita.
 // HTML e JS se atualizam sozinhos (a versão nova aparece na abertura seguinte).
 // Ao trocar sons ou imagens, mude VERSAO para os aparelhos baixarem tudo de novo.
-const VERSAO = "ficha141-v4.9";
+const VERSAO = "ficha141-v5.8";
 const ARQUIVOS = [
   "./",
   "index.html",
   "fichas.js",
+  "richtext.js",
   "armas.js",
   "armas-catalogo.js",
   "bolso-catalogo.js",
   "equip-catalogo.js",
   "equip.js",
+  "interludio.js",
   "armas/aa-12.webp",
   "armas/ak-12.webp",
   "armas/ak-74.webp",
@@ -188,6 +190,7 @@ self.addEventListener("install", e => {
 self.addEventListener("activate", e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== VERSAO && k !== "ficha141-ext").map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
+const BAIXANDO = new Set();
 // áudio pede pedaços do arquivo (Range); o Safari só toca se receber 206
 async function comRange(req, res) {
   const m = /bytes=(\d*)-(\d*)/.exec(req.headers.get("range") || "");
@@ -219,6 +222,12 @@ self.addEventListener("fetch", e => {
       e.waitUntil(fetch(req.mode === "navigate" ? idx : req, { cache: "no-cache" }).then(r => { if (r.ok && r.status === 200) return c.put(req.mode === "navigate" ? idx : req, r); }).catch(() => {}));
     }
     if (hit) return req.headers.has("range") ? comRange(req, hit) : hit;
+    // músicas extras não entram no pacote inicial (são grandes): na primeira vez que tocam,
+    // o arquivo inteiro é baixado em segundo plano e guardado para tocar sem internet depois
+    if (req.headers.has("range") && (url.pathname.includes("/sons/musicas/") || url.pathname.includes("/fundo-mosaico")) && !BAIXANDO.has(url.href)) {
+      BAIXANDO.add(url.href);
+      e.waitUntil(fetch(url.href).then(r => { if (r.ok && r.status === 200) return c.put(url.href, r); }).catch(() => {}).finally(() => BAIXANDO.delete(url.href)));
+    }
     try {
       const r = await fetch(req);
       if (r.ok && r.status === 200 && !req.headers.has("range")) c.put(req, r.clone());
