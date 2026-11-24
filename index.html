@@ -933,6 +933,18 @@ body.dragging,body.dragging *{-webkit-user-select:none!important;user-select:non
 .im-l b{color:var(--txt2);min-width:14px;font-weight:normal}.im-l em{font-style:normal;color:var(--txt2);letter-spacing:.12em}
 .im-l.on{color:var(--txt);background:rgb(var(--acc-rgb) / 0.12)}.im-l.on em,.im-l.on b{color:#fff}
 @media(max-width:650px){.in-grid.g4{grid-template-columns:repeat(2,1fr)}.in-grid.g2,.in-grid.g3{grid-template-columns:1fr}.inter-box{padding:12px}}
+/* código de item (codigo.js) */
+.cod-box{width:min(560px,100%)}
+.cod-nome{color:#fff;font-size:15px;letter-spacing:.18em;margin:12px 0 4px}
+.cod-txt{font-size:11px;color:var(--txt2);line-height:1.6;margin:6px 0 10px}
+.cod-ta{width:100%;min-height:110px;font-size:12px;word-break:break-all;resize:vertical;-webkit-user-select:text;user-select:text}
+.cod-aviso{color:var(--amber);font-size:10px;letter-spacing:.06em;margin:8px 0 0}
+.cod-prev:empty{display:none}
+.cod-prev{margin-top:10px}
+.cod-ok{display:flex;flex-direction:column;gap:3px;border-left:3px solid var(--acc);background:rgb(var(--acc-rgb) / 0.12);padding:8px 12px}
+.cod-ok em{font-style:normal;color:var(--acc-lt);font-size:9px;letter-spacing:.2em}.cod-ok b{font-weight:normal;color:#fff;font-size:14px;letter-spacing:.14em}.cod-ok small{color:var(--dim);font-size:10px;letter-spacing:.1em}
+.cod-err{border-left:3px solid var(--red);padding:8px 12px;color:#ff9a9a;font-size:10px;letter-spacing:.12em}
+.cod-box .modal-acts{margin-top:12px}
 /* configurações: playlist */
 .mus-top{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:10px}
 .mus-now{display:block;color:#fff;font-size:15px;letter-spacing:.2em;font-weight:normal}
@@ -1230,7 +1242,7 @@ details.feat.own{border-left-color:var(--good)}
       <button class="start" id="startBtn">START</button>
       <div class="hint">PRESSIONE ENTER</div>
     </div>
-    <div class="meta"><div>FILE: OPR-141 // v5.8</div><div class="warn">⚠ ACESSO RESTRITO</div></div>
+    <div class="meta"><div>FILE: OPR-141 // v5.9</div><div class="warn">⚠ ACESSO RESTRITO</div></div>
     <div class="footer">PROJECT 1.4.1 // OPERATOR MODULE // ACCESS: GRANTED</div>
     <i class="ts-glare" aria-hidden="true"></i>
   </main>
@@ -1434,14 +1446,14 @@ details.feat.own{border-left-color:var(--good)}
   <!-- 02 COMBATE & INVENTÁRIO -->
   <section class="page" id="combate">
     <div class="box">
-      <div class="box-h"><span>ARMAMENTO</span><span class="add-g"><button class="add acc-add" data-arm-cat>⌖ CATÁLOGO</button><button class="add" data-add="weapons">+ ARMA EM BRANCO</button></span></div>
+      <div class="box-h"><span>ARMAMENTO</span><span class="add-g"><button class="add acc-add" data-arm-cat>⌖ CATÁLOGO</button><button class="add" data-add="weapons">+ ARMA EM BRANCO</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button></span></div>
       <div class="cards w" id="list-weapons"></div>
       <div id="armGuia"></div>
     </div>
     <div class="grid g21" style="margin-top:16px">
       <div class="box">
         <div class="box-h"><span>MALETA</span>
-          <div class="inv-size"><button class="add" data-add="itens">+ ITEM</button>&nbsp; GRADE <input class="in" id="inv-cols" data-save data-def="10" type="number" min="1" max="24" value="10" title="Colunas">×<input class="in" id="inv-rows" data-save data-def="6" type="number" min="1" max="24" value="6" title="Linhas"></div>
+          <div class="inv-size"><button class="add" data-add="itens">+ ITEM</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button>&nbsp; GRADE <input class="in" id="inv-cols" data-save data-def="10" type="number" min="1" max="24" value="10" title="Colunas">×<input class="in" id="inv-rows" data-save data-def="6" type="number" min="1" max="24" value="6" title="Linhas"></div>
         </div>
         <div class="cards" id="list-itens" style="margin-bottom:10px"></div>
         <div class="inv-info" id="invInfo"></div>
@@ -1456,11 +1468,11 @@ details.feat.own{border-left-color:var(--good)}
           <div class="money"><input class="in" id="char-money" data-save data-def="0" data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" value="0"><span>DD</span></div>
         </div>
         <div class="box">
-          <div class="box-h"><span>EQUIPAMENTOS</span><span class="add-g"><button class="add acc-add" data-eq-cat>⌖ CATÁLOGO</button><button class="add" data-add="equipment">+ EM BRANCO</button></span></div>
+          <div class="box-h"><span>EQUIPAMENTOS</span><span class="add-g"><button class="add acc-add" data-eq-cat>⌖ CATÁLOGO</button><button class="add" data-add="equipment">+ EM BRANCO</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button></span></div>
           <div class="cards" id="list-equipment"></div>
         </div>
         <div class="box">
-          <div class="box-h"><span>ITENS DE BOLSO</span><button class="add" data-add="bolso">+ ITEM DE BOLSO</button></div>
+          <div class="box-h"><span>ITENS DE BOLSO</span><span class="add-g"><button class="add" data-add="bolso">+ ITEM DE BOLSO</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button></span></div>
           <p class="note bolso-info" id="bolsoInfo"></p>
           <div class="cards" id="list-bolso"></div>
         </div>
@@ -1491,15 +1503,15 @@ details.feat.own{border-left-color:var(--good)}
       </div>
       <div class="col">
         <div class="box">
-          <div class="box-h"><span>TÍTULOS DE PERSONAGEM</span><button class="add" data-add="titles">+ ADICIONAR</button></div>
+          <div class="box-h"><span>TÍTULOS DE PERSONAGEM</span><span class="add-g"><button class="add" data-add="titles">+ ADICIONAR</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button></span></div>
           <div class="cards" id="list-titles"></div>
         </div>
         <div class="box">
-          <div class="box-h"><span>TALENTOS</span><button class="add" data-add="talents">+ ADICIONAR</button></div>
+          <div class="box-h"><span>TALENTOS</span><span class="add-g"><button class="add" data-add="talents">+ ADICIONAR</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button></span></div>
           <div class="cards" id="list-talents"></div>
         </div>
         <div class="box">
-          <div class="box-h"><span>HABILIDADES ÚNICAS</span><button class="add" data-add="traits">+ ADICIONAR</button></div>
+          <div class="box-h"><span>HABILIDADES ÚNICAS</span><span class="add-g"><button class="add" data-add="traits">+ ADICIONAR</button><button class="add" data-code-in title="Colar o código de um item que outro jogador mandou">⇩ CÓDIGO</button></span></div>
           <div class="cards" id="list-traits"></div>
         </div>
       </div>
@@ -2314,7 +2326,7 @@ const NOUN={weapons:"ARMA",equipment:"EQUIPAMENTO",itens:"ITEM",bolso:"ITEM DE B
 function blank(list){const o={};FIELDS[list].forEach(f=>o[f]="");if(list==="equipment"||list==="itens") o.qty="1";if(o.invW!==undefined){o.invW="1";o.invH="1";}return o;}
 
 function viewCard(list,it,i){
-  const acts=`<div class="card-a">${window.CBT?CBT.tagsItem(list,i,it):""}<button class="btn ico" data-act="edit" title="Editar" data-nosfx>✎</button><button class="btn ico danger" data-act="del" title="Excluir" data-nosfx>×</button></div>`;
+  const acts=`<div class="card-a">${window.CBT?CBT.tagsItem(list,i,it):""}<button class="btn ico" data-code title="Gerar código para passar a outro jogador" data-nosfx>⧉</button><button class="btn ico" data-act="edit" title="Editar" data-nosfx>✎</button><button class="btn ico danger" data-act="del" title="Excluir" data-nosfx>×</button></div>`;
   const name=esc(it.name)||`<span style="color:var(--dim2)">${NOUN[list]} SEM NOME</span>`;
   const desc=it.desc?`<p class="desc">${rtx(it.desc)}</p>`:"";
   if(list==="weapons") return ARM.view(it,i,acts,name);
@@ -2574,7 +2586,7 @@ function renderInv(report){
     $(C.bar).innerHTML=s&&sc===c?`<b>${esc(s.name||"ITEM")} // ${dimsOf(s).join("×")}${sl==="itens"&&nz(s.qty)>1?` // ×${esc(s.qty)}`:""}${sl==="itens"?(s.carga!==""&&s.carga!=null?` // CARGA ${esc(s.carga)}`:""):` // CARGA ${String(+cargaGuardada(s,sl).toFixed(2)).replace(".",",")}`}</b>`+
         (s.invIn==="1"?`<button class="btn sm" data-inv="rot" data-nosfx>GIRAR (R)</button><button class="btn sm" data-inv="out" data-nosfx>TIRAR</button>`:`<button class="btn sm" data-inv="in" data-nosfx>ENCAIXAR</button>`)+
         `<button class="btn sm" data-inv="move" data-nosfx>→ ${CONT[outro].nome}</button>`+
-        (sl!=="itens"?`<button class="btn sm acc" data-inv="equip" data-nosfx>EQUIPAR</button>`:(window.CBT?CBT.tagsItem("itens",LISTS.itens.indexOf(s),s):"")+`<button class="btn sm" data-inv="edit" data-nosfx>EDITAR</button>`)+
+        (sl!=="itens"?`<button class="btn sm acc" data-inv="equip" data-nosfx>EQUIPAR</button>`:(window.CBT?CBT.tagsItem("itens",LISTS.itens.indexOf(s),s):"")+`<button class="btn sm" data-inv="edit" data-nosfx>EDITAR</button>`)+`<button class="btn sm" data-inv="code" title="Gerar código para passar a outro jogador" data-nosfx>⧉ CÓDIGO</button>`+
         `<button class="btn sm danger" data-inv="del" data-nosfx>EXCLUIR</button>`+(s.desc?`<div style="flex-basis:100%;color:var(--txt2);letter-spacing:.04em;font-size:11px;line-height:1.5;white-space:pre-wrap">${rtx(s.desc)}</div>`:"")
       :(c==="mal"?'ARRASTE PARA MOVER // CLIQUE PARA SELECIONAR // R GIRA // ARRASTE ARMAS E EQUIPAMENTOS PELA ALÇA ⠿ DO CARD':'GUARDE AQUI O QUE NÃO ESTÁ LEVANDO // ARRASTE PARA O ARMAMENTO OU OS EQUIPAMENTOS PARA EQUIPAR');
     if(report&&bumped.length&&state==="sheet"){toast(`SEM ESPAÇO: ${bumped.join(", ").toUpperCase()} SAIU DA GRADE ${C.nome==="MALETA"?"DA MALETA":"DO STASH"}`,true);sfx("errado");}
@@ -2594,6 +2606,7 @@ document.addEventListener("click",e=>{
   else if(act==="in"){if(autoPlace(it,c)){sfx("fechar");renderInv();changed(true);}else{sfx("errado");toast(`SEM ESPAÇO ${c==="mal"?"NA MALETA":"NO STASH"} PARA ESTE ITEM`,true);}}
   else if(act==="move"){const o=c==="mal"?"st":"mal";if(moveTo(it,l,o)){sfx("fechar");renderInv();update();changed();toast(`GUARDADO ${o==="mal"?"NA MALETA":"NO STASH"}`);}else{sfx("errado");toast(`SEM ESPAÇO ${o==="mal"?"NA MALETA":"NO STASH"}`,true);}}
   else if(act==="equip") equipar(it,l);
+  else if(act==="code"&&i>=0&&window.CODIGO) CODIGO.mostrar(l,it);
   else if(act==="edit"&&i>=0&&l==="itens"){it._snap=JSON.stringify(cleanItem(it));it._edit=true;renderList("itens");sfx("abrir");$("list-itens").querySelector("input[data-k]")?.focus();}
   else if(act==="del"&&i>=0){ask(`Excluir "${it.name||NOUN[l]}"? Não dá pra desfazer.`,{top:"EXCLUIR",yes:"EXCLUIR"}).then(ok=>{if(!ok) return;LISTS[l].splice(i,1);INV.sel=null;renderList(l);renderInv();changed();});}
 });
@@ -3250,6 +3263,7 @@ function boot(){
 <script src="dados.js"></script>
 <script src="equip.js"></script>
 <script src="interludio.js"></script>
+<script src="codigo.js"></script>
 <script src="csel.js"></script>
 <script src="glitch.js"></script>
 <script>
