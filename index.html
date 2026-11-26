@@ -33,7 +33,7 @@
       <button class="start" id="startBtn">START</button>
       <div class="hint">PRESSIONE ENTER</div>
     </div>
-    <div class="meta"><div>FILE: OPR-141 // v6.3-teste</div><div class="warn">⚠ ACESSO RESTRITO</div></div>
+    <div class="meta"><div>FILE: OPR-141 // v6.5-teste</div><div class="warn">⚠ ACESSO RESTRITO</div></div>
     <div class="footer">PROJECT 1.4.1 // OPERATOR MODULE // ACCESS: GRANTED</div>
     <i class="ts-glare" aria-hidden="true"></i>
   </main>
@@ -59,20 +59,20 @@
   </header>
 
   <div class="hud" id="hud">
-    <div class="hud-i hud-x"><em>NÍVEL</em><b id="hLvl">1</b></div>
-    <div class="hud-i hud-x"><em>PROF.</em><b id="hProf">+2</b></div>
-    <div class="hud-i"><em>CA</em><b id="char-ac">10</b><i id="hAc" hidden></i></div>
-    <div class="hud-i"><em>INICIATIVA</em><b id="char-initiative">+0</b><i id="hInit" hidden></i></div>
-    <div class="hud-i hud-spd"><em>DESLOC.</em><input class="hud-in" id="char-speed" data-save data-def="9m" type="text" value="9m" aria-label="Deslocamento" title="Deslocamento base (clique para editar)"><span class="hud-ef" id="hSpd" title="Deslocamento com os estados ativos">9m</span></div>
-    <div class="hud-i hud-hp" id="hHpBox"><em>PONTOS DE VIDA<span class="hud-tmp" title="PV temporários: gastos antes dos PV, não acumulam">+ TEMP <input class="hud-in" id="char-hp-temp" data-save data-rel type="text" inputmode="numeric" autocomplete="off" placeholder="0"></span></em>
+    <div class="hud-i hud-x"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>NÍVEL</em><b id="hLvl">1</b></div>
+    <div class="hud-i hud-x"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg>PROF.</em><b id="hProf">+2</b></div>
+    <div class="hud-i"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.6-3 8.5-7 10-4-1.5-7-5.4-7-10V6z"/><path d="M12 7v10M8.5 10.5h7"/></svg>CA</em><b id="char-ac">10</b><i id="hAc" hidden></i></div>
+    <div class="hud-i"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L5 13.5h6L10 22l8-11.5h-6z"/></svg>INICIATIVA</em><b id="char-initiative">+0</b><i id="hInit" hidden></i></div>
+    <div class="hud-i hud-spd"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18h14M7 18l1-6 4-2 2 4h3M12 10l-1-4h3"/><circle cx="15.5" cy="4.5" r="1.5"/></svg>DESLOC.</em><input class="hud-in" id="char-speed" data-save data-def="9m" type="text" value="9m" aria-label="Deslocamento" title="Deslocamento base (clique para editar)"><span class="hud-ef" id="hSpd" title="Deslocamento com os estados ativos">9m</span></div>
+    <div class="hud-i hud-hp" id="hHpBox"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0112 7.3a4.3 4.3 0 017.5 2.5C19.5 15.4 12 20 12 20z"/><path d="M8.5 12.5h2l1-2 1.5 4 1-2h1.5"/></svg>PONTOS DE VIDA<span class="hud-tmp" title="PV temporários: gastos antes dos PV, não acumulam">+ TEMP <input class="hud-in" id="char-hp-temp" data-save data-rel type="text" inputmode="numeric" autocomplete="off" placeholder="0"></span></em>
       <div class="hud-ctl"><button class="step" data-hp="-1" title="Dano" data-nosfx>−</button><input class="hud-in big" id="char-hp-current" data-save data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" placeholder="--"><span class="sl">/</span><input class="hud-in big" id="char-hp-max" data-save type="number" placeholder="MÁX" title="PV máximo"><button class="step" data-hp="1" title="Cura" data-nosfx>+</button></div>
-      <div class="hpbar"><i id="hHpBar" style="width:0"></i><i id="hTmpBar" class="tmp" style="width:0"></i></div><i id="hHp" hidden></i></div>
-    <div class="hud-i hud-pv"><em>VONTADE (PVON)</em>
+      <canvas class="ecg" id="hEcg" aria-hidden="true"></canvas><div class="hpbar"><i id="hHpBar" style="width:0"></i><i id="hTmpBar" class="tmp" style="width:0"></i></div><i id="hHp" hidden></i></div>
+    <div class="hud-i hud-pv"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c0 3-4 5.5-4 9.5a4 4 0 008 0c0-1.8-1-3.2-2-4.2-.2 1.6-1 2.5-2 2.7.6-2.6 0-5.4 0-8z"/><path d="M9 20.5h6"/></svg>VONTADE (PVON)</em>
       <div class="hud-ctl"><button class="step" data-pv="-1" title="Dano de Sopro" data-nosfx>−</button><input class="hud-in big" id="char-pvon" data-save data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual. Máximo: 10 + CON + SAB + nível + Proef" placeholder="--"><span class="sl">/</span><b class="pvmax" id="pvonMax">--</b><button class="step" data-pv="1" title="Recuperar" data-nosfx>+</button></div>
       <div class="estafa" id="estafa"></div></div>
-    <div class="hud-i" id="hPeBox"><em>P.E.</em><b id="hPe">0 / 4</b></div>
-    <div class="hud-i" id="hCgBox"><em>CARGA</em><b id="hCg">0 / 8</b></div>
-    <div class="hud-i hud-money"><em>DINHEIRO</em><span class="hud-mon"><input class="hud-in" id="char-money" data-save data-def="0" data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" value="0"><b>DD</b></span></div>
+    <div class="hud-i" id="hPeBox"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V6a2 2 0 012-2h6a2 2 0 012 2v2"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M4 13h16M10 13v2h4v-2"/></svg>P.E.</em><b id="hPe">0 / 4</b></div>
+    <div class="hud-i" id="hCgBox"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7a3 3 0 116 0"/><path d="M6 7h12l2 13H4z"/></svg>CARGA</em><b id="hCg">0 / 8</b></div>
+    <div class="hud-i hud-money"><em><svg class="hud-ic" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/></svg>DINHEIRO</em><span class="hud-mon"><input class="hud-in" id="char-money" data-save data-def="0" data-rel type="text" autocomplete="off" enterkeyhint="done" title="Digite um número, ou -20 / +5 para somar ao valor atual" value="0"><b>DD</b></span></div>
     <div class="hud-fx" id="hudFx"></div>
     <div class="hud-cbt hidden" id="hudCbt"></div>
   </div>
@@ -451,6 +451,7 @@
 <script src="js/modulos/interludio.js"></script>
 <script src="js/modulos/codigo.js"></script>
 <script src="js/modulos/fundos-musica.js"></script>
+<script src="js/modulos/ecg.js"></script>
 <script src="js/nucleo/csel.js"></script>
 <script src="js/modulos/glitch.js"></script>
 <script src="js/iniciar.js"></script>

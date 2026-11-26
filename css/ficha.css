@@ -126,9 +126,16 @@ body.sg-run{overflow-x:hidden}
 .hud-i{flex:1 1 auto;min-width:86px;padding:8px 12px;border-right:1px solid var(--line3)}
 .hud-i:last-child{border-right:none}
 .hud-i em{display:block;font-style:normal;color:var(--dim2);font-size:9px;letter-spacing:.2em}
+/* ícones da barra de cima */
+.hud-ic{width:13px;height:13px;margin:-2px 5px 0 0;vertical-align:middle;fill:none;stroke:var(--acc);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.hud-hp .hud-ic{stroke:#ff6b7f}.hud-hp.low .hud-ic{animation:b .6s steps(2) infinite}
+.hud-pv .hud-ic{stroke:#c9a0ff}
+.hud-money .hud-ic{stroke:#e0b04a}
 .hud-i b{display:block;margin-top:2px;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .hud-hp{flex:3 1 220px}
-.hpbar{height:5px;margin-top:5px;background:var(--line3);position:relative;overflow:hidden}
+/* lifeline (ECG) da vida */
+.ecg{display:block;width:100%;height:24px;margin-top:4px;background:repeating-linear-gradient(90deg,transparent 0 11px,rgba(255,255,255,.035) 11px 12px)}
+.hpbar{height:3px;margin-top:2px;background:var(--line3);position:relative;overflow:hidden}
 .hpbar i{position:absolute;inset:0 auto 0 0;background:var(--txt);transition:width .25s}
 .hud-hp.low .hpbar i{background:var(--acc);animation:b .6s steps(2) infinite}
 /* PV temporários: trecho azul logo depois da vida normal */

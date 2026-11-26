@@ -1,0 +1,14 @@
+{
+  "appId": "br.com.projeto141.ficha",
+  "appName": "Ficha 141",
+  "webDir": "www",
+  "backgroundColor": "#0a0405",
+  "android": {
+    "backgroundColor": "#0a0405",
+    "adjustMarginsForEdgeToEdge": "auto"
+  },
+  "ios": {
+    "backgroundColor": "#0a0405",
+    "contentInset": "always"
+  }
+}
