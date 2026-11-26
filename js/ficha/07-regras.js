@@ -329,8 +329,8 @@ function update(){
   // HUD
   const lvl=lvlInfo().total;
   $("hLvl").textContent=lvl;
-  // PVon (Livro: 10 + CON + SAB + nível + Proef) e níveis de Estafa
-  const pvMax=10+mods.CON+mods.SAB+lvl+prof,pvEl=$("char-pvon");
+  // PVon (Livro: 10 + CON + SAB + 2 × nível + Proef) e níveis de Estafa
+  const pvMax=10+mods.CON+mods.SAB+2*lvl+prof,pvEl=$("char-pvon");
   $("pvonMax").textContent=pvMax;
   const pv=pvEl.value===""?pvMax:nz(pvEl.value),pr=pvMax>0?pv/pvMax:1;
   const est=pv<=0?4:pr<.25?3:pr<.5?2:pr<.75?1:0;
